@@ -17,19 +17,13 @@ removedcatalogs=[];
 did=0;
 });
 </script>
-<div class="container-fluid">
-<div class="row alert alert-info well-sm">
-<div class="col-sm-5"><b>Configuration</b>/<span class="muted"><b>Catalogs/Edit</b></span></div>
-<div class="col-sm-7"></div></div>
-<div class="row">
+
 <?php 
 if(empty($catalogmasterid))
 	include_once("newcatalogmaster.php");
 else
 	include_once("editcatalogmaster.php");
 ?>
-</div>
-</div>
 
 
 

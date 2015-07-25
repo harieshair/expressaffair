@@ -10,19 +10,17 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
-                <li>
-                <a href="javascript:void(0);" onclick="getcontents('pages/fabric/fabric.php','right-content')" >Fabric</a>
-              </li>
+                <li>               <a href="javascript:void(0);" onclick="getcontents('pages/fabric/fabric.php','right-content')" >Fabric</a>              </li>
 
-                <li >
-                  <a href="javascript:void(0);" >Customer</a>
-                </li>
-                <li class="dropdown">
+                <li >  <a href="javascript:void(0);" >Customer</a>                </li>
+                <li >   <a href="javascript:void(0);" onclick="getcontents('pages/configs/configs.php','right-content')" >Configuration</a>                </li>
+
+               <!-- <li class="dropdown">
                   <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Configuration<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="javascript:void(0);" onclick="getcontents('pages/catalogs/allcatalogs.php','right-content')">Catalogs</a></li>                    
                   </ul>
-                </li>
+                </li> -->
               </ul>
                                         
             </div><!-- /.navbar-collapse -->

@@ -17,7 +17,7 @@ public function __construct() // Constructor
 public function createlog($message){
 	$ip=$this->GetIP();
 	$this->internalDB->insert('site_log', array(
-  'uid' =>isset($_SESSION['userid'])?$_SESSION['userid']:0,
+  'user_id' =>isset($_SESSION['ADMINUSERID'])?$_SESSION['ADMINUSERID']:0,
   'log_date' => date("Y-m-d H:i:s"),
   'log_ip' => $ip,
   'message' => $message  

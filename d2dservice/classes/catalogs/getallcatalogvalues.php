@@ -11,23 +11,27 @@
 		$searchqury="SELECT id,catalog_value,catalogvalue_id from  catalog_value ".$whrqury;
 		$result = $this->internalDB->query("$searchqury ORDER BY id asc ");//LIMIT $start, $rows
 	?>
-	<div class="row"><div class="col-md-1"></div><div class="col-md-10 "><div class="row gridHeaderch1">
-    <div class="col-md-1"><strong>Value Id</strong></div>
-    <div class="col-md-2">Value Name</div>
-	<div class="col-md-2">Parent</div>
-	</div>
-    <div class="row"><div class="col-md-12 catalogvalugrid">
+	<div class="row">
+	<div class="col-xs-1"></div>
+			<div class="col-xs-10">										
+	<table>
+		<tr><thead>
+	<th><strong>Value Id</strong></th>
+    <th> Name</th>
+	<th>Parent</th>
+	</thead></tr>
     
 	<?php	foreach($result as $rowdata)
 	{
 	?>
-		<div class="row">
-		<div class="col-md-1"><?php echo $rowdata['id'];?></div>
-  		<div class="col-md-2"><?php echo $rowdata['catalog_value'];?></div>
-   		<div class="col-md-2"><?php echo $rowdata['catalogvalue_id'];?></div>
-		</div>
-   <?php } ?></div></div></div></div>
-	<?php } else
+		<tr>
+		<td><?php echo $rowdata['id'];?></td>
+  		<td><?php echo $rowdata['catalog_value'];?></td>
+   		<td><?php echo $rowdata['catalogvalue_id'];?></td>
+		</tr>
+   <?php } ?></table></div></div>
+	<?php }
+	 else
 		echo '<div class="alert"><strong>Message!</strong><br> No Records Found.</div>';
 	
 	?>
