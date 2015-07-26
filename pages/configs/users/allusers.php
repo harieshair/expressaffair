@@ -8,7 +8,7 @@ if(!isset($_SESSION)){session_start();}
 $navactive="createuser";*/
 
 //$access=$_SESSION['action_list'];
-include_once($_SERVER['DOCUMENT_ROOT']."/d2dconfig.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 include_once(CLASSFOLDER."/user.php");
 $user=new userclass();
 $rows=20;

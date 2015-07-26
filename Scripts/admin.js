@@ -5,7 +5,8 @@ function callservicebyajax(POSTDATA,serverurl,callbackfunction){
 		url: serverurl,       
 		type: "POST",
 		data: POSTDATA, 
-		cache: false,         
+		cache: false,  
+		async: false,       
 		success: function (response) { 
 			ajaxResponse=response;
 			callbackfunction();
@@ -25,90 +26,25 @@ function getcontentresponse(responsearea){
 	$('#'+responsearea).html(ajaxResponse);
 	$('.nvtooltip').remove();
 }
-
-
-var addedsizebrief=[];
-var removesizederbrief=[];
-var sdid=0;
-function addsizebriefs(){
-	var itemsize=$("#dd_size").val();
-	var itemcolor=$("#dd_color").val();
-	var pieces=$('#pieces').val();	
-	if(itemsize && itemcolor && pieces) 
-	{
-		dummy=++sdid;
-		obj={};
-		obj.itemsize=itemsize;  
-		obj.itemcolor=itemcolor;
-		obj.pieces= $.trim(pieces); //persistent data
-		obj.trid="dummyid_"+dummy; // required to delete tr on client add
-		addedsizebrief.push(obj);
-		$('#sizebriefs tbody').append('<tr id="dummyid_'+ dummy +'" size="'+itemsize+'"><td><td>'+itemsize+'</td><td>'+itemcolor+'</td><td>'+$.trim(pieces)+'</td><td><a href="#" onclick=removesizebriefvalue("dummyid_'+dummy+'"); class="btn btn-sm btn-default-inverse"><i class="glyphicon  glyphicon-remove-sign white"></i>Delete</a></td></tr>');   			
-		$('#pieces').html('');		
-		
+function showmodalwindow(){
+	if(ajaxResponse){
+		var modalWindowData = JSON.parse(ajaxResponse);
+		if(modalWindowData.Header) $('#ModalWindowHeader').html(modalWindowData.Header);
+		if(modalWindowData.Body) $('#ModalWindowBody').html(modalWindowData.Body);
+		if(modalWindowData.Footer) $('#ModalWindowFooter').html(modalWindowData.Footer);
 	}
-	else{
-		$("#response_div").removeClass("label-success").addClass("label-danger").html("Please specify valid size");
-		setTimeout(function(){$("#response_div").html("");},4000);
-	}
+	 $('#MicroModalwindow').attr('class', 'modal fade').attr('aria-labelledby','myModalLabel');
+     $('.modal-dialog').attr('class','modal-dialog');
+	$('#MicroModalwindow').modal('show');
 }
-/*------------------------------------------------------------------------*/
-function removesizebriefvalue(trid){
-	orderbriefid=$("#"+trid).attr("orderbriefid")
-	if(orderbriefid)
-		removeorderbrief.push(orderbriefid);
-	else{
-		Cleanunsaveditem(trid,"trid");
-	}
-	$("#"+trid).remove();
+function closemodalwindow(){
+	$('#ModalWindowBody').html("");
+	$('#ModalWindowFooter').html("");
+	$('#ModalWindowHeader').html("");				
+	$('#MicroModalwindow').hide("hide.bs.modal");
 }
 
 
-var addedyarnrief=[];
-var removeyarnbrief=[];
-var ydid=0;
-function addyarnbriefs(){
-	var itemcolor=$("#dd_color").val();
-	var itemcount=$("#yarncount").val();
-	var kgs=$('#yarnkgs').val();	
-	if(kgs && itemcount && itemcolor) 
-	{
-		dummy=++ydid;
-		obj={};
-		obj.itemcount=itemcount;  
-		obj.itemcolor=itemcolor;
-		obj.kgs= $.trim(kgs); //persistent data
-		obj.trid="dummyid_"+dummy; // required to delete tr on client add
-		addedyarnrief.push(obj);
-		$('#yarnrbriefs tbody').append('<tr id="dummyid_'+ dummy +'" count="'+itemcount+'"><td><td>'+itemcount+'</td><td>'+itemcolor+'</td><td>'+$.trim(kgs)+'</td><td><a href="#" onclick=removeyarnbriefvalue("dummyid_'+dummy+'"); class="btn btn-sm btn-default-inverse"><i class="glyphicon  glyphicon-remove-sign white"></i>Delete</a></td></tr>');   			
-		$('#pieces').html('');		
-		
-	}
-	else{
-		$("#response_div").removeClass("label-success").addClass("label-danger").html("Please specify valid size");
-		setTimeout(function(){$("#response_div").html("");},4000);
-	}
-}
-/*------------------------------------------------------------------------*/
-function removeyarnbriefvalue(trid){
-	orderbriefid=$("#"+trid).attr("orderbriefid")
-	if(orderbriefid)
-		removeorderbrief.push(orderbriefid);
-	else{
-		Cleanunsaveditem(trid,"trid");
-	}
-	$("#"+trid).remove();
-}
-/*------------------------------------------------------------------------*/
-function Cleanunsaveditem(value,property) {
-	len = addedorderbrief.length;
-	for (var i = 0; i < len; i++){
-		if (addedorderbrief[i][property] === value) {
-			addedorderbrief.splice(i,1);
-			return
-		}
-	}
-}
 /*------------------------------------------------------------------------*/
 function saverole(){
 	var rolename=$('#rolename').val();

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once($_SERVER['DOCUMENT_ROOT']."/d2dconfig.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 include_once(CLASSFOLDER."/user.php");
 include_once(CLASSFOLDER."/common.php");
 $user=new userclass();

@@ -20,6 +20,14 @@ foreach($catalogvalues as $catalog)
 	$catalogarray['id']=$catalog['name'];
 return $catalogarray;
 }
+/*----------------------------------------------------------------------------*/
+function GetAllCatalogValues($mastername){
+
+
+$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id=(select id from catalog_master where name='$mastername')"); 
+
+return $catalogvalues;
+}
 /*-------------------------------------------------------------------------------------------------*/
 function getCatalogValuesById($catalogid){
 	if(!empty($catalogid)){

@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/d2dconfig.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 session_start();
 include_once(CLASSFOLDER."/common.php");
 include_once(CLASSFOLDER."/role.php");

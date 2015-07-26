@@ -1,7 +1,7 @@
 <?php 
 if(!isset($_SESSION)){session_start();}
 $catalogmasterid=isset($_POST['postvalue'])?$_POST['postvalue']:0;;
-include_once($_SERVER['DOCUMENT_ROOT']."/d2dconfig.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 include_once(CLASSFOLDER."/catalogs.php"); 
 $catalog = new catalogclass();
 ?>

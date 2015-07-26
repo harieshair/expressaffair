@@ -2,7 +2,7 @@
   if(!isset($_SESSION)){session_start();}
   if(isset($_POST['postvalue']))
   	$userid=$_POST['postvalue'];
-  include_once($_SERVER['DOCUMENT_ROOT']."/d2dconfig.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
   include_once(CLASSFOLDER."/enums.php");
   $typeofuser=new TypeOfUser;
   $userstatus=new UserStatus;

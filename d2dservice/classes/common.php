@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/d2dconfig.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 //include_once(CLASSFOLDER.'/dbconnection.php');

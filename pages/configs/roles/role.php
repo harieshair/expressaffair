@@ -1,7 +1,7 @@
 <?php 
 if(!isset($_SESSION)){session_start();}
 
-include_once($_SERVER['DOCUMENT_ROOT']."/d2dconfig.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 include_once(CLASSFOLDER."/role.php");
 $role=new roleclass();
 ?>
