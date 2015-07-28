@@ -6,7 +6,7 @@ function callservicebyajax(POSTDATA,serverurl,callbackfunction){
 		type: "POST",
 		data: POSTDATA, 
 		cache: false,  
-		async: false,       
+		async: true,       
 		success: function (response) { 
 			ajaxResponse=response;
 			callbackfunction();
@@ -41,7 +41,7 @@ function closemodalwindow(){
 	$('#ModalWindowBody').html("");
 	$('#ModalWindowFooter').html("");
 	$('#ModalWindowHeader').html("");				
-	$('#MicroModalwindow').hide("hide.bs.modal");
+	$('#MicroModalwindow').modal("hide");
 }
 
 
