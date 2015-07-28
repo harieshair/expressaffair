@@ -48,7 +48,7 @@ $table .= '<table id="usertable" class="table table-bordered table-hover dataTab
 			  $table.=$this->TypeOfUser->getvalue($rowdata['usertype']);
 			  $table.='</td>';			  
 			  $table .= '<td >';
-			  $table.=($rowdata['status']==1)?'Active':'Inactive';
+			  $table.=($rowdata['status']==0)?'Active':'Inactive';
 			  $table.='</td>';
 			  $table .= '</tr>';
 			  }
