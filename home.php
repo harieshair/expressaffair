@@ -15,9 +15,8 @@
   <link href="dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 <!-- AdminLTE Skins. Choose a skin from the css/skins
  folder instead of downloading all of them to reduce the load. -->
- <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />             
-        
-
+ <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />  
+<link rel="stylesheet" href="dist/css/bootstrap-multiselect.css" type="text/css"> 
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -78,11 +77,12 @@
   <script src="plugins/slimScroll/jquery.slimScroll.min.js" type="text/javascript"></script>
   <!-- FastClick -->
   <script src='plugins/fastclick/fastclick.min.js'></script>
+  <script src="dist/js/jquery.bootstrap-growl.min.js"  type="text/javascript"></script>
  <script src="dist/js/app.js" type="text/javascript"></script>
   <!-- d2d scripts -->
   <script src="scripts/admin.js" type="text/javascript"></script>
   <script src="scripts/businessflow.js" type="text/javascript"></script>
-
+<script  src="dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
    
 
 </body>
