@@ -7,7 +7,7 @@ function selectEventServices()
 	}
 	else{
 		var POSTDATA="action=getAllCatalogValues&masterName="+encodeURIComponent("Services");
-		callservicebyajax(POSTDATA,"d2dservice/catalog/catalogserver.php",function(){eventServiceresponse(selectedservice)});
+		callservicebyajax(POSTDATA,"service/config/catalogserver.php",function(){eventServiceresponse(selectedservice)});
 	}
 }
 function  eventServiceresponse(selectedservice){
@@ -42,3 +42,43 @@ function applyselectedservices(){
 	$('label[id=selectedservices]').html(serviceArrayName.toString());
 	closemodalwindow();
 }
+	/*------------------------------------------------------------------------*/
+function saverole(){
+	var rolename=$('#rolename').val();
+	if(!rolename || rolename=='' || rolename.length<=1){
+		notifyDanger('Please specify rolename')	;
+	}
+	else{
+
+		var POSTDATA="action=saverole&rolename="+encodeURIComponent(rolename);
+		callservicebyajax(POSTDATA,"service/config/roleserver.php",function(){savedataresponse(refreshRoleGrid)});
+	}
+}
+
+function refreshRoleGrid(){	
+getcontents('pages/configs/roles/role.php','content');
+}
+function refreshEventGrid(){	
+getcontents('pages/events/eventlists.php','content');
+}
+function refreshCommunityGrid(){	
+getcontents('pages/events/communities.php','content');
+}
+function saveuserform()
+{
+	userDetails = $("#update-userform").serialize();
+	var POSTDATA="action=saveuser&userdetails="+encodeURIComponent(userDetails);
+	callservicebyajax(POSTDATA,"service/config/userserver.php",function(){savedataresponse()});
+}
+function saveeventdetails(){
+	eventdetails = $("#update-eventdetails").serialize();
+	var POSTDATA="action=saveevents&eventdetails="+encodeURIComponent(eventdetails);
+	callservicebyajax(POSTDATA,"service/event/eventserver.php",function(){savedataresponse(refreshEventGrid)});	
+}
+function savecommunitydetails(){
+	communityevents=getCheckBoxValueIsideContainer('communityevents','eventid');
+		communitydetails = $("#update-communitydetails").serialize();
+	var POSTDATA="action=savecommunity&communitydetails="+encodeURIComponent(communitydetails)+"&eventids="+encodeURIComponent(communitydetails);
+	callservicebyajax(POSTDATA,"service/community/communityserver.php",function(){savedataresponse(refreshCommunityGrid)});	
+}
+

@@ -22,10 +22,25 @@ function getcontents(urllocator,responsearea,postdata)
 	callservicebyajax(POSTDATA,urllocator,function(){getcontentresponse(responsearea)});
 }
 
+function getmodalcontents(urllocator,postdata){
+var POSTDATA=''//"alias="+encodeURIComponent(ClientAlias);
+if(postdata)
+	POSTDATA+="postvalue="+encodeURIComponent(postdata);
+callservicebyajax(POSTDATA,urllocator,function(){getmodalcontentresponse()});
+}
+
 function getcontentresponse(responsearea){
 	$('#'+responsearea).html(ajaxResponse);
 	$('.nvtooltip').remove();
 }
+
+function getmodalcontentresponse(){
+	$('#MicroModalwindow').html(ajaxResponse);	
+	$('#MicroModalwindow').attr('class', 'modal fade bs-example-modal-lg').attr('aria-labelledby','myModalLabel');
+	$('.modal-dialog').attr('class','modal-dialog  modal-lg');
+	$('#MicroModalwindow').modal('show');
+}
+
 function showmodalwindow(){
 	if(ajaxResponse){
 		var modalWindowData = JSON.parse(ajaxResponse);
@@ -33,8 +48,8 @@ function showmodalwindow(){
 		if(modalWindowData.Body) $('#ModalWindowBody').html(modalWindowData.Body);
 		if(modalWindowData.Footer) $('#ModalWindowFooter').html(modalWindowData.Footer);
 	}
-	 $('#MicroModalwindow').attr('class', 'modal fade').attr('aria-labelledby','myModalLabel');
-     $('.modal-dialog').attr('class','modal-dialog');
+	$('#MicroModalwindow').attr('class', 'modal fade').attr('aria-labelledby','myModalLabel');
+	$('.modal-dialog').attr('class','modal-dialog');
 	$('#MicroModalwindow').modal('show');
 }
 function closemodalwindow(){
@@ -44,46 +59,53 @@ function closemodalwindow(){
 	$('#MicroModalwindow').modal("hide");
 }
 
+function getCheckBoxValueIsideContainer(parentid,chkboxname){
+	var chkboxvalue=[];
+	$("#"+parentid).find("ul").each(function() {
+		$("input[name='"+chkboxname+"']").each(function() {
+			if($(this).is(":checked")){
+				chkboxvalue.push($(this).val());			
+			}
+		});
+	});
+	return chkboxvalue;
+	
+}
 
-/*------------------------------------------------------------------------*/
-function saverole(){
-	var rolename=$('#rolename').val();
-	if(!rolename || rolename=='' || rolename.length<=1){
-		dangerAlert('Please specify rolename')	;
-	}
-	else{
-
-		var POSTDATA="action=saverole&rolename="+encodeURIComponent(rolename);
-		callservicebyajax(POSTDATA,"d2dservice/config/roleserver.php",function(){savedataresponse()});
+function savedataresponse(callbackmethod){
+	var response = JSON.parse(ajaxResponse);
+	if(response){
+		if(response.Exception){
+			notifyDanger(response.Exception);
+		}
+		else{
+			notifySuccess(response.Message);
+			if(callbackmethod)
+				setTimeout(function(){callbackmethod();}, 1000);			
+		}
 	}
 }
 
-
-function saveuserform()
-{
-	userDetails = $("#update-userform").serialize();
-			var POSTDATA="action=saveuser&userdetails="+encodeURIComponent(userDetails);
-		callservicebyajax(POSTDATA,"d2dservice/config/userserver.php",function(){savedataresponse()});
-}
-
-
-function savedataresponse(){
+function savemodalwindowresponse(callbackmethod){
 	var response = JSON.parse(ajaxResponse);
 	if(response){
 		if(response.Exception){
 			dangerAlert(response.Exception)	;
 		}
 		else{
-			successAlert('role created successfully!');
+			closemodalwindow();
+			callbackmethod();
 		}
 	}
+
+}
+function notifySuccess(message){
+	$.bootstrapGrowl(message,{type:'success'});                    
+}
+function notifyInfo(message){
+	$.bootstrapGrowl(message,{type: 'info'});                    
+}
+function notifyDanger(message){
+	$.bootstrapGrowl(message,{type: 'danger'});                    
 }
 
-function successAlert (message) {
-	$("#alert-area").append($("<div class='alert-message success fade in' data-alert><p> " + message + " </p></div>"));
-	$(".alert-message").delay(2000).fadeOut("slow", function () { $(this).remove(); });
-}
-function dangerAlert (message) {
-	$("#alert-area").append($("<div class='alert-message danger fade in' data-alert><p> " + message + " </p></div>"));
-	$(".alert-message").delay(2000).fadeOut("slow", function () { $(this).remove(); });
-}

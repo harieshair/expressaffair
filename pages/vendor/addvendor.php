@@ -17,6 +17,8 @@
               'phone2'=>"",
               'phone3'=>"",
               'website'=>"",
+              'portfolio'=>"",
+              "logo"=>"",              
               'contact_person'=>""      
               );
           }
