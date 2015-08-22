@@ -1,0 +1,33 @@
+.savewizard{
+	background-color: rgb(189, 203, 208);
+	padding: 5px;
+}
+.actionWizard{
+	background-color: rgb(189, 203, 208);
+}
+.innerheader{
+	padding: 1px 1px 0px 1px;
+	position:relative;
+	margin-top: 1%;
+}
+
+.skin-blue .sidebar a{
+	color: #3c8dbc !important;
+	border-bottom: #CCCCCC 2px solid !important;
+}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
+	color: #fff !important;
+	background: #1e282c !important;
+	border-left-color: #3c8dbc !important;
+}
+.list-container{
+	list-style: none;
+}
+.display-ib {
+	display: inline-block;
+}
+.form-group label.error {
+	color: #FB3A3A;
+	display: inline-block;   
+	text-align: left;    
+}

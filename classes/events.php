@@ -39,5 +39,9 @@ $eventdata= $this->internalDB->queryFirstRow("SELECT * FROM events where id=$eve
 		$eventnames= $this->internalDB->query("SELECT id,name,icons FROM events" );
 	return $eventnames;
 	}
+	function getSelectedEventByCommunityId($communityId){
+		$selectedEventIds= $this->internalDB->queryFirstColumn("SELECT event_id FROM event_visibility WHERE community_id=$communityId group by event_id" );
+	return $selectedEventIds;
+	}
 	
 }

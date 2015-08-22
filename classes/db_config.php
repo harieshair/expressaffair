@@ -1,6 +1,11 @@
 <?php
+/*define("DBSERVER","localhost");
+define("DBNAME", "kartconn_expressaffair");
+define("DBUSER", "kartconn_root");
+define("DBPWD", "Expressaffair@123");
+define("DBPORT", 3306);*/
 define("DBSERVER","localhost");
-define("DBNAME", "eventmanager");
+define("DBNAME", "kartconn_expressaffair");
 define("DBUSER", "root");
 define("DBPWD", "data");
 define("DBPORT", 3306);

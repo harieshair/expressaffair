@@ -11,8 +11,10 @@
   <link href="font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <!-- Ionicons -->
   <link href="ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <link href="plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
   <!-- Theme style -->
   <link href="dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+  <link href="dist/css/expressaffair.css" rel="stylesheet" type="text/css" />
 <!-- AdminLTE Skins. Choose a skin from the css/skins
  folder instead of downloading all of them to reduce the load. -->
  <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />  
@@ -73,6 +75,8 @@
   <script src="plugins/jQuery/jQuery.validate.min.js"></script>
   <!-- Bootstrap 3.3.2 JS -->
   <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+      <script src="plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
   <!-- SlimScroll -->
   <script src="plugins/slimScroll/jquery.slimScroll.min.js" type="text/javascript"></script>
   <!-- FastClick -->
@@ -82,8 +86,9 @@
   <!-- d2d scripts -->
   <script src="scripts/admin.js" type="text/javascript"></script>
   <script src="scripts/businessflow.js" type="text/javascript"></script>
+  
 <script  src="dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
-   
+<script  src="dist/js/ajaxupload.js" type="text/javascript"></script>
 
 </body>
 </html>

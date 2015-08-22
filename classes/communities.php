@@ -1,10 +1,12 @@
 	<?php
-	include_once(CLASSFOLDER."/dbconnection.php");	
+	include_once(CLASSFOLDER."/dbconnection.php");
+	//include_once(CLASSFOLDER."/enums.php");	
 	$dbconnect=null;
 	class communityclass extends dbconnection {		
 	function communityclass() // Constructor 
 	{
 		parent::__construct();
+		//$this->EventVisibility=new EventVisibilityType;
 	}
 	/* -----------------------------------------------------------------------------*/
 	function updatecommunity($entity,$eventids)
@@ -36,4 +38,12 @@
 		return $returnvalue;
 	}
 	
+	function getSelectedState($communityid){
+			$selectedState= $this->internalDB->queryFirstColumn("SELECT state_id FROM community_locations where community_id=$communityid");
+	return $selectedState;
+	}		
+	function getSelectedZone($communityid){
+			$selectedZone= $this->internalDB->queryFirstColumn("SELECT zone_id FROM community_locations where community_id=$communityid");
+	return $selectedZone;
+	}
 }
