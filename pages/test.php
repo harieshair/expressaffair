@@ -36,7 +36,7 @@
   <script src="../scripts/admin.js" type="text/javascript"></script>
   <script src="../scripts/businessflow.js" type="text/javascript"></script>
 <!-- <script type="text/javascript" src="../dist/js/prettify.js"></script> -->
-        <script type="text/javascript" src="../dist/js/bootstrap-multiselect.js"></script>       
+  <script type="text/javascript" src="../dist/js/bootstrap-multiselect.js"></script>       
 
         <script type="text/javascript">   
     $(document).ready(function() {
@@ -53,7 +53,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Multiselect</label>
         <div class="col-sm-10">
-            <select id="example-post" name="multiselect[]" multiple="multiple">
+            <select id="example-post" name="multiselectmine" multiple="multiple">
                 <option value="1">Option 1</option>
                 <option value="2">Option 2</option>
                 <option value="3">Option 3</option>

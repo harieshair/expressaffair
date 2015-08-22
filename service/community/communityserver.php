@@ -12,7 +12,8 @@ switch($_POST['action']){
 	if(!empty($_POST['communitydetails'])){
 		$params = array();
 		parse_str($_POST['communitydetails'], $params);
-		$eventids=isset($_POST['communitydetails'])?$_POST['communitydetails']:null;
+		//print_r($params);
+		$eventids=(isset($_POST['eventids']) && !empty($_POST['eventids']))?explode(',',$_POST['eventids']):null;
 		$response= $community->updatecommunity($params,$eventids);
 		if(empty($response["Exception"]))
 			$response['Message']="Community details updated successfully";		

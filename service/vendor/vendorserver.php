@@ -1,34 +1,84 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 session_start();
+include_once(CLASSFOLDER."/common.php");
 include_once(CLASSFOLDER."/vendor.php");
 $vendor = new vendorclass();
 switch($_POST['action'])
 {
-/*--------------------------------------------------------*/
-case "savevendor":
-	if(isset($_POST['vendordetails'])){
-
-		parse_str($_POST['vendordetails'], $data);
-		$vendorId=$vendor->savevendor($data);
-		if(!empty($data['id']))
-			$OrderId=$data['id'];
-		if($OrderId!=0){
-			if(isset($_POST['yarn_details'])){
-				parse_str($_POST['yarn_details'], $data);				
-				$fabricId=$fabric->SaveYarnRequirements($data,$OrderId);
-			}
-			if(isset($_POST['size_details'])){
-				parse_str($_POST['size_details'], $data);				
-				$fabric->SaveSizeRequirements($data,$OrderId);
-			}
-			if(isset($_POST['accessories_details'])){
-				parse_str($_POST['accessories_details'], $data);				
-				$fabric->SaveOtherAccessories($data,$OrderId);
-			}			
-		}
+	/*--------------------------------------------------------*/
+	case "savevendorbasics":
+	if(!empty($_POST['vendordetails'])){
+		$params = array();
+		parse_str($_POST['vendordetails'], $params);
+		$response= $vendor->updatevendorbasics($params);
+		if(empty($response["Exception"]))
+			$response['Message']="Vendor Profile details updated successfully";		
+		echo json_encode($response);
 	}
-
-break;
+	else{
+		$response['Exception']="Please specify valid vendor details";
+		echo json_encode($response);
+	}
+	break;
+	/*--------------------------------------------------------*/
+	case "savevendorcontacts":
+	if(!empty($_POST['contactdetails'])){
+		$params = array();
+		parse_str($_POST['contactdetails'], $params);
+		$response= $vendor->updatevendorcontacts($params);
+		if(empty($response["Exception"]))
+			$response['Message']="Contacts saved successfully";		
+		echo json_encode($response);
+	}
+	else{
+		$response['Exception']="Please specify valid contact details";
+		echo json_encode($response);
+	}
+	break;
+	/*--------------------------------------------------------*/
+	case "savevendorportfolios":
+	if(!empty($_POST['portfoliodetails'])){
+		$params = array();
+		parse_str($_POST['portfoliodetails'], $params);
+		$response= $vendor->updatevendorportfolios($params);
+		if(empty($response["Exception"]))
+			$response['Message']="Portfolio saved successfully";		
+		echo json_encode($response);
+	}
+	else{
+		$response['Exception']="Please specify valid portfolio details";
+		echo json_encode($response);
+	}
+	break;
+	case "savevendorservices":
+	if(!empty($_POST['servicedetails'])){
+		$params = array();
+		parse_str($_POST['servicedetails'], $params);
+		$response= $vendor->updatevendorservices($params);
+		if(empty($response["Exception"]))
+			$response['Message']="Service saved successfully";		
+		echo json_encode($response);
+	}
+	else{
+		$response['Exception']="Please specify valid service details";
+		echo json_encode($response);
+	}
+	break;
+	case "savevendorattachments":
+	if(!empty($_POST['attachmentdetails'])){
+		$params = array();
+		parse_str($_POST['attachmentdetails'], $params);
+		$response= $vendor->updatevendorattachments($params);
+		if(empty($response["Exception"]))
+			$response['Message']="Attachment uploaded successfully";		
+		echo json_encode($response);
+	}
+	else{
+		$response['Exception']="Please specify valid attachment details";
+		echo json_encode($response);
+	}
+	break;
+	
 }
 ?>

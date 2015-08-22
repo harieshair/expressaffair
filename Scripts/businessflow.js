@@ -42,7 +42,7 @@ function applyselectedservices(){
 	$('label[id=selectedservices]').html(serviceArrayName.toString());
 	closemodalwindow();
 }
-	/*------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------*/
 function saverole(){
 	var rolename=$('#rolename').val();
 	if(!rolename || rolename=='' || rolename.length<=1){
@@ -56,13 +56,13 @@ function saverole(){
 }
 
 function refreshRoleGrid(){	
-getcontents('pages/configs/roles/role.php','content');
+	getcontents('pages/configs/roles/role.php','content');
 }
 function refreshEventGrid(){	
-getcontents('pages/events/eventlists.php','content');
+	getcontents('pages/events/eventlists.php','content');
 }
 function refreshCommunityGrid(){	
-getcontents('pages/events/communities.php','content');
+	getcontents('pages/events/communities.php','content');
 }
 function saveuserform()
 {
@@ -75,10 +75,35 @@ function saveeventdetails(){
 	var POSTDATA="action=saveevents&eventdetails="+encodeURIComponent(eventdetails);
 	callservicebyajax(POSTDATA,"service/event/eventserver.php",function(){savedataresponse(refreshEventGrid)});	
 }
-function savecommunitydetails(){
-	communityevents=getCheckBoxValueIsideContainer('communityevents','eventid');
-		communitydetails = $("#update-communitydetails").serialize();
-	var POSTDATA="action=savecommunity&communitydetails="+encodeURIComponent(communitydetails)+"&eventids="+encodeURIComponent(communitydetails);
+function savecommunitydetails(){	
+	selectedevents=getCheckBoxValueIsideContainer('eventtablebody');
+	communitydetails = $("#update-communitydetails").serialize();
+	var POSTDATA="action=savecommunity&communitydetails="+encodeURIComponent(communitydetails)+"&eventids="+encodeURIComponent(selectedevents);
 	callservicebyajax(POSTDATA,"service/community/communityserver.php",function(){savedataresponse(refreshCommunityGrid)});	
+}
+function savevendorbasicdetails(nexturl){
+	vendordetails = $("#update-vendorbasics").serialize();
+	var POSTDATA="action=savevendorbasics&vendordetails="+encodeURIComponent(vendordetails);
+	callservicebyajax(POSTDATA,"service/vendor/vendorserver.php",function(){wizardnext(nexturl)});	
+}
+function savevendorcontactdetails(contactid,IsNew,nextwizardurl,appendurl){
+	contactdetails = $("#"+contactid+"-form").serialize();
+	var POSTDATA="action=savevendorcontacts&contactdetails="+encodeURIComponent(contactdetails);
+	callservicebyajax(POSTDATA,"service/vendor/vendorserver.php",function(){wizardnext(nextwizardurl,IsNew,appendurl)});	
+}
+function savevendorportfoliodetails(portfolioid,IsNew,nextwizardurl,appendurl){
+	portfoliodetails = $("#"+portfolioid+"-form").serialize();
+	var POSTDATA="action=savevendorportfolios&portfoliodetails="+encodeURIComponent(portfoliodetails);
+	callservicebyajax(POSTDATA,"service/vendor/vendorserver.php",function(){wizardnext(nextwizardurl,IsNew,appendurl)});	
+}
+function savevendorservices(serviceid,IsNew,nextwizardurl,appendurl){
+	servicedetails = $("#"+serviceid+"-form").serialize();
+	var POSTDATA="action=savevendorservices&servicedetails="+encodeURIComponent(servicedetails);
+	callservicebyajax(POSTDATA,"service/vendor/vendorserver.php",function(){wizardnext(nextwizardurl,IsNew,appendurl)});	
+}
+function savevendorattachments(attachmentid,IsNew,appendurl){
+	attachmentdetails = $("#"+attachmentid+"-form").serialize();
+	var POSTDATA="action=savevendorattachments&attachmentdetails="+encodeURIComponent(attachmentdetails);
+	callservicebyajax(POSTDATA,"service/vendor/vendorserver.php",function(){wizardnext("",IsNew,appendurl)});	
 }
 

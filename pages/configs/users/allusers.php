@@ -22,16 +22,14 @@ else{
 }
 ?>
 
-<div class="actionWizard">
-	<a title="Create User" class="btn btn-default pull-right btn-sm " href="javascript:void(0)" 
-	onclick="getcontents('pages/configs/users/createuser.php','content');" > <i class="glyphicon  glyphicon-plus-sign"></i>New User</a>
-</div>
 <div id="gridcontent" class ="content">
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">User List</h3>
+					<a title="Create User" class="btn btn-default pull-right btn-sm " href="javascript:void(0)" 
+	onclick="getcontents('pages/configs/users/updateuser.php','content');" > <i class="glyphicon  glyphicon-plus-sign"></i>New User</a>
 				</div>	
 				<div class="box-body">
 					<div id="example2_wrapper" class="dataTables_wrapper form-inline" role="grid">

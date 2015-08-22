@@ -12,14 +12,17 @@ function saveCatalogValuesIntoCache(){
 	return $result;
 }
 /*----------------------------------------------------------------------------*/
-function GetAllCatalogValuesByMasterName($mastername){
-
+function add_quotes($str) {
+    return sprintf("'%s'", $str);
+}
+function GetAllCatalogValuesByMasterNames($masternames){
 	$catalogarray=array();
-	$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id=(select id from catalog_master where name='$mastername')"); 
+	$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id in (select id from catalog_master where name in (".implode(',', explode(',', $masternames))."))"); 
 	foreach($catalogvalues as $catalog)
-		$catalogarray['id']=$catalog['name'];
+		$catalogarray[$catalog['id']]=$catalog['catalog_value'];
 	return $catalogarray;
 }
+
 /*----------------------------------------------------------------------------*/
 function GetAllCatalogValues($mastername){
 	$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id=(select id from catalog_master where name='$mastername')"); 
