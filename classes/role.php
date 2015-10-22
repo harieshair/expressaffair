@@ -1,14 +1,12 @@
 	<?php
-	include_once(CLASSFOLDER."/dbconnection.php");
 	include_once(CLASSFOLDER."/enums.php");
-	$dbconnect=null;
-	class roleclass extends dbconnection {
+	class roleclass {
 
-
-		/*-------------------------------------------------------------*/
-	function roleclass() // Constructor 
+public $internalDB;	
+	/*-------------------------------------------------------------*/
+	function roleclass($db) // Constructor 
 	{
-		parent::__construct();
+		$this->internalDB=$db;
 	}
 	/* -----------------------------------------------------------------------------*/
 	function CreateRole($roleName)

@@ -18,8 +18,8 @@ ul li {
 }
 
 a:hover {
-outline: none;
-text-decoration:none;
+  outline: none;
+  text-decoration:none;
 }
 
 a:focus {
@@ -30,8 +30,8 @@ a:focus {
 a {
   -webkit-transition: 300ms;
   -moz-transition: 300ms;
-    -o-transition: 300ms;
-    transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -72,7 +72,7 @@ a#scrollUp i{
 }
 
 .contactinfo ul li:first-child{
-    margin-left: -15px;
+  margin-left: -15px;
 }
 
 .contactinfo ul li a{
@@ -101,7 +101,7 @@ a#scrollUp i{
 
 .social-icons ul li a i {
   padding: 11px 15px;
-   transition: all 0.9s ease 0s;
+  transition: all 0.9s ease 0s;
   -moz-transition: all 0.9s ease 0s;
   -webkit-transition: all 0.9s ease 0s;
   -o-transition: all 0.9s ease 0s;
@@ -109,7 +109,7 @@ a#scrollUp i{
 
 .social-icons ul li a i:hover{
   color: #fff;
-   transition: all 0.9s ease 0s;
+  transition: all 0.9s ease 0s;
   -moz-transition: all 0.9s ease 0s;
   -webkit-transition: all 0.9s ease 0s;
   -o-transition: all 0.9s ease 0s;
@@ -273,7 +273,7 @@ a#scrollUp i{
 
 .navbar-header 
 .navbar-toggle .icon-bar {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 
@@ -320,7 +320,7 @@ ul.sub-menu {
 }
 
 .navbar-nav li ul.sub-menu li a:hover{
-    color: #FDB45E;
+  color: #FDB45E;
 }
 
 .fa-angle-down{
@@ -340,7 +340,7 @@ ul.sub-menu {
     transform: translateY(0);
   }
 }
-  
+
 /*************************
 *******Footer CSS******
 **************************/
@@ -412,10 +412,10 @@ ul.sub-menu {
   line-height: 0;
   display: block;
   opacity: 0;
-   -webkit-transition: 300ms;
+  -webkit-transition: 300ms;
   -moz-transition: 300ms;
-    -o-transition: 300ms;
-    transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
 }
 
 .overlay-icon i {
@@ -577,7 +577,7 @@ ul.sub-menu {
 }
 
 .carousel-indicators li.active {
-	  background: #FE980F;
+ background: #FE980F;
 }
 
 .item {
@@ -599,7 +599,7 @@ ul.sub-menu {
   color: #B4B1AB;
   font-family: abel;
   font-size: 48px;
-  margin-top: 115px;
+  margin-top: 35px;
 }
 
 .item h1 span {
@@ -659,12 +659,17 @@ ul.sub-menu {
   padding-bottom: 20px;
   padding-top: 15px;
 }
+.left-sidebar{
+  border-right: 3px inset rgba(254, 152, 15, 0.25);
+  padding-top: 20px;
+}
+
 .left-sidebar h2, .brands_products h2 {
   color: #FE980F;
   font-family: 'Roboto', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  margin: 0 auto 30px;
+  margin: 0 auto 5px;
   text-align: center;
   text-transform: uppercase;
   position: relative;
@@ -733,6 +738,10 @@ h2.title:before{
   border-top: 0 none;
 }
 
+.left-panel-body{
+  height: 140px;
+  overflow-y: scroll;
+}
 .category-products .badge {
   background:none;
   border-radius: 10px;
@@ -749,7 +758,7 @@ h2.title:before{
 }
 
 .panel-body ul{
-  padding-left: 20px;
+  padding-left: 5px;
 }
 
 
@@ -885,6 +894,10 @@ h2.title {
 .productinfo img{
   width: 100%;
 }
+.productinfo .rating{
+ width: 80%;
+}
+
 
 .productinfo{
  position:relative;
@@ -1448,10 +1461,17 @@ h2.title {
   margin-bottom: 30px;
 }
 
+.signup-form label.error {
+  color: #FB3A3A;
+  display: inline-block;   
+  text-align: left;    
+}
 
-.login-form form input, .signup-form form input {
-  background: #F0F0E9;
-  border: medium none;
+.login-form form input[type="text"], .login-form form input[type="email"], .login-form form input[type="password"],
+.signup-form form input[type="text"], .signup-form form input[type="email"], .signup-form form input[type="password"],
+.signup-form form select, .signup-form form textarea {
+  background: #E8E8E4;
+  border: #F6F9CB  2px solid;
   color: #696763;
   display: block;
   font-family: 'Roboto', sans-serif;
@@ -1463,7 +1483,9 @@ h2.title {
   padding-left: 10px;
   width: 100%;
 }
-
+.signup-form  form textarea {
+  min-height: 100px;
+}
 .login-form form span{
   line-height: 25px;
 }
@@ -1475,16 +1497,15 @@ h2.title {
   margin-right: 5px;
 }
 
-.login-form form button {
+.login-form form a {
   margin-top: 23px;
 }
 
-.login-form form button, .signup-form form button {
+.login-form form a, .signup-form form a {
   background: #FE980F;
   border: medium none;
   border-radius: 0;
   color: #FFFFFF;
-  display: block;
   font-family: 'Roboto', sans-serif;
   padding: 6px 25px;
 }
@@ -1492,17 +1513,6 @@ h2.title {
 .login-form label{
 
 }
-
-
-.login-form label input {
-  border: medium none;
-  display: inline-block;
-  height: 0;
-  margin-bottom: 0;
-  outline: medium none;
-  padding-left: 0;
-}
-
 
 .or{
 	background: #FE980F;
@@ -1781,7 +1791,7 @@ h2.title {
   padding: 5px 15px;
 }
 .update{
-    margin-left: 40px;
+  margin-left: 40px;
 }
 
 .check_out {
@@ -2069,7 +2079,7 @@ h2.title {
 }
 
 .post-meta span{
-    float: right;
+  float: right;
 }
 
 .post-meta span i{
@@ -2243,7 +2253,7 @@ h2.title {
 }
 
 .blog-socials ul li {
-  
+
   float: left;
   height: 17px;
   margin-right: 5px;
@@ -2519,5 +2529,10 @@ h2.title {
 .contact-info .social-networks ul li a:hover{
   color: #FE980F;
 }
-
+.productinfo span .rate {
+  color: #FE980F;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
 

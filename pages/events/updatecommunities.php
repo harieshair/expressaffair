@@ -3,12 +3,13 @@
   $communityid=(isset($_POST['postvalue']))?$_POST['postvalue']:0;
 
   include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+  include_once(CLASSFOLDER."/dbconnection.php");
   include_once(CLASSFOLDER."/communities.php");
-  $community=new communityclass();
+  $community=new communityclass($dbconnection->dbconnector);
   include_once(CLASSFOLDER."/catalogs.php");
-  $catalog=new catalogclass();
+  $catalog=new catalogclass($dbconnection->dbconnector);
   include_once(CLASSFOLDER."/events.php");
-  $event=new eventclass();
+  $event=new eventclass($dbconnection->dbconnector);
   $communitydata=(!empty($communityid))? $community->getcommunitybyid($communityid):array();    
   $selectedState=(!empty($communityid))? $community->getSelectedState($communityid):array();  
   $selectedZone=(!empty($communityid))? $community->getSelectedZone($communityid):array();  

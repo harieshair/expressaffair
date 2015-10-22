@@ -2,7 +2,7 @@
 /*------------------------------------------------------------------------*/
 function showcataloghierarchical(catalogmasterid){
 	var POSTDATA="action=getallcatalogvalues&catalogmasterid="+encodeURIComponent(catalogmasterid);
-	callservicebyajax(POSTDATA,"service/config/catalogserver.php",function(){showcataloghierarchicalresponse(catalogmasterid)});
+	callservicebyajax(POSTDATA,"service/catalogserver.php",function(){showcataloghierarchicalresponse(catalogmasterid)});
 
 }
 /*------------------------------------------------------------------------*/
@@ -48,7 +48,7 @@ function getallcatalogmasters(page,searchCriteria){
 	searchobj=JSON.stringify(searchCriteria);
 	var POSTDATA="action=showmngcatalogpaging&searchObj="+encodeURIComponent(searchobj)+"&page="+encodeURIComponent(page)+"&rows="+encodeURIComponent(rows);
 	$('#loading').html("<img src=\"loader.gif\">");
-	callservicebyajax(POSTDATA,"service/config/catalogserver.php",function(){savedataresponse()});
+	callservicebyajax(POSTDATA,"service/catalogserver.php",function(){savedataresponse()});
 }
 /*----------------------------------------------------------------*/
 function getcatalogsearchcriteria()
@@ -84,7 +84,7 @@ function SaveCatalogList(){
 		if(enabledcatalogs.length>0) POSTDATA+="&enabledcatalogs="+encodeURIComponent(enabledcatalogs);
 		if(disabledcatalogs.length>0) POSTDATA+="&disabledcatalogs="+encodeURIComponent(disabledcatalogs);
 		$('#loading').html("<img src=\"loader.gif\">");
-		callservicebyajax(POSTDATA,"service/config/catalogserver.php",function(){savedataresponse(refreshCatalogGrid)}) ;
+		callservicebyajax(POSTDATA,"service/catalogserver.php",function(){savedataresponse(refreshCatalogGrid)}) ;
 	}
 	else{
 		notifyDanger("Invalid Catalog MasterName/Changes is not valid to save");
@@ -95,7 +95,7 @@ function loadcatalogchilds(){
 	masterid=$('#catalogvalueparent').val();
 	if(masterid){
 		var POSTDATA="action=getallCatalogValuesNamesForDropDown&catalogmasterid="+encodeURIComponent(masterid);		
-		callservicebyajax(POSTDATA,"service/config/catalogserver.php",function(){
+		callservicebyajax(POSTDATA,"service/catalogserver.php",function(){
 			$("#childcatalogs").html(ajaxResponse);
 		});
 	}
@@ -125,7 +125,7 @@ function addcatalogtolist(){
 			obj.trid="dummyid_"+dummy; // required to delete tr on client add
 			addedcatalogs.push(obj);
 			$('#catalogvaluelist tbody').append('<tr id="dummyid_'+ dummy +'" catalogname="'+catalogvaluename+'"><td><input type="checkbox" name="selectCatalogValue"  trid="dummyid_'+dummy+'"/></td><td>'+catalogvaluename+'</td><td>'
-				+$.trim(parentname)+'</td><td><a href="#" onclick=removecatalogvalue("dummyid_'+dummy+'"); class="btn btn-sm btn-default-inverse"><i class="glyphicon  glyphicon-remove-sign white"></i>Delete</a></td></tr>');   
+				+$.trim(parentname)+'</td><td><a href="#" onclick=removecatalogvalue("dummyid_'+dummy+'"); class="btn btn-default btn-default-inverse btn-sm"><i class="glyphicon  glyphicon-remove-sign white"></i></a></td></tr>');   
 		}
 	});
 		$('#catalogvalue').html('');

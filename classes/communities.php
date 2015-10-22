@@ -1,11 +1,9 @@
 	<?php
-	include_once(CLASSFOLDER."/dbconnection.php");
-	//include_once(CLASSFOLDER."/enums.php");	
-	$dbconnect=null;
-	class communityclass extends dbconnection {		
-	function communityclass() // Constructor 
+	class communityclass  {	
+	public $internalDB;		
+	function communityclass($db) // Constructor 
 	{
-		parent::__construct();
+		$this->internalDB=$db;
 		//$this->EventVisibility=new EventVisibilityType;
 	}
 	/* -----------------------------------------------------------------------------*/
@@ -31,6 +29,14 @@
 	}
 	function deletecommunity(){
 
+	}
+	function getAllCommunityNames(){
+		$communitynames=array();
+		$resultset= $this->internalDB->query("SELECT id,name FROM communities" );
+		foreach ($resultset as $row) {
+			$communitynames[$row['id']]=$row['name'];
+		}
+		return $communitynames;
 	}
 	function getTotalCommunities($searchobj){
 		$searchobj=($searchobj!=null)?json_decode($searchobj):null;

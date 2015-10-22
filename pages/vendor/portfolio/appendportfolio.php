@@ -4,12 +4,12 @@ if(isset($_POST['postvalue']))
   $portfolioid=$_POST['postvalue'];        
   if(empty($vendor)  ){
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/vendor.php");
-$vendor=new vendorclass();
+$vendor=new vendorclass($dbconnection->dbconnector);
 include_once(CLASSFOLDER."/catalogs.php");
-$catalog=new catalogclass();          
-$portfoliocatalog=$catalog->GetAllCatalogValues('PortfolioType'); 
-$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("'PortfolioType'");   
+$catalog=new catalogclass($dbconnection->dbconnector);          
+$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("PortfolioType");   
 }
 if(empty($portfolio))
 $portfolio=(!empty($portfolioid))?$vendor->getportfoliobyid($portfolioid):array();
@@ -27,9 +27,9 @@ $portfolio=(!empty($portfolioid))?$vendor->getportfoliobyid($portfolioid):array(
                       <select id="portfoliotype" name="portfoliotype" class="form-control">
                        <?php
                        if(!empty($portfoliocatalog) && count($portfoliocatalog)>0){
-                        foreach ($portfoliocatalog as $catalog) {
+                        foreach ($portfoliocatalog as $key->$value) {
                           ?>            
-                          <option value="<?php echo $catalog['id'] ;?>"><?php echo $catalog['catalog_value'] ;?></option>
+                          <option value="<?php echo $key ;?>"><?php echo $value ;?></option>
                           <?php }
                         }
                         ?>

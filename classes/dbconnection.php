@@ -3,20 +3,19 @@ include_once(CLASSFOLDER."/db_config.php");
 include_once(CLASSFOLDER."/dbCon.php"); 
 class dbconnection 
 {
-	//extends GlobalCache
-	public $internalDB = null;
+public $dbconnector=null;	
 public function __construct() // Constructor 
 {
 	//$this->ALIAS=$alias;
 	//$this->oCache=new GlobalCache;
-	$this->internalDB = new MeekroDB(DBSERVER,DBUSER,DBPWD,DBNAME,DBPORT);
+	$this->dbconnector = new MeekroDB(DBSERVER,DBUSER,DBPWD,DBNAME,DBPORT);
 	
 }
 
 /*----------------------------------------------------------------------------------------*/
 public function createlog($message){
 	$ip=$this->GetIP();
-	$this->internalDB->insert('site_log', array(
+	$this->dbconnector->insert('site_log', array(
   'user_id' =>isset($_SESSION['ADMINUSERID'])?$_SESSION['ADMINUSERID']:0,
   'log_date' => date("Y-m-d H:i:s"),
   'log_ip' => $ip,
@@ -40,4 +39,5 @@ public function createlog($message){
 	}
 /*----------------------------------------------------------------------------------------*/
 }
+$dbconnection=new dbconnection();
 ?>

@@ -17,7 +17,7 @@ try{
 		isset($entity['startedyear'])?$updateObject['startedyear']=$entity['startedyear']:'';
 		isset($entity['leadby'])?$updateObject['leadby']=$entity['leadby']:'';		
 		$this->internalDB->update('vendor',$updateObject,"id=%i",$entity['vendorid']);
-		return array('Id'=>$entity['vendorid'] );	
+		return array('Id'=>$entity['vendorid']);	
 	}
 	else{
 

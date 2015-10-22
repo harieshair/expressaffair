@@ -1,8 +1,24 @@
+<?php
+if(!isset($_SESSION)){session_start();}
+if(!isset($_SESSION['ADMINUSERID']))
+{
+  include_once("index.php");
+  exit();
+}
+$userid=$_SESSION['ADMINUSERID'];
+include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
+include_once(CLASSFOLDER."/user.php");
+include_once(CLASSFOLDER."/common.php");
+$user=new userclass($dbconnection->dbconnector);
+$userdata = $user->getuserbyid($userid);
+$userdata['profile_path'] = $user->getUserProfilePath($userid);
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>Express Affair</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <link rel="stylesheet" href="dist/css/jquery-ui.css" type="text/css" />
   <!-- Bootstrap 3.3.2 -->
@@ -19,6 +35,8 @@
  folder instead of downloading all of them to reduce the load. -->
  <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />  
 <link rel="stylesheet" href="dist/css/bootstrap-multiselect.css" type="text/css"> 
+
+
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -27,7 +45,7 @@
     <![endif]-->
   </head>
   <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-  <body class="skin-blue layout-top-nav">
+  <body class="skin-blue layout-top-nav app-body" id="affairbody">
     <div class="wrapper">
 
       <header class="main-header">               
@@ -89,6 +107,6 @@
   
 <script  src="dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
 <script  src="dist/js/ajaxupload.js" type="text/javascript"></script>
-
+<script  src="plugins/jQuery/ajax-loader.js"></script>
 </body>
 </html>

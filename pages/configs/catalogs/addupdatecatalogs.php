@@ -2,8 +2,9 @@
 if(!isset($_SESSION)){session_start();}
 $catalogmasterid=isset($_POST['postvalue'])?$_POST['postvalue']:0;;
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/catalogs.php"); 
-$catalog = new catalogclass();
+$catalog = new catalogclass($dbconnection->dbconnector);
 ?>
 <style type="text/css">
 #catalogvaluelist td{ text-align:center;}

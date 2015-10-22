@@ -1,6 +1,7 @@
 // JavaScript Document
 /*-------------------------------------------------------------------------------------------------*/
 function callservicebyajax(POSTDATA,serverurl,callbackfunction){
+	showPageLoader();
 	$.ajax({
 		url: serverurl,       
 		type: "POST",
@@ -8,7 +9,23 @@ function callservicebyajax(POSTDATA,serverurl,callbackfunction){
 		cache: false,  
 		async: true,       
 		success: function (response) { 
-			ajaxResponse=response;
+			ajaxResponse=response;			
+			callbackfunction();
+			ajaxResponse='';
+			hidePageLoader();
+
+		}
+	});
+}
+function oncallservice(POSTDATA,serverurl,callbackfunction){
+	$.ajax({
+		url: serverurl,       
+		type: "POST",
+		data: POSTDATA, 
+		cache: false,  
+		async: true,       
+		success: function (response) { 
+			ajaxResponse=response;			
 			callbackfunction();
 			ajaxResponse='';
 		}
@@ -60,23 +77,6 @@ function getmodalcontentresponse(){
 	$('#MicroModalwindow').modal('show');
 }
 
-function showmodalwindow(){
-	if(ajaxResponse){
-		var modalWindowData = JSON.parse(ajaxResponse);
-		if(modalWindowData.Header) $('#ModalWindowHeader').html(modalWindowData.Header);
-		if(modalWindowData.Body) $('#ModalWindowBody').html(modalWindowData.Body);
-		if(modalWindowData.Footer) $('#ModalWindowFooter').html(modalWindowData.Footer);
-	}
-	$('#MicroModalwindow').attr('class', 'modal fade').attr('aria-labelledby','myModalLabel');
-	$('.modal-dialog').attr('class','modal-dialog');
-	$('#MicroModalwindow').modal('show');
-}
-function closemodalwindow(){
-	$('#ModalWindowBody').html("");
-	$('#ModalWindowFooter').html("");
-	$('#ModalWindowHeader').html("");				
-	$('#MicroModalwindow').modal("hide");
-}
 
 function getCheckBoxValueIsideContainer(checkboxid){
 	var eventids = $("#"+checkboxid+" input:checkbox:checked").map(function(){
@@ -161,75 +161,161 @@ function notifyDanger(message){
 	$.bootstrapGrowl(message,{type: 'danger'});                    
 }
 
-function removefilefromattachment(divid,inputid)
+function removefilefromattachment(filename,hiddenfieldname)
 {
-	$("#"+divid).html("");
-	$("#"+inputid).val("");
+	$("#view_"+filename).remove();
+	$("#remove_"+filename).remove();
+	var files=$('#'+hiddenfieldname).val();
+	files=files.split(',');
+	var index = files.indexOf(filename);
+	if (index > -1) {
+		files.splice(index, 1);
+		$('#'+hiddenfieldname).val(files.join(','));
+	}
+}
+function stringReplace(variable,searchstring,replacestring){
+	return variable.replace(searchstring, replacestring);
 }
 
 /*--------------------------------------------------------------------------------------------*/
 function uploadfiles(elementid)
 {
-	if($("#oldattachment_"+elementid).val()!="" && $("#oldattachment_"+elementid).val()!=undefined)
+	if($("#file_name_"+elementid).val()!="" && $("#file_name_"+elementid).val()!=undefined)
 	{
 		var isfilereplace=confirm("file is already exists,Do you want to replace.?");
 		if(!isfilereplace)
 			return;
 	}
 	if($('#attachment_'.elementid).val()!='')
-		{
-			type= $("#attachmenttype_"+elementid).val();
-			fileElementId="attachmenttype_"+elementid;
-			file='service/accessories/attachments.php?filetype='+type+'&elementId=attachment_'+elementid;
+	{
+		type= $("#file_type_"+elementid).val();
+		fileElementId="attachment_"+elementid;
+		file='service/accessories/attachments.php?filetype='+type+'&elementId=attachment_'+elementid;
 
-			$("#loading")
-			.ajaxStart(function(){
+		$("#loading")
+		.ajaxStart(function(){
 			$(this).show();
-			})
-			.ajaxComplete(function(){
+		})
+		.ajaxComplete(function(){
 			$(this).hide();
-			});
-			$.ajaxFileUpload
-			(
-				{
-				url:file,
-				secureuri:true,
-				fileElementId:fileElementId,
-				dataType: 'json',
-				success: function (data, status)
-				{
-					if(data!=0)
-					 {
-						alert("Attached Successfully");
-						$('#'+resopnsefield).val(data);
-						var div = $("<div>");
-						$("<a/>").css({"cursor":"pointer","color":"#0000CC"}).html(data).appendTo(div);
-						$("<a/>").css("cursor","pointer").attr({"onClick":"removefilefromattachment('"+divid+"','"+resopnsefield+"')","Title":"Remove file"})
-						.addClass("glyphicon glyphicon-remove").appendTo(div);
-						$("#"+divid).html(div);
-					  }
-					  else{
-					  if(type == 'htm')
-							notifyDanger("Error.. Upload format is .html/.htm/.php (Max 1 MB)");
-						if(type == 'image')
-							notifyDanger("Error.. Upload format is .jpg/ .png/ .gif/ .bmp/ .jpeg/ (Max 10 MB)");
-						else if(type == 'css')
-							notifyDanger("Error.. Upload format is .css file (Max 50KB)");
-						else if(type == 'js')
-							 notifyDanger("Error.. Upload format is .js file (Max 50KB)");
-					 else if(type == 'excel')
-							 notifyDanger("Error.. Upload format is .xls/.xlsx/.csv file (Max 3 MB)");
-
-						}
-					},
-					error: function (data, status, e)
-					{
-						notifyDanger(e);
-					}
+		});
+		$.ajaxFileUpload
+		(	{
+			url:file,
+			secureuri:true,
+			fileElementId:fileElementId,
+			dataType: 'json',
+			success: function (data, status)
+			{
+				var result=jQuery.parseJSON(data);
+				if(!result.Exception || result.Exception=="")
+				{					
+					notifySuccess("Attached Successfully");
+					$('#file_name_'+elementid).val(result.newfilename);
+					var div = $("#divexistingfile_"+elementid);
+					$("<a/>").css({"cursor":"pointer","color":"#0000CC"}).html(result.filename).attr({"href":"../downloadfiles.php?filelocation=../uploadfiles/"+result.newfilename,"Title":"Download","target":"_blank"}).appendTo(div);				
 				}
-			)
-		}
-		else
+				else
+					notifyDanger(result.Exception);						 
+			},
+			error: function (data, status, e)
+			{
+				notifyDanger(e);
+			}
+		}	)
+	}
+	else
 		{ notifyDanger("Please Upload files");  }
-		return false;
+	return false;
+}
+function uploadmultiplefiles()
+{
+	if($("#file_name").val()!="" && $("#file_name").val()!=undefined)
+	{
+		var isfilereplace=confirm("file is already exists,Do you want to replace.?");
+		if(!isfilereplace)
+			return;
+	}
+	if($('#attachment').val()!='')
+	{
+		type= $("#file_type").val();
+		fileElementId="attachment";
+		file='service/accessories/multi_attachments.php?filetype='+type+'&elementId=attachment';
+
+		$("#loading")
+		.ajaxStart(function(){
+			$(this).show();
+		})
+		.ajaxComplete(function(){
+			$(this).hide();
+		});
+		$.ajaxFileUpload
+		(	{
+			url:file,
+			secureuri:true,
+			fileElementId:fileElementId,
+			dataType: 'json',
+			success: function (data, status)
+			{
+				var result=jQuery.parseJSON(data);
+				if(!result.Exception || result.Exception=="")
+				{			
+					var files=[];	
+					var div = $("#divexistingfile");	
+					$.each(result, function (key, value) {
+						if(key!="Exception"){
+							files.push(value);
+							$("<a/>").css({"cursor":"pointer","color":"#0000CC"}).html(key).attr({"href":"../downloadfiles.php?filelocation=../uploadfiles/"+key,"Title":"Download","target":"_blank"}).appendTo(div);				
+						}
+
+					});
+
+					$('#file_name').val(files.join(','));
+
+					notifySuccess("Attached Successfully");
+				}
+				else
+					notifyDanger(result.Exception);						 
+			},
+			error: function (data, status, e)
+			{
+				notifyDanger(e);
+			}
+		});
+	}
+	else
+		{ notifyDanger("Please Upload files");  }
+	return false;
+}
+
+function showmodalwindow(){
+	if(ajaxResponse){
+		var modalWindowData = JSON.parse(ajaxResponse);
+		if(modalWindowData.Header) $('#ModalWindowHeader').html(modalWindowData.Header);
+		if(modalWindowData.Body) $('#ModalWindowBody').html(modalWindowData.Body);
+		if(modalWindowData.Footer) $('#ModalWindowFooter').html(modalWindowData.Footer);
+	}
+	$('#MicroModalwindow').attr('class', 'modal fade').attr('aria-labelledby','myModalLabel');
+	$('.modal-dialog').attr('class','modal-dialog');
+	$('#MicroModalwindow').modal('show');
+}
+function closemodalwindow(){
+	$('#ModalWindowBody').html("");
+	$('#ModalWindowFooter').html("");
+	$('#ModalWindowHeader').html("");				
+	$('#MicroModalwindow').modal("hide");
+}
+
+function changenavstatus(navbarid,selectedtab)
+{
+	$('#'+navbarid).each(function(){
+		$(this).find('li').each(function(){
+			$(this).removeClass("active");
+		});
+		$(this).find('li').each(function(){
+			if($(this).attr('id')==selectedtab){
+				$(this).addClass("active");
+			}
+		});
+	});
 }

@@ -1,10 +1,10 @@
 <?php
-include_once(CLASSFOLDER."/dbconnection.php");
-class catalogclass extends dbconnection {
+class catalogclass  {
+	public $internalDB;	
 	/*-------------------------------------------------------------*/
-function catalogclass() // Constructor 
+function catalogclass($db) // Constructor 
 {
-	parent::__construct();
+	$this->internalDB=$db;
 }
 /*----------------------------------------------------------------------------*/
 function saveCatalogValuesIntoCache(){
@@ -17,7 +17,7 @@ function add_quotes($str) {
 }
 function GetAllCatalogValuesByMasterNames($masternames){
 	$catalogarray=array();
-	$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id in (select id from catalog_master where name in (".implode(',', explode(',', $masternames))."))"); 
+	$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id in (select id from catalog_master where name in ('".implode("','", explode(',', $masternames))."'))"); 
 	foreach($catalogvalues as $catalog)
 		$catalogarray[$catalog['id']]=$catalog['catalog_value'];
 	return $catalogarray;

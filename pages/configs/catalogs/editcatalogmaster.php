@@ -20,16 +20,16 @@ $catalogvalues=$catalog->getCatalogValuesByMasterId($catalogmasterid); ?>
                     <?php 
                     $catalogmasternames=$catalog->getallCatalogMastaersNames();
                     foreach($catalogmasternames as $master) 
-                       echo '<option value="'.$master['id'].'">'.$master['name'].'</option>'; 
-                   unset($catalogmasternames);
-                   ?>
-               </select>
-           </div>
-           <div class="col-md-4">
+                     echo '<option value="'.$master['id'].'">'.$master['name'].'</option>'; 
+                 unset($catalogmasternames);
+                 ?>
+             </select>
+         </div>
+         <div class="col-md-4">
             <label>Description</label>
             <input type="text" id="description"  placeholder="Description" value="<?php echo $catalogmaster['description'];?>" class="form-control"/>
         </div>
-            <div class="col-md-4">
+        <div class="col-md-4">
             <label>Catalog Value</label>
             <input type="text" id="catalogvalue"  placeholder="Catalog value" class="form-control"/>
         </div>
@@ -54,27 +54,26 @@ $catalogvalues=$catalog->getCatalogValuesByMasterId($catalogmasterid); ?>
 <br /><br />
 <div class="box box-warning ">
     <div class="box-header">
-        <h3 class="box-title">Catalog Values</h3>
-    </div>  
-    <div class="box-body">
-        <div id="example2_wrapper" class="dataTables_wrapper form-inline" role="grid"> 
-           <div class="row pull-right">
-               <span class="label label-info" id="catalogcountinformer"></span>
-               <a href="javascript:void(0);" onclick="enableSelectedCatalogvalues('selectCatalogValue');" class="btn btn-default btn-default-inverse btn-sm">
-                <i class="glyphicon  glyphicon-ok-circle white"></i>Enable Selected Catalogs</a>
-                <a href="javascript:void(0);" onclick="disableSelectedCatalogvalues('selectCatalogValue');" class="btn btn-default btn-default-inverse btn-sm">
-                    <i class="glyphicon  glyphicon-ban-circle white"></i>Disable Se;ected Catalogs</a>
-                    <a href="javascript:void(0);" onclick="removeAllCatalogvalues('selectCatalogValue');" class="btn btn-default btn-default-inverse btn-sm">
-                        <i class="glyphicon  glyphicon-remove-circle white"></i>Delete Selected Catalogs</a>
-                    </div>
-
-                    <div class="row">
+        <h3 class="col-sm-6 box-title">Catalog Values</h3>
+        <div class="col-sm-6 pull-right">
+         <span class="label label-info" id="catalogcountinformer"></span>
+         <a href="javascript:void(0);" onclick="enableSelectedCatalogvalues('selectCatalogValue');" class="btn btn-default btn-default-inverse btn-sm">
+            <i class="glyphicon  glyphicon-ok-circle white"></i>Visible</a>
+            <a href="javascript:void(0);" onclick="disableSelectedCatalogvalues('selectCatalogValue');" class="btn btn-default btn-default-inverse btn-sm">
+                <i class="glyphicon  glyphicon-ban-circle white"></i>Disable</a>
+                <a href="javascript:void(0);" onclick="removeAllCatalogvalues('selectCatalogValue');" class="btn btn-default btn-default-inverse btn-sm">
+                    <i class="glyphicon  glyphicon-remove-circle white"></i>Remove</a>
+                </div>
+            </div>
+            <div class="box-body">
+                <div id="example2_wrapper" class="dataTables_wrapper form-inline" role="grid"> 
+                    <div class="col-sm-12">
                         <table id="catalogvaluelist" class="table table-bordered table-hover dataTable " aria-describedby="example2_info">
-                            <thead><tr ><th>
-                                <input type="checkbox" name="selectAllCatalogValues"  onclick="selectallcatalogvalues('selectAllCatalogValues','selectCatalogValue')" /></th>
-                                <th >Value</th>
-                                <th >Parent</th>
-                                <th >Delete</th>
+                            <thead><tr ><td>
+                                <input type="checkbox" name="selectAllCatalogValues"  onclick="selectAllCheckboxchilds('selectAllCatalogValues','selectCatalogValue')" /></td>
+                                <td>Value</td>
+                                <td>Parent</td>
+                                <td>Delete</td>
                             </tr></thead>
                             <tbody>
                                 <?php if(!empty($catalogvalues)){
@@ -82,11 +81,11 @@ $catalogvalues=$catalog->getCatalogValuesByMasterId($catalogmasterid); ?>
                                   <tr id="dummy_<?php echo $catalogvalue['id'];?>" catalogvalueid="<?php echo $catalogvalue['id'];?>" 
                                     catalogname="<?php echo $catalogvalue['catalog_value'];?>" >
                                     <td> <input type="checkbox" name="selectCatalogValue"  catalogvalueid="<?php echo $catalogvalue['id'];?>" 
-                                       trid="dummy_<?php echo $catalogvalue['id'];?>" /></td>
-                                       <td><?php echo $catalogvalue['catalog_value'];?></td>
-                                       <td><?php echo (!empty($catalogvalue['catalogvalue_id']))?$catalog->getcatalogValueByValueId($catalogvalue['id']):'';?></td>
-                                       <td><a href="#" onclick="removecatalogvalue('dummy_<?php echo $catalogvalue['id'];?>' );" 
-                                        class="btn btn-default btn-default-inverse btn-sm"><i class="glyphicon  glyphicon-remove-sign white"></i>Delete</a></td>       
+                                     trid="dummy_<?php echo $catalogvalue['id'];?>" /></td>
+                                     <td><?php echo $catalogvalue['catalog_value'];?></td>
+                                     <td><?php echo (!empty($catalogvalue['catalogvalue_id']))?$catalog->getcatalogValueByValueId($catalogvalue['catalogvalue_id']):'';?></td>
+                                     <td><a href="#" onclick="removecatalogvalue('dummy_<?php echo $catalogvalue['id'];?>' );" 
+                                        class="btn btn-default btn-default-inverse btn-sm"><i class="glyphicon  glyphicon-remove-sign white"></i></a></td>       
                                     </tr>
                                     <?php 	}
                                 } ?>
@@ -96,6 +95,8 @@ $catalogvalues=$catalog->getCatalogValuesByMasterId($catalogmasterid); ?>
                 </div>
             </div>
         </div>
+    </div>
+
 
 
 

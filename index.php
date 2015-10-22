@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-<link href="dist/img/4.ico" type="image/png" rel="icon">
+<!--<link href="dist/img/4.ico" type="image/png" rel="icon">-->
 
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">;
 <link rel="stylesheet" type="text/css" href="font-awesome/4.3.0/css/font-awesome.min.css">

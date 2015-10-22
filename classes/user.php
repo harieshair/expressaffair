@@ -1,23 +1,20 @@
 <?php
-include_once(CLASSFOLDER."/dbconnection.php");
-include_once(CLASSFOLDER."/enums.php");
-$dbconnect=null;
-class userclass extends dbconnection {
-
-	/*-------------------------------------------------------------*/
-function userclass() // Constructor 
+include_once(CLASSFOLDER."/enums/userenums.php");
+class userclass{
+public $internalDB;	
+function userclass($db) // Constructor 
 {
-	parent::__construct();
+	$this->internalDB=$db;
 	$this->TypeOfUser=new TypeOfUser;
-	$this->UserStatus=new UserStatus;
+	$this->UserStatus=new UserStatus;	
 }
-/* -----------------------------------------------------------------------------*/
+
 function GetLoginDetails($uname,$pwd)
 {
-	$user= $this->internalDB->queryFirstRow("SELECT * FROM users WHERE login_name='$uname' AND password='$pwd' AND status=0");
-	return $user;
+	$resultSet= $this->internalDB->queryFirstRow("SELECT * FROM users WHERE login_name='$uname' AND password='$pwd' AND status=0");
+	return $resultSet;
 }
-/*----------------------------------------------------------------------------*/
+
 function CheckAccesstoPage($useractionarray,$pageid)
 {
 	if(in_array('26',$useractionarray))
@@ -33,99 +30,113 @@ function CheckAccesstoPage($useractionarray,$pageid)
 }
 function saveUser($entity){
 	$response =include 'user/saveuser.php'	;	
-		return $response;
+	return $response;
 
 }
-/*---------------------------------------------------------------*/
+
+function saveroles($roleids,$userid){
+
+	$oldroles= $this->internalDB->queryFirstColumn("select role_id from user_role where user_id=$userid");
+	if(!empty($roleids)){
+		$removedroles = array_diff($oldroles, $roleids);
+		if(!empty($removedroles) && count($removedroles)>0)
+			$this->internalDB->query("DELETE  FROM user_role where role_id  in (".implode(',',$removedroles).") AND user_id =$userid");
+		$newroles = array_diff($roleids,$oldroles);
+		if(!empty($newroles) && count($newroles)>0){
+			$updateobject=array();
+			foreach ($newroles as $roleid) {
+				$updateobject[]=array("role_id"=>$roleid,"user_id"=>$userid);
+			}
+			$this->internalDB->insert('user_role', $updateobject);
+		}
+	}
+	else{
+		$this->internalDB->query("DELETE  FROM user_role where  user_id =$userid");	
+	}
+}
 function showAllUsers($page,$rows,$obj)
 {
 	$searchobj=($obj!=null)?json_decode($obj):null;
-	$returnvalue=include 'user/getallusers.php';
-	return $returnvalue;
+	$response=include 'user/getallusers.php';
+	return $response;
 }
-/*---------------------------------------------------------------*/
+
 function getTotalUsers($obj)
 {
 	$searchobj=($obj!=null)?json_decode($obj):null;
-	$returnvalue=include 'user/gettotalusers.php';
-	return $returnvalue;
+	$response=include 'user/gettotalusers.php';
+	return $response;
 }
-/*-------------------------------------------ShowUserManagementPagination------------*/
+
 
 function ShowUserManagementPagination($totcount,$page,$rows)
 {
-	$returnvalue=include 'user/user_pagination.php';
-	return $returnvalue;	
+	$response=include 'user/user_pagination.php';
+	return $response;	
 }
 
 
-/*----------------------getuser byId---------------------------*/
+
 function getuserbyid($userid)
 {		
-	$userdata= $this->internalDB->queryFirstRow("SELECT id,name,login_name,phone,email,usertype,status,
-		employeeid,password FROM users where id=$userid");
-	return $userdata;
-}
-/*----------------------getuser byId---------------------------*/
-function getUserTypeNameFromid($id)
-{	
-	$userdata= $this->internalDB->queryFirstField("select user_role_name from user_role where user_role_id=$id");
-	return $userdata;
+	$resultSet= $this->internalDB->queryFirstRow("SELECT id,name,login_name,phone,email,usertype,status,
+		employeeid,password,photo_id,roles FROM users where id=$userid");
+	return $resultSet;
 }
 
-/*----------------------------------------------------------------------------*/
+function getUserTypeNameFromid($id)
+{	
+	$resultSet= $this->internalDB->queryFirstField("select user_role_name from user_role where user_role_id=$id");
+	return $resultSet;
+}
+
+
 function getlistAccesstoPagefromUserRole($userrole)
 {
-	$results= $this->internalDB->query("select action_id from role_access where role_id =$userrole ");
+	$resultSet= $internalDB->query("select action_id from role_access where role_id =$userrole ");
 	$value='';
-	foreach($results as $col)
+	foreach($resultSet as $col)
 	{
 		$value[]=$col['action_id'];	
 	}
 	return $value;
 }
-/*----------------------------------------------------------------------------*/
-public function IsValidTenant()
-{
-	return !empty($this->CLIENTID)?true:false;
-}
-/*----------------------------------------------------------------------------*/
-public function GetAllInterviewerListToSelectBox()
-{
-	$sql=$this->internalDB->query("select id,name from users where usertype =(SELECT user_role_id FROM user_role where user_role_name='Interviewer') and status=1");
-	$optionresult='';
-	if($sql!='')
-	{
-		foreach($sql as $interviewers)
-		{
-			$optionresult.='<option value="'.$interviewers['id'].'">'.$interviewers['name'].'</option>';
-		}
-	}
-	return $optionresult;
-
-}
 
 
-/*----------------------------------------------------------------------------*/
-function getTenantIDByAlias($alias)
-{
-	$tenantid=$this->tenantDB->query("SELECT id FROM client where alias='$alias' and is_deleted=0");
-	return $tenantid;
-}
-/*----------------------------------------------------------*/
 public function sendCreateUserNotification($mailid,$name,$loginid,$password){
 	include_once(CLASSFOLDER.'/rpoconstants.php');
 	include_once(CLASSFOLDER.'/sendmail/sendmail.php');
-	$result=include "users/notifycreateuser.php";
-	return $result;
+	$response=include "users/notifycreateuser.php";
+	return $response;
 }
 
 
-/*-------------------------------------------------------------*/
+
 public function sendForgetPasswordNotification($mailid,$username,$password){
 	$result=include "users/notifypasswordchange.php";
 }
+public function getUserAttachments($userid){
+	$this->entityType=new EntityType;
+	$resultSet= $this->internalDB->queryFirstRow("SELECT * from attachments WHERE entity_id =$userid and entity_type=".$this->entityType->getkey(USER));
+	return $resultSet;
+}
+public function getUserProfilePath($userid){
+	$this->entityType=new EntityType;
+	$resultSet= $this->internalDB->queryFirstField("SELECT file_path from attachments WHERE entity_id =$userid and entity_type=".$this->entityType->getkey(USER));
+	return $resultSet;
+}
+function saveattachments($entity){
+	$this->entityType=new EntityType;
+	$entity['entity_type']=$this->entityType->getkey(USER);			
 
-/*----------------------------------------------------------------------------*/
+	include_once(CLASSFOLDER."/attachments.php");
+	$attachment=new attachmentclass($this->internalDB);
+	return $attachment->updateattachments($entity);
+}
+function removeAttachment($attachmentid){	
+	include_once(CLASSFOLDER."/attachments.php");
+	$attachment=new attachmentclass($this->internalDB);
+	return $attachment->removeAttachment($$attachmentid);	
+}
 }
 ?>

@@ -9,11 +9,12 @@ $navactive="createuser";*/
 
 //$access=$_SESSION['action_list'];
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/vendor.php");
-$vendor=new vendorclass();
+$vendor=new vendorclass($dbconnection->dbconnector);
 include_once(CLASSFOLDER."/catalogs.php");
-$catalog=new catalogclass();          
-$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("'City'");
+$catalog=new catalogclass($dbconnection->dbconnector);          
+$catalogArray=$catalog->GetAllCatalogValuesByMasterNames('City');
 $searchObject=isset($_POST['postvalue'])?$_POST['postvalue']:null;
 if(!empty($searchObject)){
     $rows=$searchObject['rows'];
