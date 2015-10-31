@@ -32,18 +32,23 @@
 <div class="box box-success">
   <div class="box-header">
     <h3 class="box-title">Catalog Values</h3>
-  </div>                    
-  <table id="catalogvaluelist" class="table table-bordered table-hover dataTable" aria-describedby="example2_info" width="100%">
-    <thead><tr class="gridHeader">
-     <th width="20%">Value</th>
-     <th width="8%" >Code</th>
-     <th width="20%">Parent</th>
-     <th width="15%"></th>
-   </tr></thead>
-   <tbody></tbody>
- </table>
+  </div>     
+  <div class="box-body"   >
+    <div id="example2_wrapper" class="dataTables_wrapper form-inline" role="grid"> 
+      <div class="col-sm-12">            
+        <table id="catalogvaluelist" class="table table-bordered table-hover dataTable " aria-describedby="example2_info">
+          <thead><tr >
+           <th >Value</th>
+           <th >Code</th>
+           <th >Parent</th>
+           <th >Delete</th>
+         </tr></thead>
+         <tbody></tbody>
+       </table>
+     </div>
+   </div>
+ </div>
 </div>
-
 </div>
 
 

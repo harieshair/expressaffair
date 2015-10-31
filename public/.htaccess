@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^event=([0-9]*)$ events.php?eventid=$1    [L,QSA]
+RewriteRule ^cart$ cart.php   [L,QSA]
+RewriteRule ^signin$ signin.php    [L,QSA]
+RewriteRule ^signup$ signup.php    [L,QSA]
+RewriteRule ^myaccount$ myaccount.php [L,QSA]
+RewriteRule ^home$ index.php [L,QSA]
+RewriteRule ^logout$ logout.php    [L,QSA]
+RewriteRule ^$ index.php [L,QSA]

@@ -3,10 +3,11 @@
           if(isset($_POST['postvalue']))
           	$vendorid=$_POST['postvalue'];
           include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+          include_once(CLASSFOLDER."/dbconnection.php");
           include_once(CLASSFOLDER."/vendor.php");
-          $vendor=new vendorclass();   
+          $vendor=new vendorclass($dbconnection->dbconnector);   
           include_once(CLASSFOLDER."/catalogs.php");
-          $catalog=new catalogclass();          
+          $catalog=new catalogclass($dbconnection->dbconnector);          
           $locationcatalogs=$catalog->GetAllCatalogValues('Location'); 
           $vendordata=(!empty($vendorid))?$vendor->getvendorbyid($vendorid):array();
           ?>

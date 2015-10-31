@@ -14,6 +14,8 @@ define("DOCUMENT","Document");
 define("EXCEL","Excel");
 define("AUDIO","Audio");
 define("ICON","Icon");
+define("NONE","None");
+define("USER","USER");
 
 class TypeOfUser {
 	public  function getlists()
@@ -79,7 +81,9 @@ class EntityType{
 	public function getlists(){
 		return array(
 			"0"=>CUSTOMER,
-			"1"=>VENDOR		
+			"1"=>VENDOR,
+			"2"=>USER,
+			"3"=>NONE,	
 			);	
 	}
 	public function getvalue($id)
@@ -92,6 +96,12 @@ class EntityType{
 			break;
 			case "1":
 			$value=VENDOR;
+			break;
+			case "2":
+			$value=USER;
+			break;
+			case "3":
+			$value=NONE;
 			break;
 		}
 		return $value;
@@ -107,6 +117,12 @@ class EntityType{
 			case VENDOR:
 			$key=1;
 			break;			
+			case USER:
+			$key=2;
+			break;
+			case NONE:
+			$key=3;
+			break;
 		}
 		return $key;
 	}
@@ -114,13 +130,65 @@ class EntityType{
 class AttachmentType{
 	public function getlists(){
 		return array(
-			"Image"=>IMAGE,
-			"Video"=>"VIDEO",
-			"Document"=>"DOCUMENT",
-			"Excel"=>"EXCEL",
-			"Audio"=>"AUDIO",
-			"Icon"=>"ICON"
+			"0"=>IMAGE,
+			"1"=>VIDEO,
+			"2"=>DOCUMENT,
+			"3"=>EXCEL,
+			"4"=>AUDIO,
+			"5"=>ICON
 			);	
+	}
+	public function getvalue($id)
+	{
+		$value="";
+		switch($id)
+		{
+			case "0":
+			$value=IMAGE;
+			break;
+			case "1":
+			$value=VIDEO;
+			break;
+			case "2":
+			$value=DOCUMENT;
+			break;
+			case "3":
+			$value=EXCEL;
+			break;
+			case "4":
+			$value=AUDIO;
+			break;
+			case "5":
+			$value=ICON;
+			break;
+		}
+		return $value;
+	}
+	public function getkey($value)
+	{
+		$key="";
+		switch($value)
+		{
+			case IMAGE:
+			$key=0;
+			break;
+			case VIDEO:
+			$key=1;
+			break;			
+			case DOCUMENT:
+			$key=2;
+			break;
+			case EXCEL:
+			$key=3;
+			break;
+			case AUDIO:
+			$key=4;
+			break;
+			case ICON:
+			$key=5;
+			break;
+		}
+		return $key;
 	}
 }
 

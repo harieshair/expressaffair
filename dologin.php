@@ -1,9 +1,10 @@
 <?php
 session_start();
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/user.php");
 include_once(CLASSFOLDER."/common.php");
-$user=new userclass();
+$user=new userclass($dbconnection->dbconnector);
 $loginname=htmlspecialchars($_POST['username'],ENT_QUOTES);
 $password=$_POST['password'];
 $passwordencoded=md5($password);
@@ -15,18 +16,16 @@ $adminusername=$result['name'];
 if(!empty($adminuser_id))
 {
 				//now set the session from here if needed
-	$_SESSION['ADMINUSERID']= $adminuser_id;
-	$_SESSION['ADMINUSERNAME']= $adminusername; 			
+	$_SESSION['ADMINUSERID']= $adminuser_id;	
 				$_SESSION['start'] = time(); // taking now logged in time
 				$_SESSION['expire'] = $_SESSION['start'] + (18* 60) ;
-				$user->createlog("User $adminusername Logged In");
+				$dbconnection->createlog("User ".$result['name']." Logged In");
 				updateloginlog($adminuser_id,$user,commonclass::GetIP());
 				echo 'yes';	
 			}
 			else
 			{ 
-				$_SESSION['ADMINUSERID']= '';
-				$_SESSION['ADMINUSERNAME'] = '';			
+				$_SESSION['ADMINUSERID']= '';							
 				echo "<span class=\"label label-important\">Username / Password incorrect !</span>"; 
 			}
 

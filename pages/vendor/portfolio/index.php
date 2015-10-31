@@ -3,12 +3,12 @@ if(!isset($_SESSION)){session_start();}
 if(isset($_POST['postvalue']))
   $vendorid=$_POST['postvalue'];          
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/vendor.php");
-$vendor=new vendorclass();   
+$vendor=new vendorclass($dbconnection->dbconnector);   
 include_once(CLASSFOLDER."/catalogs.php");
-$catalog=new catalogclass();          
-$portfoliocatalog=$catalog->GetAllCatalogValues('PortfolioType'); 
-$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("'PortfolioType'");
+$catalog=new catalogclass($dbconnection->dbconnector);          
+$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("PortfolioType");
 $portfoliodata=(!empty($vendorid))?$vendor->getallvendorportfolio($vendorid):array();
 ?>
 
@@ -41,9 +41,9 @@ $portfoliodata=(!empty($vendorid))?$vendor->getallvendorportfolio($vendorid):arr
                   <select id="portfoliotype" name="portfoliotype" class="form-control">
                    <?php
                    if(!empty($portfoliocatalog) && count($portfoliocatalog)>0){
-                    foreach ($portfoliocatalog as $catalog) {
+                    foreach ($portfoliocatalog as $key->$value) {
                       ?>            
-                      <option value="<?php echo $catalog['id'] ;?>"><?php echo $catalog['catalog_value'] ;?></option>
+                      <option value="<?php echo $key;?>"><?php echo $value ;?></option>
                       <?php }
                     }
                     ?>
@@ -74,8 +74,8 @@ $portfoliodata=(!empty($vendorid))?$vendor->getallvendorportfolio($vendorid):arr
     </li>
 </ul>  
 <div class="row">
-<a href="javascript:void(0);"  onclick="getwizardcontents('pages/vendor/contact/index.php','wizardcontent')" class="btn btn-default "><i class="glyphicon  glyphicon-next"></i>Previous</a>                          
-  <a href="javascript:void(0);"  onclick="getwizardcontents('pages/vendor/services/index.php','wizardcontent')" class="btn btn-default pull-right"><i class="glyphicon  glyphicon-next"></i>Next</a>                          
+<a href="javascript:void(0);"  onclick="getwizardcontents('pages/vendor/contact/','wizardcontent')" class="btn btn-default "><i class="glyphicon  glyphicon-next"></i>Previous</a>                          
+  <a href="javascript:void(0);"  onclick="getwizardcontents('pages/vendor/services/','wizardcontent')" class="btn btn-default pull-right"><i class="glyphicon  glyphicon-next"></i>Next</a>                          
   <a href="javascript:void(0);"  onclick="addmorelists('li-new')" class="btn btn-default pull-right"><i class="glyphicon  glyphicon-plus-sign"></i>Add More</a>      
   
 </div>
@@ -104,6 +104,7 @@ $portfoliodata=(!empty($vendorid))?$vendor->getallvendorportfolio($vendorid):arr
     //when the dom has loaded setup form validation rules
     addmorelists=function(listclass){
       $('.'+listclass).css("display","block");
+      adjustwizardleftpanelsize();
     }
     editlist=function(listid){
       $('#'+listid+'-edit').css("display","block");
@@ -118,6 +119,7 @@ $portfoliodata=(!empty($vendorid))?$vendor->getallvendorportfolio($vendorid):arr
     cancelnewform=function(listid){
       resetform(listid+'-form');
       $('.li-new').css("display","none");
+      adjustwizardleftpanelsize();
     }
     saveeditform=function(listid){
       if($('#'+listid+'-form').valid()){

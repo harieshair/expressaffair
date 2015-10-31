@@ -8,9 +8,9 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse1">
           <ul class="nav navbar-nav">
-            <li>               <a href="javascript:void(0);" onclick="getcontents('pages/events/events.php','right-content')" >Events</a>  
+            <li>               <a href="javascript:void(0);" onclick="getcontents('pages/events/events.php','right-content')" >Manage</a>  
               <li> <a href="javascript:void(0);" onclick="getcontents('pages/vendor/vendor.php','right-content')" >Vendors</a>              </li>
 
               <li >  <a href="javascript:void(0);" onclick="getcontents('pages/customers/customers.php','right-content')">Customers</a>                </li>
@@ -37,7 +37,7 @@
                               <a href="#">
                                 <div class="pull-left">
                                   <!-- User Image -->
-                                  <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                                  <img src="<?php echo !empty($userdata['profile_path'])?$userdata['profile_path']:'images/anonymous.jpg';?>" class="img-circle" alt="User Image" />
                                 </div>
                                 <!-- Message title and timestamp -->
                                 <h4>
@@ -116,17 +116,16 @@
                       <!-- Menu Toggle Button -->
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                        <img src="<?php echo !empty($userdata['profile_path'])?$userdata['profile_path']:'images/anonymous.jpg';?>" class="user-image" alt="User Image"/>
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs"><?php echo $userdata['name']; ?></span>
                       </a>
                       <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                          <img src="<?php echo !empty($userdata['profile_path'])?$userdata['profile_path']:'images/anonymous.jpg';?>" class="img-circle" alt="User Image" />
                           <p>
-                            Alexander Pierce - Web Developer
-                            <small>Member since Nov. 2012</small>
+                            <?php echo $userdata['name']; ?>
                           </p>
                         </li>
                         <!-- Menu Body -->

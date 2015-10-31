@@ -1,8 +1,9 @@
 <?php 
 if(!isset($_SESSION)){session_start();}
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/catalogs.php");
-$catalog=new catalogclass();
+$catalog=new catalogclass($dbconnection->dbconnector);
 $rows = 20;
 $page = 0;
 ?>

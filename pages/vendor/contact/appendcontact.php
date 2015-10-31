@@ -4,13 +4,14 @@ if(isset($_POST['postvalue']))
   $contactid=$_POST['postvalue'];        
   if(empty($vendor)  ){
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/vendor.php");
-$vendor=new vendorclass();   
+$vendor=new vendorclass($dbconnection->dbconnector);   
 include_once(CLASSFOLDER."/catalogs.php");
-$catalog=new catalogclass();          
+$catalog=new catalogclass($dbconnection->dbconnector);          
 $statecatalogs=$catalog->GetAllCatalogValues('State'); 
 $citycatalogs=$catalog->GetAllCatalogValues('City');
-$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("'City','State'");
+$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("City,State");
 }
 if(empty($contact))
 $contact=(!empty($contactid))?$vendor->getcontactsbyid($contactid):array();

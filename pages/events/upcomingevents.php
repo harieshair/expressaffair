@@ -1,8 +1,9 @@
 <?php 
 if(!isset($_SESSION)){session_start();}
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/events.php");
-$event=new eventclass();
+$event=new eventclass($dbconnection->dbconnector);
 ?>
 <div id="gridcontent" class ="content">
 

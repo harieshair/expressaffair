@@ -3,22 +3,17 @@ if(!isset($_SESSION)){session_start();}
 if(isset($_POST['postvalue']))
   $vendorid=$_POST['postvalue'];          
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/vendor.php");
-$vendor=new vendorclass();   
+$vendor=new vendorclass($dbconnection->dbconnector);   
 include_once(CLASSFOLDER."/catalogs.php");
-$catalog=new catalogclass();          
+$catalog=new catalogclass($dbconnection->dbconnector);          
 $statecatalogs=$catalog->GetAllCatalogValues('State'); 
 $citycatalogs=$catalog->GetAllCatalogValues('City');
-$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("'City','State'");
+$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("City,State");
 $contactsdata=(!empty($vendorid))?$vendor->getallvendorcontactsbyvendorid($vendorid):array();
 ?>
-<style type="text/css">
-  .form-group label.error {
-    color: #FB3A3A;
-    display: inline-block;   
-    text-align: left;    
-  }
-</style>
+
 <div class="row">          
   <input type="hidden" id="entityid" name="entityid" value="<?php  echo (!empty($vendorid))?$vendorid:0; ?>" />
   <a href="javascript:void(0);"  onclick="addmorelists('li-new')" class="btn btn-default pull-right"><i class="glyphicon  glyphicon-plus-sign"></i>Add More</a>      
@@ -124,10 +119,10 @@ $contactsdata=(!empty($vendorid))?$vendor->getallvendorcontactsbyvendorid($vendo
     </li>
   </ul>  
   <div class="row">
-  <a href="javascript:void(0);"  onclick="getwizardcontents('pages/vendor/vendorbasics.php','wizardcontent')" class="btn btn-default "><i class="glyphicon  glyphicon-next"></i>Previous</a>                          
-  <a href="javascript:void(0);"  onclick="getwizardcontents('pages/vendor/portfolio/index.php','wizardcontent')" class="btn btn-default pull-right"><i class="glyphicon  glyphicon-next"></i>Next</a>                          
-  <a href="javascript:void(0);"  onclick="addmorelists('li-new')" class="btn btn-default pull-right"><i class="glyphicon  glyphicon-plus-sign"></i>Add More</a>      
-  
+    <a href="javascript:void(0);"  onclick="getwizardcontents('pages/vendor/vendorbasics.php','wizardcontent')" class="btn btn-default "><i class="glyphicon  glyphicon-next"></i>Previous</a>                          
+    <a href="javascript:void(0);"  onclick="getwizardcontents('pages/vendor/portfolio/','wizardcontent')" class="btn btn-default pull-right"><i class="glyphicon  glyphicon-next"></i>Next</a>                          
+    <a href="javascript:void(0);"  onclick="addmorelists('li-new')" class="btn btn-default pull-right"><i class="glyphicon  glyphicon-plus-sign"></i>Add More</a>      
+    
   </div>
 </div> 
 
@@ -161,6 +156,7 @@ $contactsdata=(!empty($vendorid))?$vendor->getallvendorcontactsbyvendorid($vendo
     //when the dom has loaded setup form validation rules
     addmorelists=function(listclass){
       $('.'+listclass).css("display","block");
+      adjustwizardleftpanelsize();
     }
     editlist=function(listid){
       $('#'+listid+'-edit').css("display","block");
@@ -175,6 +171,7 @@ $contactsdata=(!empty($vendorid))?$vendor->getallvendorcontactsbyvendorid($vendo
     cancelnewform=function(listid){
       resetform(listid+'-form');
       $('.li-new').css("display","none");
+      adjustwizardleftpanelsize();
     }
     saveeditform=function(listid){
       if($('#'+listid+'-form').valid()){
@@ -198,7 +195,7 @@ $contactsdata=(!empty($vendorid))?$vendor->getallvendorcontactsbyvendorid($vendo
     }
     $(D).ready(function($) {         
       JQUERY4U.UTIL.setupFormValidation("new-form");
-    });  
+  });  
   })(jQuery, window, document);
 
 </script>

@@ -1,8 +1,9 @@
 <?php 
 if(!isset($_SESSION)){session_start();}
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/events.php");
-$events=new eventclass();
+$events=new eventclass($dbconnection->dbconnector);
 $searchObject=isset($_POST['postvalue'])?$_POST['postvalue']:null;
 if(!empty($searchObject)){
 	$rows=$searchObject['rows'];
@@ -20,7 +21,8 @@ else{
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Event List</h3>
-						
+						<a title="Update Event" class="btn btn-default pull-right btn-sm " href="javascript:void(0)" 
+                    onclick="getcontents('pages/events/updateevents.php','content')" > <i class="glyphicon glyphicon-plus-sign"></i>Add New</a>
 				</div>	
 				<div class="box-body">
 					<div id="example2_wrapper" class="dataTables_wrapper form-inline" role="grid">
@@ -45,7 +47,7 @@ else{
 										<td><a  title="Edit Event" href="javascript:void(0)" 
 											onclick="getcontents('pages/events/updateevents.php','content', <?php echo $rowdata['id']; ?>);"> 
 											<?php  echo $rowdata['name']; ?></a></td>
-											<td ><?php echo $rowdata['description']; ?></td>			  
+											<td ><?php echo $events->closetags(substr($rowdata['description'],0,80)); ?></td>			  
 											<td><?php echo $rowdata['created_on'] ;?></td>
 											<td > <?php echo $rowdata['icons'];?> </td>											
 										</tr>

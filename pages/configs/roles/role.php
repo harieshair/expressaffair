@@ -2,21 +2,20 @@
 if(!isset($_SESSION)){session_start();}
 
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/role.php");
-$role=new roleclass();
+$role=new roleclass($dbconnection->dbconnector);
 ?>
-<div class="actionWizard"><a title="Create Role" class="btn btn-primary pull-right btn-xs" href="javascript:void(0)" onclick="getcontents('pages/configs/roles/createrole.php','content');"><i class="glyphicon  glyphicon-plus-sign"></i>New Role</a>
-</div>
 <div id="gridcontent" class ="content">
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Roles</h3>
+					<a title="Create Role" class="btn btn-primary pull-right btn-xs" href="javascript:void(0)" onclick="getcontents('pages/configs/roles/createrole.php','content');"><i class="glyphicon  glyphicon-plus-sign"></i>New Role</a>
 				</div>
 				<div class="box-body">
 					<div id="example2_wrapper" class="dataTables_wrapper form-inline" role="grid"><div class="row"><div class="col-xs-6"></div><div class="col-xs-6"></div></div>
-
 					<?php
 					$page=0;
 					$roles =$role->showAllRoles();

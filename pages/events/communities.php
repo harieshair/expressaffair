@@ -1,8 +1,9 @@
  <?php 
  if(!isset($_SESSION)){session_start();}
  include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+ include_once(CLASSFOLDER."/dbconnection.php");
  include_once(CLASSFOLDER."/communities.php");
- $community=new communityclass();
+ $community=new communityclass($dbconnection->dbconnector);
  $searchObject=isset($_POST['postvalue'])?$_POST['postvalue']:null;
  if(!empty($searchObject)){
  	$rows=$searchObject['rows'];
@@ -30,7 +31,7 @@
  						if($totlaCommunities>0){ 
  							if($totlaCommunities>=($page-1) * $rows){
  								include_once(CLASSFOLDER."/catalogs.php");
- 								$catalog=new catalogclass();
+ 								$catalog=new catalogclass($dbconnection->dbconnector);
  								$catalogArray=$catalog->GetAllCatalogValuesByMasterNames("'State','Zone'");
  								$communitylist= $community->getallcommunityLists($page,$rows,null);
  								?>	

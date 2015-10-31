@@ -9,8 +9,9 @@ $navactive="createuser";*/
 
 //$access=$_SESSION['action_list'];
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/user.php");
-$user=new userclass();
+$user=new userclass($dbconnection->dbconnector);
 $searchObject=isset($_POST['postvalue'])?$_POST['postvalue']:null;
 if(!empty($searchObject)){
 	$rows=$searchObject['rows'];
