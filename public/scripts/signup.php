@@ -60,10 +60,19 @@
     	JQUERY4U.UTIL.setupFormValidation();     
     	$('#submitsignup').on('click', function(){ 
     		if($('#signup_form').valid()){
-    			savecustomersignupdetails("../service/config/customerserver.php","signup_form");
+    			savecustomersignupdetails("../service/customerserver.php","signup_form",changetoreadonlymode);
     		}
     	});  
     });
 
 })(jQuery, window, document);
+
+changetoreadonlymode=function(){
+		fun_edit_save_cancel();
+                oncallservice("",'profileinfo/profilereadmode.php',function(){$('#dispprofile').html(ajaxResponse);});
+	};
+        fun_edit_save_cancel =function() {
+            $("#dispprofile").toggle(); 
+            $("#editprofile").toggle();       
+};    
 </script>
