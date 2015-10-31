@@ -106,12 +106,16 @@ function isemailexisits(value){
 		}	
 	});
 }
-function savecustomersignupdetails(serviceurl,formid){
+function savecustomersignupdetails(serviceurl,formid,callbackfn){
 	signupdetails = $("#"+formid).serialize();
 	var POSTDATA="action=savecustomer&signupdetails="+encodeURIComponent(signupdetails);
-	oncallservice(POSTDATA,serviceurl,function(){
+        
+        oncallservice(POSTDATA,serviceurl,function(){
 		if(ajaxResponse==1){
-			window.location="../";
+                    if(customerid!=0)
+                        callbackfn();
+                    else
+			window.location="home";
 		}
 	});
 }

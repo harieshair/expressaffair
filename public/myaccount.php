@@ -8,8 +8,12 @@ if(isset($_SESSION['CUSTOMERID']))
 {
 	$CustomerId=$_SESSION['CUSTOMERID']; 
 	$customerData = $customerService->GetCustomerById($CustomerId); 
+}else{
+    header("location:home");
+    exit();
 }
 $Citys=$customerService->GetCatalogValuesByMasterName('City');
+$States = $customerService->GetCatalogValuesByMasterName('State');
 /*$communityNames=$customerService->GetAllCommunityNames();
 */
 ?>
@@ -39,6 +43,9 @@ $Citys=$customerService->GetCatalogValuesByMasterName('City');
 	<?php	
 	include "profileinfo/profile.php" ;
 	include "static/footer.php";
+        include "scripts/signup.php";
 	?>	
+        
+        
 </body>
 </html>

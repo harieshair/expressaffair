@@ -1,6 +1,7 @@
 RewriteEngine On
 
 RewriteRule ^event=([0-9]*)$ events.php?eventid=$1    [L,QSA]
+RewriteRule ^ritual=([0-9]*)$ rituals.php?ritualid=$1    [L,QSA]
 RewriteRule ^cart$ cart.php   [L,QSA]
 RewriteRule ^signin$ signin.php    [L,QSA]
 RewriteRule ^signup$ signup.php    [L,QSA]
