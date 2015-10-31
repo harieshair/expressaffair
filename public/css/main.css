@@ -667,13 +667,22 @@ ul.sub-menu {
 .left-sidebar h2, .brands_products h2 {
   color: #FE980F;
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
-  margin: 0 auto 5px;
   text-align: center;
   text-transform: uppercase;
   position: relative;
   z-index:3;
+}
+.left-sidebar h6 {
+    color: #FE980F;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
 }
 
 .left-sidebar h2:after, h2.title:after{
@@ -801,7 +810,7 @@ h2.title:before{
 
 
 .price-range{
-  margin-top:30px;
+  margin-top:10px;
 }
 
 .well {
@@ -1461,7 +1470,8 @@ h2.title {
   margin-bottom: 30px;
 }
 
-.signup-form label.error {
+.signup-form label.error,
+.login-form label.error{
   color: #FB3A3A;
   display: inline-block;   
   text-align: left;    
@@ -1510,9 +1520,6 @@ h2.title {
   padding: 6px 25px;
 }
 
-.login-form label{
-
-}
 
 .or{
 	background: #FE980F;

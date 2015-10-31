@@ -55,11 +55,11 @@ function getwizardcontents(urllocator,responsearea,postdata){
 		callservicebyajax(POSTDATA,urllocator,function(){getcontentresponse(responsearea)});
 }
 
-function getmodalcontents(urllocator,postdata){
+function getmodalcontents(urllocator,postdata,callback){
 	var POSTDATA='';
 	if(postdata)
 		POSTDATA+="postvalue="+encodeURIComponent(postdata);
-	callservicebyajax(POSTDATA,urllocator,function(){getmodalcontentresponse()});
+	callservicebyajax(POSTDATA,urllocator,callback);
 }
 
 function getcontentresponse(responsearea){
@@ -72,7 +72,7 @@ function appendpartialcontentresponse(beforelementclass){
 
 function getmodalcontentresponse(){
 	$('#MicroModalwindow').html(ajaxResponse);	
-	$('#MicroModalwindow').attr('class', 'modal fade bs-example-modal-lg').attr('aria-labelledby','myModalLabel');
+	$('#MicroModalwindow').attr('class', 'modal fade bs-example-modal-sm').attr('aria-labelledby','myModalLabel');
 	$('.modal-dialog').attr('class','modal-dialog  modal-lg');
 	$('#MicroModalwindow').modal('show');
 }

@@ -50,7 +50,7 @@ switch($_POST['action']){
 				$_SESSION['CUSTOMERID']= $response;	
 				$_SESSION['start'] = time(); // taking now logged in time
 				$_SESSION['expire'] = $_SESSION['start'] + (1*60) ;
-				echo 1;	
+				echo $response;	
 				break;
 			}
 			echo 0;		

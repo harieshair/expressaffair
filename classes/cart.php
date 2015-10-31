@@ -9,7 +9,7 @@
 		$this->internalDB=$db;
 	}
 	
-	function AddToCart($serviceId,$v_serviceId,$customerId)
+	function AddToCart($entity)
 	{
 		include "cart/addtocart.php";
 	}

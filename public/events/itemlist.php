@@ -23,12 +23,12 @@ $vendorServices=$customerService->GetAllVendorServices($serviceid,$locationid);
 		<div class="product-image-wrapper">
 			<div class="single-products">
 				<div class="productinfo text-center">
-					<img src="<?php echo HTTPAPPLICATIONROOT.'/'.$service['file_path']; ?>" alt="" height="170" width="42"/>					
+					<img src="<?php echo HTTPAPPLICATIONROOT.'/'.$service['file_path']; ?>" alt="" height="170" width="42" onclick="previewitem(<?php echo $service['id'];?>);"/>					
 					<span class="col-sm-12"><?php echo $service['title'];?></span>				
 					<span class="col-sm-12"><?php echo $Citys[$service['locations']];?></span> 	
-					<span class="col-sm-6"><label class="rate"><?php echo $service['price']; ?></label> INR</span>
+					<span class="col-sm-6"><label class="rate"><i class="fa fa-rupee"></i><?php echo $service['price']; ?></label></span>
 					<span class="col-sm-6"><img class="rating" src="images/product-details/rating.png"/></span>					
-					<span class="col-sm-12"><a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></span>
+					<span class="col-sm-12"><a href="#" class="btn btn-default add-to-cart"  onclick="addtocart('<?php echo $service['id']; ?>');"><i class="fa fa-bookmark"></i>Shortlist to booking</a></span>
 				</div>
 			</div>
 			<div class="choose">

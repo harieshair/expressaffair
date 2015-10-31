@@ -20,8 +20,8 @@ include "static/title.php" ;
 
 <body>	
 	<?php	
-	include "static/header.php" ;
-	include "static/home.php" ;
+	include "static/header.php";
+	include "static/home.php";
 	include "static/footer.php";
 	?>	
 </body>

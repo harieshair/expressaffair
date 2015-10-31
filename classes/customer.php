@@ -10,7 +10,7 @@ function customerclass($db) // Constructor
 function getCustomerId($email,$pwd)
 {
 	$resultSet= $this->internalDB->queryFirstField("SELECT id FROM customers WHERE email='$email' AND password='".md5($pwd)."'");
-	return !empty($resultSet)?$resultSet['id']:0;
+	return !empty($resultSet)?$resultSet:0;
 }
 
 function saveCustomer($entity){

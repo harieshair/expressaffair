@@ -28,16 +28,13 @@ include "static/title.php" ;
 	include "events/showcase.php" ;
 	include "static/footer.php";
 	?>
+	<script src="../plugins/jQuery/jQuery.validate.min.js"></script>
+	<script src="../plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+    <script src="../plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+    <script src="../plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
 	<script src="../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 	<script src="../plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
 	<script src="js/ajax-loader.js"></script>
-	<script type="text/javascript">
-		var locationId=0;
-		$(function () {
-			locationId=<?php echo isset($_SESSION['LOCATION'])?$_SESSION['LOCATION']:0; ?>;
-         //Date range picker with time picker
-         $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});           
-     });
-	</script>
+	<?php include "scripts/events.php" ; ?>
 </body>
 </html>

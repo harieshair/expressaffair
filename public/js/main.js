@@ -1,7 +1,10 @@
 /*price range*/
 
 $('#sl2').slider();
-
+var IsPopUpSignUp;
+var pendingactions={};
+var locationId=0;
+var customerid;
 var RGBChange = function() {
 	$('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
 };
@@ -14,9 +17,17 @@ function getcatalogname(){
 }
 
 /*scroll to top*/
-
 $(document).ready(function(){
+	/*$('#affair-modal').modal({
+		keyboard: false
+	});*/
+	$('#affair-modal').on('hidden.bs.modal', function (e) {
+		$('#affair-modal-dialog').removeClass("modal-lg").removeClass("modal-sm");
+		$('#affair-modal').modal('hide')
+	});
 	$(function () {
+
+
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
 	        scrollDistance: 300, // Distance from top/bottom before showing element (px)
@@ -46,8 +57,8 @@ function getservicevendors(serviceid,responsearea){
 }
 function getpubliccontentresponse(responsearea){
 	$('#'+responsearea).html(ajaxResponse);
-			hidePageLoader();
-			$('.nvtooltip').remove();	
+	hidePageLoader();
+	$('.nvtooltip').remove();	
 }
 
 function callRestService(serviceName,postdata,callback){
@@ -63,7 +74,11 @@ function getintoaccount(serviceurl,formid){
 	var logindetails = $("#"+formid).serialize();
 	var POSTDATA="action=getintoaccount&logindetails="+encodeURIComponent(logindetails);
 	oncallservice(POSTDATA,serviceurl,function(){
-		if(ajaxResponse==1){
+		if(ajaxResponse>0){
+			customerid=ajaxResponse;
+			if(IsPopUpSignUp)
+				completepouuppendingactions();
+			else
 			window.location="home";
 		}
 		else
@@ -114,3 +129,34 @@ function changeLocationResponse(){
 		showmodalwindow();
 	}
 }
+
+function addtocart(serviceid){
+	if(!customerid){
+		pendingactions.serviceid=serviceid;
+		pendingactions.operation="addtocart";
+		IsPopUpSignUp=true;
+		getmodalcontents("loginorsignup.php","",getmodalresponse);
+	}
+	else{
+
+	}
+}
+function completepouuppendingactions(){
+
+
+}
+function getmodalresponse(){
+	$('#affair-modal-body').html(ajaxResponse);
+	showaffairmodal("large");
+}
+
+function showaffairmodal(size){
+	if(size=="small"){
+		$('#affair-modal-dialog').addClass("modal-sm");
+	}
+	else if(size=="large"){
+		$('#affair-modal-dialog').addClass("modal-lg");
+	}
+	$('#affair-modal').modal("show");	 
+}
+
