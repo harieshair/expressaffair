@@ -132,8 +132,10 @@ function changeLocationResponse(){
 
 function addtocart(serviceid){
 	if(!customerid){
+		pendingactions={};
 		pendingactions.serviceid=serviceid;
 		pendingactions.operation="addtocart";
+		pendingactions.operation=$('#eventdate').val();
 		IsPopUpSignUp=true;
 		getmodalcontents("loginorsignup.php","",getmodalresponse);
 	}
@@ -142,7 +144,6 @@ function addtocart(serviceid){
 	}
 }
 function completepouuppendingactions(){
-
 
 }
 function getmodalresponse(){
@@ -158,5 +159,8 @@ function showaffairmodal(size){
 		$('#affair-modal-dialog').addClass("modal-lg");
 	}
 	$('#affair-modal').modal("show");	 
+}
+function refinesearch(){
+	eventdate=$('#eventdate').val();
 }
 

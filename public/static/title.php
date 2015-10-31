@@ -11,8 +11,7 @@
 	<link href="css/prettyPhoto.css" rel="stylesheet">
 	<link href="css/price-range.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
-	<link href="../plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
-	<link href="../plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+	<link href="../plugins/datepicker/datepicker3.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
 	<link href="css/express.css" rel="stylesheet">

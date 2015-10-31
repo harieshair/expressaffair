@@ -1,10 +1,7 @@
 <div class="left-sidebar">
-	<div class="">
-		<a href="javascript:void()" class="form-control btn btn-default refine-search" onclick="refinesearch();">Refine Event Search</a>
-	</div>
 	<div class="price-range">
 		<div class="panel-heading">
-			<h6 class="panel-title">Price Range</h6>
+			<h2 class="panel-title">Price Range</h2>
 		</div>
 		
 		<div class="well text-center">
@@ -16,7 +13,7 @@
 	<div class="panel-group category-products" id="accordian"><!--category-productsr-->	
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h6 class="panel-title">Packages</h6>
+				<h2 class="panel-title">Packages</h2>
 			</div>
 			<div class="panel-collapse in">
 				<div class="panel-body left-panel-body" >
