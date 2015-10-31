@@ -7,6 +7,6 @@ define("DBPORT", 3306);*/
 define("DBSERVER","localhost");
 define("DBNAME", "kartconn_expressaffair");
 define("DBUSER", "root");
-define("DBPWD", "data");
+define("DBPWD", "root");
 define("DBPORT", 3306);
 ?>

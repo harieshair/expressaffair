@@ -34,7 +34,7 @@ include "static/title.php" ;
     <script src="../plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
 	<script src="../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 	<script src="../plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
-	<script src="js/ajax-loader.js"></script>
+        <script src="js/ajax-loader.js"></script>
 	<?php include "scripts/events.php" ; ?>
 </body>
 </html>

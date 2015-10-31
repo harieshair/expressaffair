@@ -31,7 +31,7 @@ function showAllCustomers($page,$rows,$obj)
 }
 function getCustomerById($customerid)
 {		
-	$resultSet= $this->internalDB->queryFirstRow("SELECT id,name,email,password,city,state FROM customers where id=$customerid");
+	$resultSet= $this->internalDB->queryFirstRow("SELECT id,name,email,password,city,state,contact_number,address FROM customers where id=$customerid");
 	return $resultSet;
 }
 public function sendCreateUserNotification($mailid,$name,$password){

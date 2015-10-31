@@ -6,7 +6,7 @@ try{
 	$userId="";
 	if(!empty($entity['entity_id'])){
 
-		$duplicate=$this->internalDB->queryFirstRow("select * from customers where  email='".$entity['login_name']."' AND id!=".$entity['entity_id']);
+		$duplicate=$this->internalDB->queryFirstRow("select * from customers where  email='".$entity['email']."' AND id!=".$entity['entity_id']);
 		if(!empty($duplicate))
 			return array("Exception"=>"Specified email already exists" );
 
