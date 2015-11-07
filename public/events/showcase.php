@@ -7,7 +7,7 @@
 			</div>
 			
 			<div class="col-sm-9 padding-right">
-				<?php 				include "navbar.php" ; ?>
+				<?php include "navbar.php" ; ?>
 				<div id="servicelist" >
 					<?php include "itemlist.php"; ?>
 				</div>

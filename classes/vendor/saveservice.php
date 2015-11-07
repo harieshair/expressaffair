@@ -22,6 +22,9 @@ try{
 		
 		$entity['entity_id']=$entity['serviceid'];
 
+		// Save vendor service locations
+		$this->savevendorservicelocations($entity['entity_id'],implode(',',$entity['selectedlocation']));
+
 		if(!empty($entity['file_name'])){
 		//Remove removeAttachments
 			$this->removeAttachments($entity['serviceid'], $entity['file_name'],"VendorService");
@@ -60,6 +63,10 @@ try{
 		$vendor_serviceId=$this->internalDB->insertId() ;
 		
 		$entity['entity_id']=$vendor_serviceId;
+
+		// Save vendor service locations
+		$this->savevendorservicelocations($entity['entity_id'],implode(',',$entity['selectedlocation']));
+
 
 		if(!empty($entity['file_name'])){
 			$files=explode(",",$entity['file_name']);

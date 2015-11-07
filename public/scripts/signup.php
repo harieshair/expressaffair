@@ -44,7 +44,7 @@
               email:"Please specify valid email",
               name:"Please specify your name",
               password :"Valid password required (8-15 characters)",
-              cfmPassword :"Confirm password must match to password",
+              cfmPassword :"Password does not matches",
               state:"please specify your current state",
               city:"please specify your current city",
               address:"please specify your communication address",

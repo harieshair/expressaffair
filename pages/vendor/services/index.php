@@ -239,6 +239,7 @@ $servicedata=(!empty($vendorid))?$vendor->getAllVendorServicesByVendorId($vendor
       $('#'+listid+'-edit').css("display","block");
       $('#'+listid+'-non-edit').css("display","none");
       activatemultiselects(listid,listid+"-form");
+      $('#'+listid +'-form #selectedservice').val($('#'+listid +'-form #serviceid').val());
       JQUERY4U.UTIL.setupFormValidation(listid+"-form"); 
 
     }

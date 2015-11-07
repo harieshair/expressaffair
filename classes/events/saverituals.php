@@ -13,6 +13,10 @@ try{
 		isset($entity['title'])?$updateObject['title']=$entity['title']:'';	
 		isset($serviceIds)?$updateObject['services']=$serviceIds:'';		
 		$this->internalDB->update('rituals',$updateObject,"id=%i",$entity['ritualid']);
+
+		//Save rituals services
+		!empty($serviceIds)?$this->saveRitualServices($entity['ritualid'],$serviceIds):'';
+
 		//Update pulic ritual menu
 		$this->updateRitualMenu();
 		return array('Id'=>$entity['ritualid'] );	
@@ -28,7 +32,11 @@ try{
 		isset($serviceIds)?$updateObject['services']=$serviceIds:'';		
 		$updateObject['created_on']=$today;
 		$updateObject['is_deleted']=0;
-		$this->internalDB->insert('rituals',$updateObject);
+		$this->internalDB->insert('rituals',$updateObject);		
+		$entity['entity_id']=$this->internalDB->insertId();
+
+		//Save rituals services
+		!empty($serviceIds)?$this->saveRitualServices($entity['entity_id'],$serviceIds):'';
 
 		//Update pulic ritual menu
 		$this->updateRitualMenu();

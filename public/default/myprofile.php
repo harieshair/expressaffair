@@ -1,3 +1,18 @@
+<?php
+if(!isset($_SESSION)){session_start();}
+include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
+include_once(SERVERFOLDER."/customer/services.php");
+if(empty($customerService)){
+	$customerService=new customerservice($dbconnection->dbconnector);
+	if(isset($_SESSION['CUSTOMERID']) && empty($customerData))
+	{
+		$customerId=$_SESSION['CUSTOMERID']; 
+		$customerData = $customerService->GetCustomerById($customerId);
+		if(!isset($_SESSION['LOCATION']))
+			$_SESSION['LOCATION']=$customerData['city'] ;
+	}
+}
+?>
 <div class="header_top"><!--header_top-->
 	<div class="container">
 		<div class="row">
@@ -17,11 +32,11 @@
 						else {
 							?>
 							<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-						<li><a href="javascript:void()" onclick="changeLocation('getCatalogsByMaterName','City');"><i class="fa fa-crosshairs"></i>Change Location</a></li>
-						<li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+							<li><a href="javascript:void()" onclick="changeLocation('getCatalogsByMaterName','City');"><i class="fa fa-crosshairs"></i>Change Location</a></li>
+							<li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 							<li><a href="myaccount"><i class="fa fa-user"></i>
 								<?php echo $customerData['name'];?> Profile</a></li>
-							<li><a href="logout"><i class="fa fa-lock"></i>Log Out</a></li>
+								<li><a href="logout"><i class="fa fa-lock"></i>Log Out</a></li>
 								<?php
 							} ?>
 						</ul>

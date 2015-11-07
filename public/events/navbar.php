@@ -8,29 +8,32 @@
 						$serviceSeq=1;
 						foreach ($Services as $service) { 
 							if($serviceSeq==1){
-								$serviceid=$service['id'];
+								$customerService->searchObj->serviceId=$service['id'];
 								$serviceName=$service['catalog_value'];
-								?>			
+								?>	
+								<li id="<?php echo $service['id']; ?>" >
+									<a href="home"><i class="fa fa-home"></i></a>
+								</li>		
 								<li class="active" id="<?php echo $service['id']; ?>" >
 									<a href="javascript:void()" 
-										onclick="getservicevendors('<?php echo $service['id']; ?>','servicelist');changenavstatus('navbar-events','<?php echo $service['id']; ?>')">
-										<?php echo $service['catalog_value']; ?>
-									</a>
-								</li>
-								<?php }
-								else { ?>
-								<li id="<?php echo $service['id']; ?>" >
-									<a href="javascript:void()" id="<?php echo $service['id']; ?>" 
-										onclick="getservicevendors('<?php echo $service['id']; ?>','servicelist');changenavstatus('navbar-events','<?php echo $service['id']; ?>')">
-										<?php echo $service['catalog_value']; ?>
-									</a>
-								</li>
-								<?php }
-								$serviceSeq++;
-							} ?>
-						</ul>
-					</div>
-				</div><!--/category-tab-->
-			</div>
+									onclick="getservicevendors('<?php echo $service['id']; ?>','servicelist');changenavstatus('navbar-events','<?php echo $service['id']; ?>')">
+									<?php echo $service['catalog_value']; ?>
+								</a>
+							</li>
+							<?php }
+							else { ?>
+							<li id="<?php echo $service['id']; ?>" >
+								<a href="javascript:void()" id="<?php echo $service['id']; ?>" 
+									onclick="getservicevendors('<?php echo $service['id']; ?>','servicelist');changenavstatus('navbar-events','<?php echo $service['id']; ?>')">
+									<?php echo $service['catalog_value']; ?>
+								</a>
+							</li>
+							<?php }
+							$serviceSeq++;
+						} ?>
+					</ul>
+				</div>
+			</div><!--/category-tab-->
 		</div>
-	</section>
+	</div>
+</section>
