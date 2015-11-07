@@ -31,7 +31,8 @@
 				</div>			
 			</div>
 		</div>
-		<?php if(count($Rituals)>0){ ?>
+                <?php if($activeMenu!="rituals") { ?>
+		<?php echo $activeMenu; if(count($Rituals)>0){ ?>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h6 class="panel-title">Rituals</h6>
@@ -50,5 +51,6 @@
 			</div>
 		</div>
 		<?php } ?>
+            <?php } ?>
 	</div><!--/category-products-->	
 </div>

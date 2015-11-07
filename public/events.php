@@ -19,7 +19,6 @@ $Rituals=$customerService->GetAllRitualsByEventId($eventid);
 $Citys=$customerService->GetAllCatalogValuesByMasterNames('City');
 $ServiceCategory=$customerService->GetCatalogValuesByMasterName('Service Category');
 
-
 include "static/title.php" ;
 ?>
 <body class="app-body">

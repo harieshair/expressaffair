@@ -1,3 +1,5 @@
+<?php //var_dump($Services)?>
+
 <section>
 	<div class="container">
 		<div class="row">
