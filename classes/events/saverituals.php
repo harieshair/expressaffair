@@ -1,4 +1,6 @@
 <?php
+/*require_once 'KLogger.php';
+$log = new KLogger ( "log.txt" , KLogger::DEBUG );*/
 $temp = commonclass::to_ist(commonclass::to_gmt(time()));
 $today=date("y-m-d H:i:s",$temp);
 $updateObject=array();
@@ -13,7 +15,6 @@ try{
 		isset($entity['title'])?$updateObject['title']=$entity['title']:'';	
 		isset($serviceIds)?$updateObject['services']=$serviceIds:'';		
 		$this->internalDB->update('rituals',$updateObject,"id=%i",$entity['ritualid']);
-
 		//Save rituals services
 		!empty($serviceIds)?$this->saveRitualServices($entity['ritualid'],$serviceIds):'';
 
@@ -32,6 +33,7 @@ try{
 		isset($serviceIds)?$updateObject['services']=$serviceIds:'';		
 		$updateObject['created_on']=$today;
 		$updateObject['is_deleted']=0;
+
 		$this->internalDB->insert('rituals',$updateObject);		
 		$entity['entity_id']=$this->internalDB->insertId();
 

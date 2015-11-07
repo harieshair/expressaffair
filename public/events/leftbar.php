@@ -20,6 +20,7 @@
 			</div>
 		</div>
 		<?php } ?>
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h2 class="panel-title">Packages</h2>
@@ -37,6 +38,7 @@
 				</div>			
 			</div>
 		</div>
+
 	</div><!--/category-products-->	
 		<div class="price-range">
 		<div class="panel-heading">
