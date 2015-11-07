@@ -27,9 +27,14 @@ function callRestService(serviceName,postdata,callback){
 }
 
 function completepopuppendingactions(){
-if(pendingactions.ef && pendingactions.et)
-	notifyDanger("Hey, you missed event date");
-additemtocart();
+	if(!pendingactions.ef && !pendingactions.et){
+		notifyDanger("Hey, you missed event date");
+		return false;
+	}
+	if(IsBooking)
+		bookitemonmyaccount();
+	else
+		additemtocart();
 }
 
 function getmodalresponse(){
@@ -63,7 +68,7 @@ function oncallservice(POSTDATA,serverurl,callbackfunction){
 			ajaxResponse='';
 		}
 	});
-	 return false;
+	return false;
 }
 function callservicebyajax(POSTDATA,serverurl,callbackfunction){
 	//showPageLoader();
@@ -80,7 +85,7 @@ function callservicebyajax(POSTDATA,serverurl,callbackfunction){
 			//hidePageLoader();
 		}
 	});
-	 return false;
+	return false;
 }
 function calljsonservicebyajax(POSTDATA,serverurl,callbackfunction){
 	showPageLoader();
@@ -98,11 +103,11 @@ function calljsonservicebyajax(POSTDATA,serverurl,callbackfunction){
 			hidePageLoader();
 		},
 		error: function (data, status, e)
-			{
-				notifyDanger(e);
-			}
+		{
+			notifyDanger(e);
+		}
 	});
-	 return false;
+	return false;
 }
 function getcontents(urllocator,responsearea,postdata)
 {
@@ -334,12 +339,27 @@ function trim(s)
 {	return $.trim(s);	
 }
 function jsonToQueryString(json) {
-    return '?' + 
-        Object.keys(json).map(function(key) {
-            return encodeURIComponent(key) + '=' +
-                encodeURIComponent(json[key]);
-        }).join('&');
+	return '?' + 
+	Object.keys(json).map(function(key) {
+		return encodeURIComponent(key) + '=' +
+		encodeURIComponent(json[key]);
+	}).join('&');
 }
 function javascriptObjectToQueryString( obj ) {
-  return '?'+Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&');
+	return '?'+Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&');
+}
+function getGeoLocationCityName(){
+	$.get("http://ipinfo.io", function (response) {
+		if(response){
+			city=response.city; 
+			if(city){ 
+				$("#locationId").find("option:contains("+city+")").each(function(){
+					if( $(this).text() == city ) {
+						$(this).attr("selected","selected");
+					}
+				});
+				
+			}
+		}  
+	}, "jsonp");
 }

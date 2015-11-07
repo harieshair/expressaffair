@@ -13,7 +13,7 @@
 								$customerService->searchObj->serviceId=$service['id'];
 								$serviceName=$service['catalog_value'];
 								?>	
-								<li id="<?php echo $service['id']; ?>" >
+								<li>
 									<a href="home"><i class="fa fa-home"></i></a>
 								</li>		
 								<li class="active" id="<?php echo $service['id']; ?>" >

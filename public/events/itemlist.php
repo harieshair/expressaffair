@@ -17,6 +17,10 @@ $vendorServices=$vendorServices["Items"];
 	<div id="features-items">
 		<?php 
 		if(!empty($vendorServices)){
+			$canshowbooking=false;
+			if((!empty($customerService->searchObj->eventFrom) || !empty($customerService->searchObj->eventTo)) 
+				&& !empty($customerService->searchObj->locationId))
+				$canshowbooking=true;
 			foreach ($vendorServices as $service) {
 				?>
 				<div class="col-sm-4">
@@ -27,8 +31,15 @@ $vendorServices=$vendorServices["Items"];
 								<span class="col-sm-12"><?php echo $service['title'];?></span>				
 								<span class="col-sm-12"><?php echo $service['city'];?></span> 	
 								<span class="col-sm-6"><label class="rate"><i class="fa fa-rupee"></i><?php echo $service['price']; ?></label></span>
-								<span class="col-sm-6"><a class="rating"><?php echo getRatings($service['review']);?></a></span>					
-								<span class="col-sm-12"><a href="#" class="btn btn-default add-to-cart"  onclick="addtomycart('<?php echo $service['id']; ?>');"><i class="fa fa-bookmark"></i>Shortlist to booking</a></span>
+								<span class="col-sm-6"><a class="rating"><?php echo getRatings($service['review']);?></a></span>
+								
+								<?php if($canshowbooking){ ?>
+								<span class="col-sm-6"><a href="#" class="btn btn-default add-to-cart"  onclick="addtomycart('<?php echo $service['id']; ?>');"><i class="fa fa-bookmark"></i>Shortlist</a></span>
+									<span class="col-sm-6"><a href="#" class="btn btn-default add-to-cart"  onclick="bookthisitem('<?php echo $service['id']; ?>');"><i class="fa fa-bookmark"></i>Book Now!</a></span>
+									<?php }
+									else{ ?>
+										<span class="col-sm-12"><a href="#" class="btn btn-default add-to-cart"  onclick="addtomycart('<?php echo $service['id']; ?>');"><i class="fa fa-bookmark"></i>Shortlist</a></span>
+										<?php } ?>
 							</div>
 						</div>
 					</div>

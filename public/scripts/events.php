@@ -1,15 +1,18 @@
 <script type="text/javascript">
-/*price range*/
-var pricerangeslider =$('#pricerange').slider();
-var IsPopUpSignUp;
-var pendingactions={};
+	/*price range*/
+	var pricerangeslider; 
+	
 
-$(document).ready(function(){
+	var IsPopUpSignUp;
+	var IsBooking=false;
+	var pendingactions={};
 
-	$('#affair-modal').on('hidden.bs.modal', function (e) {
-		$('#affair-modal-dialog').removeClass("modal-lg").removeClass("modal-sm");
-		$('#affair-modal').modal('hide')
-	});
+	$(document).ready(function(){
+		pricerangeslider=$('#pricerange').slider().on('slideStop',searchonsliderchange);
+		$('#affair-modal').on('hidden.bs.modal', function (e) {
+			$('#affair-modal-dialog').removeClass("modal-lg").removeClass("modal-sm");
+			$('#affair-modal').modal('hide')
+		});
 
 		pendingactions.c=<?php echo !empty($customerService->searchObj->customerId)?$customerService->searchObj->customerId:0; ?>;
 		pendingactions.l=<?php echo !empty($customerService->searchObj->locationId)?$customerService->searchObj->locationId:0; ?>;
@@ -18,8 +21,14 @@ $(document).ready(function(){
 		pendingactions.s=<?php echo !empty($customerService->searchObj->serviceId)?$customerService->searchObj->serviceId:0; ?>;
 		pendingactions.st= <?php echo !empty($customerService->searchObj->start)?$customerService->searchObj->start:0; ?>;
 		pendingactions.ma=<?php echo !empty($customerService->searchObj->max)?$customerService->searchObj->max:15; ?>;
-		pendingactions.oby=<?php echo !empty($customerService->searchObj->oby)?$customerService->searchObj->oby:2; ?>;
-		$('#locationId').val(pendingactions.l);
+		pendingactions.oby=<?php echo !empty($customerService->searchObj->orderBy)?$customerService->searchObj->orderBy:2; ?>;
+		pendingactions.prm=<?php echo !empty($customerService->searchObj->priceMinimum)?$customerService->searchObj->priceMinimum:0; ?>;
+		pendingactions.prmax=<?php echo !empty($customerService->searchObj->priceMaximum)?$customerService->searchObj->priceMaximum:0; ?>;
+		if(pendingactions.l!=0)
+			$('#locationId').val(pendingactions.l);
+		else
+			getGeoLocationCityName();
+		
 		$('#eventDD').val(pendingactions.e);
 		startdate = new Date();
 		enddate=new Date();
@@ -42,13 +51,14 @@ $(document).ready(function(){
 			eventdateto.val('').datepicker('update');
 			eventdateto.datepicker("setStartDate", event.date);
 			eventdateto.datepicker("setEndDate", newDate);
-		});
-		
-$('#event-search-object').html(getFilterString());
+		});			
 
-/*scroll to top*/
-	$(function () {
-		$.scrollUp({
+		/*$('#event-search-object').html(getFilterString());*/
+		 pricerangeslider.slider('setValue', pendingactions.prm).slider('setValue', pendingactions.prmax);
+
+		/*scroll to top*/
+		$(function () {
+			$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
 	        scrollDistance: 300, // Distance from top/bottom before showing element (px)
 	        scrollFrom: 'top', // 'top' or 'bottom'
@@ -64,8 +74,9 @@ $('#event-search-object').html(getFilterString());
 	        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
 	        zIndex: 2147483647 // Z-Index for the overlay
 	    });
-	});
+		});
 
 });
+
 
 </script>

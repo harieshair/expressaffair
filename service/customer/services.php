@@ -20,6 +20,9 @@ class customerservice {
 		$this->searchObj->start= isset($_GET['st'])?$_GET['st']:null;
 		$this->searchObj->customerId= isset($_GET['c'])?$_GET['c']:null;
 		$this->searchObj->vserviceId= isset($_GET['vsi'])?$_GET['vsi']:null;
+		$this->searchObj->packages= isset($_GET['pac'])?$_GET['pac']:null;
+		$this->searchObj->priceMinimum= isset($_GET['prm'])?$_GET['prm']:null;
+		$this->searchObj->priceMaximum= isset($_GET['prmax'])?$_GET['prmax']:null;
 	}
 	/*------------------------------Events ---------------*/
 	function GetAllEventNames(){

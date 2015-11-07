@@ -38,15 +38,15 @@
 				</div>			
 			</div>
 		</div>
-
 	</div><!--/category-products-->	
 		<div class="price-range">
 		<div class="panel-heading">
 			<h2 class="panel-title">Price Range</h2>
 		</div>
-		<div class="row">		
-		<div class="col-sm-12"> <input id="pricerange" type="text" class="price-range" 
-		value="" data-slider-min="10000" data-slider-max="200000" data-slider-step="20000" data-slider-value="[30000,100000]"/> 
+		<div class="row">	
+		<input id="lookinthisrange" type="checkbox" class="look-in-this-range" checked onclick="enabledisablelookinthisrange(this)" /> Look in this range	
+		<div class="col-sm-12 ">
+		 <input id="pricerange" type="text" class="price-range" value="" data-slider-min="0" data-slider-max="400000" data-slider-step="50000" data-slider-value="[0,400000]"/> 
 		</div>		
 		</div>		
 	</div><!--/price-range-->

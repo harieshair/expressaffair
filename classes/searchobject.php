@@ -12,5 +12,7 @@
 		public $customerId= null;
 		public $vserviceId= null;
 		public $packages= null;
+		public $priceMinimum= null;
+		public $priceMaximum= null;
 		
 	}

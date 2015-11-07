@@ -32,5 +32,7 @@ function getPOstPatrameters($request,$searchobj){
 	$searchobj->customerId= !empty($request->c)?$request->c:null;
 	$searchobj->vserviceId= !empty($request->vsi)?$request->vsi:null;
 	$searchobj->packages= !empty($request->pac)?$request->pac:null;
+	$searchobj->priceMinimum= !empty($request->prm)?$request->prm:null;
+	$searchobj->priceMaximum= !empty($request->prmax)?$request->prmax:null;
 	return $searchobj;
 }

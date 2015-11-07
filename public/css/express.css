@@ -6,10 +6,11 @@
   border: 0 none;
   border-radius: 0;
   color: #FFFFFF;
+  margin-top: 20px;
 }
 .event-search{
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 .event-search-title{
 	color: #FE980F;
@@ -43,3 +44,27 @@ border: 0px solid transparent;
 .fa-star{
     color: #FE980F;
 }
+.profile-border-left{
+      border-left: 1px solid #FE980F;
+}
+.profile-border-right{
+      border-right: 1px solid #FE980F;
+}
+.look-in-this-range{
+  padding-top:10px !important;
+  margin-bottom: 35px !important;
+  margin-left: 20px !important;
+}
+.search-header{
+    font-style: oblique;
+    color: #FE980F;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+}
+.affair-header-nav{}
+.affair-home-nav{}
+.affair-sub-nav{}

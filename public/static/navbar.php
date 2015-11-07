@@ -2,8 +2,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<div class="navbar-header pull-left">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".affair-home-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -11,7 +11,7 @@
 					</button>
 				</div>
 				<div class="mainmenu pull-right">
-					<ul class="nav navbar-nav collapse navbar-collapse">
+					<ul class="nav navbar-nav collapse navbar-collapse affair-home-nav">
 						<li><a href="<?php echo HTTPAPPLICATIONROOT; ?>/public" class="<?php echo ($activeMenu=='home')?'active':''?>">Home</a></li>
 						
 						<li><a href="javascript:void()" class="<?php echo ($activeMenu=='events')?'active':''?>" >Events</a>

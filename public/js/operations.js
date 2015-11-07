@@ -1,3 +1,31 @@
+function addtomycart(vserviceid){
+	if(validateitemtosave(vserviceid))
+		additemtocart();
+}
+function bookthisitem(vserviceid){
+	IsBooking=true;
+	if(validateitemtosave(vserviceid))
+		bookitemonmyaccount();
+}	
+function validateitemtosave(vserviceid){
+	pendingactions.vsi=vserviceid;
+	if(pendingactions.ef =="" && pendingactions.et==""){
+		notifyDanger("Hey, Tell us your event date"); 
+		return false;
+	}
+	if(pendingactions.l==0 || pendingactions.l==""){
+		notifyDanger("Hey, Tell us your event location"); 
+		return false;
+	}
+	if(!pendingactions.c || pendingactions.c==0){
+		IsPopUpSignUp=true;
+		getmodalcontents("loginorsignup.php","",getmodalresponse);
+		return false;
+	}
+	return true;
+
+}
+
 function additemtocart(){
 	POSTDATA="action=aditemtocart&itemdata="+encodeURIComponent(JSON.stringify(pendingactions));
 	oncallservice(POSTDATA,"../service/cartserver.php",function(){
@@ -7,47 +35,54 @@ function additemtocart(){
 		else
 			notifyDanger("Try after some time");  
 	});
-
 }
+function bookitemonmyaccount(){
+	POSTDATA="action=bookthisitem&itemdata="+encodeURIComponent(JSON.stringify(pendingactions));
+	oncallservice(POSTDATA,"../service/cartserver.php",function(){
+		if(ajaxResponse>0){
+			notifySuccess("Item added to shortlisted list");           
+		}
+		else
+			notifyDanger("Try after some time");  
+	});
+}
+
+function searchonsliderchange(){
+	var range = pricerangeslider.slider('getValue');
+	if(range!=0 &&(pendingactions.prm!=range[0] || pendingactions.prmax!=range[1])){
+		pendingactions.prm=range[0] ;pendingactions.prmax=range[1];
+		refinesearch();
+	}
+}
+function enabledisablelookinthisrange(obj){
+	if(obj.checked){
+		$("#pricerange").slider("enable");
+		searchonsliderchange()
+	}
+	else{
+		$("#pricerange").slider("disable");
+		if((pendingactions.prm!=0 || pendingactions.prmax!=0)){
+			pendingactions.prm=0;pendingactions.prmax=0;
+			refinesearch();
+		}
+	}
+}
+
 function refinesearchonclick(){
 	pendingactions.ef=$('#eventdatefrom').val();
 	pendingactions.et=$('#eventdateto').val();
 	pendingactions.l=$('#locationid').val();
-	if(pendingactions.ef =="" && pendingactions.et==""){
-		notifyDanger("Hey,Please pick your event date");
-		return;
-	}	
-	if(pendingactions.l==""){
-		notifyDanger("Hey,Please pick your event location");
-		return;
-	}
 	refinesearch();
 }
 function refinesearch(){	
 	pendingactions.pac=getCheckBoxValueIsideContainer('package-list');
-	$('#event-search-object').html(getFilterString());
+	/*$('#event-search-object').html(getFilterString());*/
 	POSTDATA=JSON.stringify(pendingactions);
 	calljsonservicebyajax(POSTDATA,"../service/searchservice.php",fillsearcheditems);	
 }
 
-function addtomycart(vserviceid){
-	if(pendingactions.ef =="" && pendingactions.et==""){
-		notifyDanger("Hey, Refine your search by giving event date");
-		return;
-	}	
-	if(pendingactions.l==""){
-		notifyDanger("Hey, Refine your search by giving event location");
-		return;
-	}
-	pendingactions.vsi=vserviceid;
-	if(!pendingactions.c || pendingactions.c==0){
-		IsPopUpSignUp=true;
-		getmodalcontents("loginorsignup.php","",getmodalresponse);
-	}
-	else{
-		additemtocart();
-	}
-}
+
+
 
 function savecustomersignupdetails(serviceurl,formid,callbackfn){
 	signupdetails = $("#"+formid).serialize();
@@ -61,7 +96,7 @@ function savecustomersignupdetails(serviceurl,formid,callbackfn){
 				hideaffairmodal();
 				completepopuppendingactions();
 			}
-			else if(callbackfn)
+			else if(callbackfn && $("#"+formid+" #entity_id").length>0)
 				callbackfn();
 			else
 				window.location="home";
@@ -143,9 +178,9 @@ function getFilterString()
 }
 function redirecttonewevent(sel) {
 	if(sel.value && sel.value!=0)
-      window.location="events="+sel.value;
-    }
-    function switchtoritualdata(ritualid){
-    	pendingactions.r=ritualid;
-    	window.location="rituals="+javascriptObjectToQueryString(pendingactions);
-    }
+		window.location="events="+sel.value;
+}
+function switchtoritualdata(ritualid){
+	pendingactions.r=ritualid;
+	window.location="rituals="+javascriptObjectToQueryString(pendingactions);
+}

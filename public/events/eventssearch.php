@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<div class="col-sm-2">	
-	<label>From</label>
+	<label>When</label>
 		<div class="input-group">		
 			<input type="text" class="form-control pull-right" id="eventdatefrom" />
 			<div class="input-group-addon">
@@ -51,12 +51,12 @@
 	<div class="col-sm-2">
 	<label></label>
 	<div class="input-group">
-		<a href="javascript:void()" class="form-control btn btn-default refine-search" onclick="refinesearchonclick();"><i class="fa fa-search"></i>Refine Event Search</a>
+		<a href="javascript:void()" class="form-control btn btn-default refine-search" onclick="refinesearchonclick();"><i class="fa fa-filter"></i>  Filter</a>
 		</div>
 	</div>
 </div>
 </div>
-<div class="row event-search">
+<!--<div class="row event-search">
 <div class="col-sm-2"><span class="pull-right event-search-title">Filter based on:</span></div>
 <div class="col-sm-10"><span id="event-search-object" class="event-search-object"></span></div>
-</div>
+</div>-->

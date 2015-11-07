@@ -1,5 +1,6 @@
 /*price range*/
 var IsPopUpSignUp;
+var IsBooking=false;
 var pendingactions={};
 var locationId=0;
 /*scroll to top*/

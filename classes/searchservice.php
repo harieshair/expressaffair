@@ -25,30 +25,38 @@ class searchservices{
 		$itemArray=array('Exception'=>"",'Items'=>null);
 		$selectCount="SELECT count(vs.id) ";
 		$joinclause=" FROM  v_services vs inner join v_service_location vsl on vsl.vservice_id=vs.id ";
-		$where=" where vs.service_id is not null ";		
+		$where=" where vs.service_id is not null ";	
+		//Location filter	
 		$where.=!empty($searchObj->locationId)?" AND vsl.location_id=$searchObj->locationId ":'';
+		//Service filter
 		$where.=!empty($searchObj->serviceId)?" AND vs.service_id=$searchObj->serviceId ":'';
-
+		//Event filter
 		if(!empty($searchObj->eventId)){
 			$joinclause.=" inner join e_services es on es.service_id=vs.service_id ";
 			$where.=" AND es.event_id=$searchObj->eventId ";
 		}
-	
+		// Ritual filter
 		if(!empty($searchObj->ritualId)){
 			$joinclause.=" inner join r_services rs on rs.service_id=vs.service_id ";
 			$where.=" AND rs.ritual_id=$searchObj->ritualId ";
 		}
+		//Package filter
 		if(!empty($searchObj->packages)){			
 			$where.=" AND vs.service_category in (".implode(',',$searchObj->packages).") ";
 		}
-		
-		if(!empty($searchObj->customerId)){
-			$where.=" AND NOT EXISTS (select c.v_service_id from carts c where c.v_service_id = vs.id) ";
+		// Price range filter
+		if(!empty($searchObj->priceMinimum) && !empty($searchObj->priceMaximum)){
+			$where.=" AND (vs.price between $searchObj->priceMinimum and $searchObj->priceMaximum) ";
+		}else if(empty($searchObj->priceMinimum) && !empty($searchObj->priceMaximum)){
+			$where.=" AND (vs.price <= $searchObj->priceMaximum) ";
 		}
-		
+		//Customer filter
+		if(!empty($searchObj->customerId)){
+			$where.=" AND NOT EXISTS (select c.v_service_id from carts c where c.v_service_id = vs.id and c.customer_id=$searchObj->customerId) ";
+		}
+		//Limit 
 		$searchObj->start=empty($searchObj->start)?0:$searchObj->start;
-		$searchObj->max=empty($searchObj->max)?15:$searchObj->max;
-			
+		$searchObj->max=empty($searchObj->max)?15:$searchObj->max;			
 		$limit=" limit $searchObj->start, $searchObj->max ";	
 
 		
