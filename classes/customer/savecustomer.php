@@ -36,7 +36,7 @@ try{
 			return array('Exception'=>"Specified login name already exists" );
 
 		isset($entity['email'])?$updateObject['email']=$entity['email']:'';
-		isset($entity['password'])?$updateObject['password']=md5($entity['password']):''; 
+		isset($entity['signuppassword'])?$updateObject['password']=md5($entity['signuppassword']):''; 
 		isset($entity['phone'])?$updateObject['contact_number']=$entity['phone']:''; 
 		isset($entity['name'])?$updateObject['name']=$entity['name']:'';
 		isset($entity['status'])?$updateObject['status']=$entity['status']:'';

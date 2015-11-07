@@ -24,5 +24,6 @@ include "static/title.php" ;
 	include "static/home.php";
 	include "static/footer.php";
 	?>	
+	<script src="js/affair-page-loader.js"></script>
 </body>
 </html>

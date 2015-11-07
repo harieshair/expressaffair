@@ -2,10 +2,6 @@
 /*************************
 *******Typography******
 **************************/
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
-@import url(http://fonts.googleapis.com/css?family=Abel);
-
 body {
   font-family: 'Roboto', sans-serif;
   background:;
@@ -655,7 +651,7 @@ ul.sub-menu {
 
 .category-products {
   border: 1px solid #F7F7F0;
-  margin-bottom: 35px;
+  margin-bottom: 10px;
   padding-bottom: 20px;
   padding-top: 15px;
 }
@@ -748,7 +744,7 @@ h2.title:before{
 }
 
 .left-panel-body{
-  height: 140px;
+  max-height: 140px;
   overflow-y: scroll;
 }
 .category-products .badge {
@@ -964,7 +960,7 @@ h2.title {
 
 
 .add-to-cart {
-  background:#F5F5ED;
+  background:#ddd;
   border: 0 none;
   border-radius: 0;
   color: #696763;

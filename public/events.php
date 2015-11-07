@@ -1,21 +1,20 @@
 <?php
 if(!isset($_SESSION)){session_start();}
 $activeMenu="events";
-$eventid= $_GET['eventid'];
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 include_once(SERVERFOLDER."/customer/services.php");
 $customerService=new customerservice($dbconnection->dbconnector);
+$customerService->GetAllQueryStrings();
 if(isset($_SESSION['CUSTOMERID']))
 {
-	$CustomerId=$_SESSION['CUSTOMERID']; 
-	$customerData = $customerService->GetCustomerById($CustomerId);
-	if(isset($_SESSION['LOCATION']))
-		$LocationId=$_SESSION['LOCATION'];
-	else
-		$_SESSION['LOCATION']=$LocationId=$customerData['city'] ;
+	$customerService->searchObj->customerId=$_SESSION['CUSTOMERID']; 
+	$customerData = $customerService->GetCustomerById($customerService->searchObj->customerId);
+	if(!isset($_SESSION['LOCATION']))
+		$_SESSION['LOCATION']=$customerData['city'] ;		
 }
-$Services=$customerService->GetAllServicesByEventId($eventid);
-$Rituals=$customerService->GetAllRitualsByEventId($eventid);
+empty($customerService->searchObj->locationId)?$customerService->searchObj->locationId=(isset($_SESSION['LOCATION'])?$_SESSION['LOCATION']:null):'';
+$Services=$customerService->GetAllServicesByEventId($customerService->searchObj->eventId);
+$Rituals=$customerService->GetAllRitualsByEventId($customerService->searchObj->eventId);
 $Citys=$customerService->GetAllCatalogValuesByMasterNames('City');
 $ServiceCategory=$customerService->GetCatalogValuesByMasterName('Service Category');
 
@@ -23,7 +22,7 @@ include "static/title.php" ;
 ?>
 <body class="app-body">
 	<?php
-	include "static/header.php" ;	
+	include "static/itemheader.php" ;	
 	include "events/showcase.php" ;
 	include "static/footer.php";
 	?>
@@ -31,9 +30,10 @@ include "static/title.php" ;
 	<script src="../plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
     <script src="../plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
     <script src="../plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-	<script src="../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-	<script src="../plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
-        <script src="js/ajax-loader.js"></script>
+	<script src="../plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+	<script src="js/ajax-loader.js"></script>
+	<script src="js/event-items.js" type="text/javascript"></script>
 	<?php include "scripts/events.php" ; ?>
+
 </body>
 </html>

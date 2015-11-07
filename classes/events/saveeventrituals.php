@@ -7,9 +7,9 @@ try{
 		if(!empty($oldritualIds) && count($oldritualIds)>0){
 			$ritualIdsToRemove=array_diff($oldritualIds, $ritualsToCreate);
 			$ritualsToCreate=array_diff($ritualsToCreate,$oldritualIds);
-			if(!empty($ritualIdToRemove) && count($ritualIdToRemove)>0){
+			if(!empty($ritualIdsToRemove) && count($ritualIdsToRemove)>0){
 				$this->internalDB->query("DELETE FROM e_rituals where  event_id =$eventId  
-					and  ritual_id in (".implode(',',$ritualIdToRemove.")"));
+					and  ritual_id in (".implode(',',$ritualIdsToRemove).")");
 
 			}
 		}

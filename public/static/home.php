@@ -26,7 +26,7 @@ $allEvents=$customerService->GetAllEvents(1,50,null);
 										<h1><span><?php echo $event['name']; ?></span></h1>
 
 										<p> <?php echo $event['description']; ?></p>
-										<a href="event=<?php echo $event['id'];?>" class="btn btn-default get">Customize it</a>
+										<a href="events=<?php echo $event['id'];?>" class="btn btn-default get">Customize it</a>
 									</div>
 									<div class="col-sm-6">
 										<img src="../<?php echo $attachments[0]['file_path']; ?>" class="girl img-responsive" alt="dw" />

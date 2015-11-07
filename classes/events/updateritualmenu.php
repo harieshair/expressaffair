@@ -3,7 +3,7 @@ $rituals= $this->internalDB->query("SELECT id,title FROM rituals" );
 $menuList='<ul role="menu" class="sub-menu">';
 
 foreach ($rituals as $ritual) { 
-	$menuList.="<li><a href='ritual=".$ritual['id']."'>".$ritual['title']."</a></li>";
+	$menuList.="<li><a href='rituals=".$ritual['id']."'>".$ritual['title']."</a></li>";
 }
 
 $menuList.='</ul>';

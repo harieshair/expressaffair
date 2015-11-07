@@ -1,6 +1,6 @@
 	<?php
 	class ritualclass{	
-	public $internalDB;		
+		public $internalDB;		
 	function ritualclass($db) // Constructor 
 	{
 		$this->internalDB=$db;
@@ -11,17 +11,12 @@
 		$response =include 'events/saverituals.php'	;	
 		return $response;
 	}
-        
-        function saveRitualServices($ritualid,$services){
+
+	function saveRitualServices($ritualId,$services){
 		$returnvalue=include 'events/saveritualservices.php';
 		return $returnvalue;
 	}
-        
-        function GetAllServicesByRitualsId($ritualId) {
-                $eventServices= $this->internalDB->query("SELECT cv.id,cv.catalog_value FROM catalog_value cv inner join r_services es on es.serviceId=cv.id where es.ritualId= $ritualId" );
-		return $eventServices;
-	}
-	/*---------------------------------------------------------------*/
+
 	function getallRitualLists($pages,$rows,$searchobj){
 		$searchobj=($searchobj!=null)?json_decode($searchobj):null;
 		$returnvalue=include 'events/getallrituals.php';
@@ -53,6 +48,11 @@
 		return $ritualnames;
 	}
 	function updateRitualMenu(){
-	include 'events/updateritualmenu.php';		
-}
+		include 'events/updateritualmenu.php';		
+	}
+
+	function GetAllServicesByRitualId($ritualId){
+		$ritualServices= $this->internalDB->query("SELECT cv.id,cv.catalog_value FROM catalog_value cv inner join r_services es on es.service_id=cv.id where es.ritual_id= $ritualId" );
+		return $ritualServices;
+	}
 }

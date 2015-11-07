@@ -15,6 +15,9 @@ include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 	<?php	
 	include "default/login.php" ;
 	include "static/footer.php";
+	?>
+	<script src="js/affair-page-loader.js"></script>
+	<?php
     include "scripts/login.php";
 	?>
 
