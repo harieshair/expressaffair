@@ -16,26 +16,19 @@ function add_quotes($str) {
     return sprintf("'%s'", $str);
 }
 function GetAllCatalogValuesByMasterNames($masternames){
-	$catalogarray=array();
-	$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id in (select id from catalog_master where name in ('".implode("','", explode(',', $masternames))."'))"); 
-	foreach($catalogvalues as $catalog)
-		$catalogarray[$catalog['id']]=$catalog['catalog_value'];
-	return $catalogarray;
+		$result=include "catalogs/getallcatalogvaluesbymastername.php";
+	return $result;
 }
 
 /*----------------------------------------------------------------------------*/
 function GetAllCatalogValues($mastername){
-	$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id=(select id from catalog_master where name='$mastername')"); 
-
-	return $catalogvalues;
+	$result=include "catalogs/returnallcatalogvalues.php";
+	return $result;
 }
 /*-------------------------------------------------------------------------------------------------*/
 function getCatalogValuesById($catalogid){
-	if(!empty($catalogid)){
-		$ret=$this->internalDB->queryFirstField("select catalog_value from catalog_value where id=$catalogid");
-		return $ret;
-	}
-	return '';
+	$result=include "catalogs/getallcatalogvaluesbyid.php";
+	return $result;
 }
 /*-------------------------------------------------------------------------------------------------*/
 function getallCatalogMastaersNames(){

@@ -33,7 +33,8 @@ try{
 
 		$this->internalDB->update('users',$updateObject,"id=%i",$entity['entity_id']);
 		$userId= $entity['entity_id'];	
-		$this->saveRoles($entity['roles'],$userId);
+		if(isset($entity['roles']))
+			$this->saveRoles($entity['roles'],$userId);
 
 	}
 	else{

@@ -3,10 +3,10 @@ $temp = commonclass::to_ist(commonclass::to_gmt(time()));
 $today=date("y-m-d H:i:s",$temp);
 $updateObject=array();
 try{
-	if(!empty($entity['serviceid'])){
+	if(!empty($entity['vserviceid'])){
 
 		$duplicate=$this->internalDB->queryFirstRow("select id from v_services where  title='".$entity['title']."' AND vendor_id !="
-			.$entity['vendor_id']." AND id!=".$entity['serviceid']);
+			.$entity['vendor_id']." AND id!=".$entity['vserviceid']);
 		if(!empty($duplicate))
 			return array("Exception"=>"Specified service title already exists" );
 
@@ -18,28 +18,31 @@ try{
 		isset($entity['selectedlocation'])?$updateObject['locations']=implode(',',$entity['selectedlocation']):''; 
 		isset($entity['selectedstate'])?$updateObject['states']=implode(',',$entity['selectedstate']):''; 
 		isset($entity['category'])?$updateObject['service_category']=$entity['category']:'';
-		$this->internalDB->update('v_services',$updateObject,"id=%i",$entity['serviceid']);
+		isset($entity['rd_ismasterimage'])?$updateObject['master_image']=$entity['rd_ismasterimage']:'';		
+		$this->internalDB->update('v_services',$updateObject,"id=%i",$entity['vserviceid']);
 		
-		$entity['entity_id']=$entity['serviceid'];
+		$entity['entity_id']=$entity['vserviceid'];
 
 		// Save vendor service locations
 		$this->savevendorservicelocations($entity['entity_id'],implode(',',$entity['selectedlocation']));
-
+		
 		if(!empty($entity['file_name'])){
 		//Remove removeAttachments
-			$this->removeAttachments($entity['serviceid'], $entity['file_name'],"VendorService");
+			$this->removeAttachments($entity['vserviceid'], $entity['file_name'],VENDORSERVICE);
 
 		//Add New Attachments
 			$files=explode(",",$entity['file_name']);
 			foreach ($files as $file) {
-				$oldFileId=$this->getAttachmentByFileName($file,$entity['serviceid'],"VendorService");
+				$oldFileId=$this->getAttachmentByFileName($file,$entity['vserviceid'],VENDORSERVICE);
 				if(empty($oldFileId)){
 					$entity['file_name']=$file;
-					$response=$this->saveattachments($entity,"VendorService");
+					$response=$this->saveattachments($entity,VENDORSERVICE);
 				}
-			}	
+			}
+			if(isset($entity['rd_ismasterimage']))
+			$this->saveprofileFile($entity['vserviceid'],VENDORSERVICE,'attachments/vservice/'.$entity['vserviceid'].'/images/'.$entity['rd_ismasterimage']);
 		}
-		return array('Id'=>$entity['serviceid'] );	
+		return array('Id'=>$entity['vserviceid'] );	
 	}
 	else{
 
@@ -57,6 +60,7 @@ try{
 		isset($entity['selectedstate'])?$updateObject['states']=implode(',',$entity['selectedstate']):''; 
 		isset($entity['vendor_id'])?$updateObject['vendor_id']=$entity['vendor_id']:'';	
 		isset($entity['category'])?$updateObject['service_category']=$entity['category']:'';
+		isset($entity['rd_ismasterimage'])?$updateObject['master_image']=$entity['rd_ismasterimage']:'';
 		$updateObject['created_on']=$today;
 		$updateObject['is_deleted']=0;
 		$this->internalDB->insert('v_services',$updateObject);
@@ -73,7 +77,9 @@ try{
 			foreach ($files as $file) {
 				$entity['file_name']=$file;
 				$response=$this->saveattachments($entity,VENDORSERVICE);
-			}	
+			}
+			if(isset($entity['rd_ismasterimage']))
+			$this->saveprofileFile($entity['entity_id'],VENDORSERVICE,$entity['rd_ismasterimage']);	
 		}
 		return array('Id'=>$vendor_serviceId );
 

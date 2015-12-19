@@ -15,7 +15,8 @@ public $internalDB;
 		return $response;
 	}
 	function getallattachments($entityid,$entitytype){
-		return $this->internalDB->query("SELECT * FROM attachments WHERE entity_id =$entityid AND entity_type=$entitytype order by id desc");	
+		$response =include 'attachment/getallattachments.php';	
+		return $response;
 	}	
 	function getattachmentbyid($attachmentid){
 		return $this->internalDB->queryFirstRow("SELECT * FROM attachments WHERE id=$attachmentid");		

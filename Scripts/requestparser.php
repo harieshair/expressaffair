@@ -1,0 +1,13 @@
+pendingactions.c=<?php echo !empty($customerService->searchObj->customerId)?$customerService->searchObj->customerId:0; ?>;
+pendingactions.l=<?php echo !empty($customerService->searchObj->locationId)?$customerService->searchObj->locationId:0; ?>;
+pendingactions.e=<?php echo !empty($customerService->searchObj->eventId)?$customerService->searchObj->eventId:0; ?>;
+pendingactions.r=<?php echo !empty($customerService->searchObj->ritualId)?$customerService->searchObj->ritualId:0;?>;
+pendingactions.s=<?php echo !empty($customerService->searchObj->serviceId)?$customerService->searchObj->serviceId:0; ?>;
+pendingactions.st= <?php echo !empty($customerService->searchObj->start)?$customerService->searchObj->start:0; ?>;
+pendingactions.ma=<?php echo !empty($customerService->searchObj->max)?$customerService->searchObj->max:15; ?>;
+pendingactions.oby=<?php echo !empty($customerService->searchObj->orderBy)?$customerService->searchObj->orderBy:2; ?>;
+pendingactions.prm=<?php echo !empty($customerService->searchObj->priceMinimum)?$customerService->searchObj->priceMinimum:0; ?>;
+pendingactions.prmax=<?php echo !empty($customerService->searchObj->priceMaximum)?$customerService->searchObj->priceMaximum:0; ?>;
+pendingactions.ef=<?php echo !empty($customerService->searchObj->eventFrom)?"'".$customerService->searchObj->eventFrom."'":0; ?>;
+pendingactions.et=<?php echo !empty($customerService->searchObj->eventTo)?"'".$customerService->searchObj->eventTo."'":0; ?>;
+pendingactions.vsi=<?php echo !empty($customerService->searchObj->vserviceId)?$customerService->searchObj->vserviceId:0; ?>;

@@ -24,7 +24,7 @@ try{
 		!empty($serviceIds)?$this->saveEventServices($entity['entity_id'],$serviceIds):'';
 		
 		//Update pulic event menu
-		$this->updateEventMenu();
+		//$this->updateEventMenu();
 
 		
 
@@ -40,7 +40,9 @@ try{
 					$entity['file_name']=$file;
 					$response=$this->saveattachments($entity);
 				}
-			}	
+			}
+			if(isset($entity['rd_ismasterimage']))
+			$this->saveprofileFile($entity['entity_id'],$entity['rd_ismasterimage']);	
 		}
 		return array('Id'=>$entity['eventid'] );	
 	}
@@ -72,10 +74,12 @@ try{
 			foreach ($files as $file) {
 				$entity['file_name']=$file;
 				$response=$this->saveattachments($entity);
-			}	
+			}
+			if(isset($entity['rd_ismasterimage']))
+			$this->saveprofileFile($entity['entity_id'],$entity['rd_ismasterimage']);		
 		}
 		//Update pulic event menu
-		$this->updateEventMenu();
+		//$this->updateEventMenu();
 
 		return array('Id'=>$entity['entity_id'] );
 

@@ -1,10 +1,13 @@
 	<?php
+	include_once(CLASSFOLDER."/enums/commonenums.php");
 	class eventclass
 	{		
 		public $internalDB;	
+		public $entityType;
 	function eventclass($db) // Constructor 
-	{
+	{			
 		$this->internalDB=$db;
+		$this->entityType=new EntityType();
 	}
 	/* -----------------------------------------------------------------------------*/
 	function updateevent($entity,$ritualIds,$serviceIds)
@@ -13,8 +16,7 @@
 		return $response;
 	}
 	/*---------------------------------------------------------------*/
-	function getalleventlists($pages,$rows,$searchobj){
-		$searchobj=($searchobj!=null)?json_decode($searchobj):null;
+	function getalleventlists($pages,$rows,$searchobj){		
 		$returnvalue=include 'events/getallevents.php';
 		return $returnvalue;
 	}
@@ -36,12 +38,8 @@
 
 	}	
 	function getAllEventNames(){
-		$eventnames=array();
-		$resultset= $this->internalDB->query("SELECT id,name FROM events" );
-		foreach ($resultset as $row) {
-			$eventnames[$row['id']]=$row['name'];
-		}
-		return $eventnames;
+		$returnvalue=include 'events/getalleventnames.php';
+		return $returnvalue;
 	}
 
 	function saveEventServices($eventId,$services){
@@ -62,41 +60,41 @@ function updateEventMenu(){
 		return $selectedEventIds;
 	}
 	function GetAllServicesByEventId($eventId){
-		$eventServices= $this->internalDB->query("SELECT cv.id,cv.catalog_value FROM catalog_value cv inner join e_services es on es.service_id=cv.id where es.event_id= $eventId" );
-		return $eventServices;
+		$returnvalue=include 'events/getallservicesbyeventid.php';
+		return $returnvalue;
 	}
 	function GetAllRitualsByEventId($eventId){
-		$eventRituals= $this->internalDB->query("SELECT r.id,r.title FROM rituals r inner join e_rituals er on er.ritual_id=r.id where er.event_id=$eventId" );
-		return $eventRituals;
+		$returnvalue=include 'events/getallritualsbyeventid.php';
+		return $returnvalue;	
 	}
 	function getAllEventAttachments($eventid){
-			include_once(CLASSFOLDER."/enums/commonenums.php");
-			$entityType=new EntityType();
-		$sql="SELECT a.file_type, a.file_name, a.file_path";
- 		$sql.=" FROM attachments a WHERE a.entity_id=$eventid AND a.entity_type=".$entityType->getkey("Event");
+		$sql="SELECT a.id,a.file_type, a.file_name, a.file_path ,a.is_profile_file";
+ 		$sql.=" FROM attachments a WHERE a.entity_id=$eventid AND a.entity_type=".$this->entityType->getkey("Event");
  		return $this->internalDB->query($sql);	
 	}
 	function getAttachmentByFileName($fileName,$eventId){
-			include_once(CLASSFOLDER."/enums/commonenums.php");
-			$entityType=new EntityType();
-		$sql="SELECT id FROM attachments a WHERE entity_id=$eventId AND file_name='$fileName' AND entity_type=".$entityType->getkey("Event");
+
+		$sql="SELECT id FROM attachments a WHERE entity_id=$eventId AND file_name='$fileName' AND entity_type=".$this->entityType->getkey("Event");
  		return $this->internalDB->queryFirstField($sql);	
 	}
 	function saveattachments($entity){
-		include_once(CLASSFOLDER."/enums/commonenums.php");
-			$entityType=new EntityType();
-		$entity['entity_type']=$entityType->getkey(EVENT);		
+		$entity['entity_type']=$this->entityType->getkey(EVENT);		
 		include_once(CLASSFOLDER."/attachments.php");
 		$attachment=new attachmentclass($this->internalDB);
 		return $attachment->updateattachments($entity);
 	}
+	function saveprofileFile($entityid,$fileName){	
+			$updateObject=array("is_profile_file"=>0);
+			$this->internalDB->update('attachments',$updateObject,
+				"entity_id=%i and entity_type=%i",$entityid,$fileName,$this->entityType->getkey(EVENT));
+			$updateObject=array("is_profile_file"=>1);
+			$this->internalDB->update('attachments',$updateObject,
+				"entity_id=%i  and file_name=%s and entity_type=%i",$entityid,$fileName,$this->entityType->getkey(EVENT));			
+	}
 		function removeAttachments($entityId,$fileNames){
-		include_once(CLASSFOLDER."/enums/commonenums.php");
-		$entityType=new EntityType;
-		
 		include_once(CLASSFOLDER."/attachments.php");
 		$attachment=new attachmentclass($this->internalDB);
-		return $attachment->removeEntityFilesNotExistsInGivenList($entityId,$entityType->getkey(EVENT),$fileNames);
+		return $attachment->removeEntityFilesNotExistsInGivenList($entityId,$this->entityType->getkey(EVENT),$fileNames);
 	}
 
 	function closetags ( $html )

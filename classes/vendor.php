@@ -47,7 +47,16 @@
 		$attachment=new attachmentclass($this->internalDB);
 		return $attachment->updateattachments($entity);
 	}
+	function saveprofileFile($entityid,$entitytype,$fileName){	
+			$updateObject=array("is_profile_file"=>0);
+			$this->internalDB->update('attachments',$updateObject,
+				"entity_id=%i and entity_type=%i",$entityid,$fileName,$this->EntityType->getkey($entitytype));
+			$updateObject=array("is_profile_file"=>1);
+			$this->internalDB->update('attachments',$updateObject,
+				"entity_id=%i  and file_name=%s and entity_type=%i",$entityid,$fileName,$this->EntityType->getkey($entitytype));			
+	}
 
+	
 	function getAttachmentByFileName($fileName,$vendorServiceId,$entitytype){
 		$sql="SELECT id FROM attachments a WHERE entity_id=$vendorServiceId AND file_name='$fileName' AND entity_type='".$this->EntityType->getkey($entitytype)."'";
 		return $this->internalDB->queryFirstField($sql);	
@@ -57,7 +66,7 @@
 	$returnvalue=include 'vendor/savevendorservicelocations.php';
 		return $returnvalue;
 	}
-
+/*---------------------------------------------------------------*/
 	
 	function getallvendorlists($pages,$rows,$searchobj){
 		$searchobj=($searchobj!=null)?json_decode($searchobj):null;
@@ -74,15 +83,12 @@
 		return $this->internalDB->queryFirstRow("SELECT * FROM vendor where id=$vendorid");
 		
 	}
-	/*---------------------------------------------------------------*/
+	
 	function getallvendorcontactsbyvendorid($vendorid){
 		$response =include 'vendor/getallvendorcontacts.php'	;	
 		return $response;
 	}
 
-	function getcontactsbyid($contactid){
-		return $this->internalDB->queryFirstRow("SELECT * FROM contacts WHERE title IS NOT NULL AND id=$contactid");	
-	}
 	function deleteVendorContacts($contactId,$vendorId){
 		return $this->internalDB->query("SELECT * FROM contacts WHERE title IS NOT NULL AND id=$contactid");
 	}
@@ -97,10 +103,8 @@
 		return $this->internalDB->query("SELECT * FROM v_services WHERE vendor_id=$vendorid");	
 	}
 	function getAllVendorServices($serviceId,$locationId){
-		$sql="SELECT vs.id,vs.locations,vs.vendor_id,vs.title,vs.description,vs.price,a.file_path,vs.service_id FROM  v_services vs 
-		inner join attachments a on vs.id=a.entity_id where  vs.service_id= $serviceId AND a.entity_type=4 and a.file_type=0 ";
-		$sql.=!empty($locationId)?" AND vs.locations=$locationId ":'';
-		return $this->internalDB->query($sql);	
+		$response =include 'vendor/getallvendorservices.php';	
+		return $response;
 	}
 	function getvendorservicebyid($serviceid){
 		return $this->internalDB->queryFirstRow("SELECT * FROM v_services WHERE id=$serviceid");		
@@ -117,9 +121,12 @@
 		return $this->internalDB->queryFirstRow($sql);	
 	}
 	function getAllAttachmentsByEntityId($entityId,$entityType){
-		$sql="SELECT a.file_type, a.file_name, a.file_path";
-		$sql.=" FROM attachments a WHERE a.entity_id=$entityId AND a.entity_type=".$this->EntityType->getkey($entityType);
-		return $this->internalDB->query($sql);	
+		$returnValue=include "vendor/getallattachmentsbyentityid.php";
+		return $returnValue;
+	}
+	function getServiceItemDetailsByvServiceId($vserviceId,$locationId){
+		$returnValue=include "vendor/getServiceItemDetails.php";
+		return $returnValue;
 	}
 
 	function removeAttachments($entityId,$fileNames,$entitytype){		

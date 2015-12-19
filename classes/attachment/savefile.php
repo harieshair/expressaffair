@@ -16,6 +16,9 @@ if(file_exists ($sourcepath)){
 			case 3:
 			$targetLocation.="event/";
 			break;
+			case 4:
+			$targetLocation.="vservice/";
+			break;
 			default:
 			$targetLocation.="others/";
 			break;
@@ -42,7 +45,7 @@ if(file_exists ($sourcepath)){
 	}
 
 	$this->makedirectory(ROOTFOLDER."/".$targetLocation);
-	$destinationpath = ROOTFOLDER."/".$targetLocation."/".$filename;
+	$destinationpath = ROOTFOLDER."/".$targetLocation.$filename;
 
 	if (file_exists($destinationpath))
 		unlink($destinationpath);

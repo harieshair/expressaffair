@@ -81,26 +81,28 @@ class searchservices{
 			$items= $this->internalDB->query($selectclause.$joinclause.$where.$orderby.$limit);	
 
 		//Get already booked service ids
-			$sqlbookedservice="SELECT vservice_id FROM booking_days ";
-			if(!empty($searchObj->eventFrom))
-			{
-				$searchObj->eventFrom=str_replace("/","-",$searchObj->eventFrom);
-				$searchObj->eventFrom=date('Y-m-d',strtotime($searchObj->eventFrom));		
-			}	
-			if(!empty($searchObj->eventTo))
-			{
-				$searchObj->eventTo=str_replace("/","-",$searchObj->eventTo);
-				$searchObj->eventTo=date('Y-m-d',strtotime($searchObj->eventTo));		
-			}	
-			if(!empty($searchObj->eventFrom) && !empty($searchObj->eventTo))
-				$sqlbookedservice.=" where booking_date between '$searchObj->eventFrom' and '$searchObj->eventTo' ";
-			else if(!empty($searchObj->eventFrom))
-				$sqlbookedservice.=" where booking_date = '$searchObj->eventFrom' ";
-			else if(!empty($searchObj->eventTo))
-				$sqlbookedservice.=" where booking_date = '$searchObj->eventTo' ";
+			$bookedVendorServiceIds=array();
+			$bookingbegin="";
+	$bookingend="";
+	if(!empty($searchObj->eventFrom) || !empty($searchObj->eventTo)){
+		$sqlbookedservice="SELECT vservice_id FROM booking_dates ";
+		if(!empty($searchObj->eventFrom))
+		{
+			$eventfrom=explode('/',$searchObj->eventFrom);
+			$bookingbegin= $eventfrom[2].'-'.$eventfrom[0].'-'.$eventfrom[1];		
+		}	
 
-			$bookedVendorServiceIds=$this->internalDB->queryFirstColumn($sqlbookedservice);
-			//Get all city catalogs
+		if(!empty($searchObj->eventTo))
+		{
+			$eventto=explode('/',$searchObj->eventTo);
+			$bookingend= $eventto[2].'-'.$eventto[0].'-'.$eventto[1];	
+		}
+		else
+			$bookingend=$eventfrom[2].'-'.$eventfrom[0].'-'.$eventfrom[1];
+		$sqlbookedservice.=" where booking_date between '$bookingbegin' and '$bookingend'";
+		$bookedVendorServiceIds=$this->internalDB->queryFirstColumn($sqlbookedservice);
+	}
+				//Get all city catalogs
 			$catalogarray=array();
 			$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id in (select id from catalog_master where name in ('City'))"); 
 			foreach($catalogvalues as $catalog)

@@ -1,6 +1,6 @@
 <?php	
 
-$wherecondition=" where name is not null ";
+$wherecondition=" where title is not null ";
 if($searchobj!=null){
 	
 }

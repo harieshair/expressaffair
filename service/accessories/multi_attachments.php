@@ -1,7 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 include_once(CLASSFOLDER."/enums/commonenums.php");
-session_start();
 set_time_limit(0);
 
 $response=array();
@@ -17,7 +16,11 @@ foreach($_FILES[$fileElementName]['name'] as $key=>$val)
 $filenameexploded= explode(".", $_FILES[$fileElementName]['name'][$key]);
 $ext=end($filenameexploded);
 
-	$newext=($ext=='xls')?'xlsx':$ext; //becaues xlsx not reading xls file
+	$newext=($ext=='xls')?'xlsx':$ext; //because xlsx not reading xls file
+
+	if($type=="0")	$newext="png";
+
+	
 
 	if(!empty($_FILES[$fileElementName]['error'][$key]))
 	{
@@ -57,10 +60,12 @@ $ext=end($filenameexploded);
 			{
 				if($_FILES[$fileElementName]['size'][$key] <$maxsize)
 				{
+					$filename=str_replace(" ", "_", $name);
 					$filename= str_replace(".".$ext, "", $name).date('d_m_Y_h_i').'.'.$newext;
 					$newname = $path.$filename;
 					move_uploaded_file($_FILES[$fileElementName]['tmp_name'][$key],$newname);
-					$response[$name]=$filename;
+					$shrinkedoriginalfilename=str_replace(" ", "_", $name);				
+					$response[$shrinkedoriginalfilename]=$filename;
 										
 				}
 				else $response['Exception'].="File exceeds maximum size ".$maxsize/$minSize." MB";

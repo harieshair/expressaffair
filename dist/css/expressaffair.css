@@ -24,6 +24,9 @@
 .list-container{
 	list-style: none;
 }
+.list-container span{
+    color: #021B2D;
+}
 .display-ib {
 	display: inline-block;
 }
@@ -53,4 +56,14 @@
 }
 .profile-image{
 	width: 75px;
+}
+.multi-attachment-view{
+	max-height: 150px;
+    overflow-y: scroll
+}
+.attachment-anchor{
+	cursor:pointer;color:#076F0B;
+}
+.ele-centered{
+  text-align: center;
 }

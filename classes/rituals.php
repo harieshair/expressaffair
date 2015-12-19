@@ -40,19 +40,15 @@
 
 	}	
 	function getAllRitualNames(){
-		$ritualnames=array();
-		$resultset= $this->internalDB->query("SELECT id,title FROM rituals" );
-		foreach ($resultset as $row) {
-			$ritualnames[$row['id']]=$row['title'];
-		}
-		return $ritualnames;
+		$returnvalue=include 'events/getallritualnames.php';
+		return $returnvalue;		
 	}
 	function updateRitualMenu(){
 		include 'events/updateritualmenu.php';		
 	}
 
 	function GetAllServicesByRitualId($ritualId){
-		$ritualServices= $this->internalDB->query("SELECT cv.id,cv.catalog_value FROM catalog_value cv inner join r_services es on es.service_id=cv.id where es.ritual_id= $ritualId" );
-		return $ritualServices;
+		$returnvalue=include 'events/getallservicesbyritualid.php';
+		return $returnvalue;
 	}
 }
