@@ -41,6 +41,8 @@
 		
 		public function __construct( $filepath , $priority )
 		{
+                    echo 'filepath:'.$filepath.date("m_j_Y_H:i a");
+                    echo 'filename:'.basename($filepath);
 			if ( $priority == KLogger::OFF ) return;
 			
 			$this->log_file = $filepath;

@@ -8,11 +8,11 @@
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
-						<tr class="cart_menu">
+                                            <tr class="cart_menu" style="border-style: dashed">
 							<td class="image">Service</td>
 							<td class="description">About Service</td>
 							<td class="description">Provider</td>
-							<td class="description">Description</td>
+							<td class="description">Description</td> 
 							<td class="total">Price</td>
 							<td></td>
 						</tr>
@@ -39,8 +39,8 @@
 									<h4><a href="">Xpress Affair</a></h4>								
 								</td>
 								<td class="cart_description">
-									<h4><a href=""><?php echo $item['description'];?></a></h4>
-									<p>Event Location: <?php echo $item['city'];?></p>
+									<h4><a href=""><?//php echo $item['description'];?></a></h4>
+									<p>Event Location: <?//php echo $item['city'];?></p>
 									<p>Event From: 1089772</p>
 									<p>Event To: 1089772</p>
 								</td>
