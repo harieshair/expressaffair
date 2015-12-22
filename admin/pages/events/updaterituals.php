@@ -8,7 +8,7 @@
   $catalog=new catalogclass($dbconnection->dbconnector);
   $servicecatalogs=$catalog->GetAllCatalogValues('Services');
   $ritualData=(!empty($ritualid))? $rituals->getRitualById($ritualid):array();    
-
+$attachment=!empty($ritualid)?$rituals->getRitualAttachments($ritualid):null;
   ?>
   <link href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
   <form  id="update-ritualdetails" name="update-ritualdetails" action="" method="post" novalidate="novalidate">
@@ -21,6 +21,7 @@
             <input type="text"  id="title" name="title" value="<?php echo !empty($ritualData['title'])?$ritualData['title']:'';?>" maxlength="55" placeholder="Ritual Title" class="form-control" >
           </div>
           <div class="form-group margin">
+              <div class="col-sm-6">
             <label><span class="text-error">*</span> Description</label>        
 
             <div class='box-body pad'>              
@@ -30,6 +31,14 @@
               </textarea>            
             </div>
           </div>
+              <div class="col-sm-6">
+                  <img  id="previewimage" src="<?php echo !empty($attachment['file_name']) ? HTTPAPPLICATIONROOT.'/'.$attachment['file_path'] : "../images/404/404.png"; ?>" height="190"    >
+                        <input type="hidden" value="0" name="file_type" id="file_type">
+                        <input type="file" class="form-control" name="attachment" id="attachment"  onchange="uploadfiles();" >
+                        <input type="hidden" value="<?php echo $attachment['file_name']; ?>" name="file_name" id="file_name">
+              </div>
+          </div>
+        </div>
           <div class="box box-warning ">
            <div class="box-header">
              <h3 class="box-title">Possible services</h3>
@@ -66,6 +75,7 @@
               </div>      
             </div>
           </div>
+      </div>
         </div>
         <div class="savewizard">
           <div class="row">

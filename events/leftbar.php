@@ -12,7 +12,7 @@
                             <?php
                             foreach ($Rituals as $ritual) {
                                 ?>
-                                <li><a href="javascript:void()" class="btn-block btn-leftbar" onclick="switchtoritualdata(<?php echo $ritual['id']; ?>)"><?php echo $ritual['title']; ?></a></li>
+                                <li><a href="javascript:void(0)" class="btn-block btn-leftbar" onclick="switchtoritualdata(<?php echo $ritual['id']; ?>)"><?php echo $ritual['title']; ?></a></li>
                             <?php }
                             ?>							
                         </ul>

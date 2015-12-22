@@ -82,6 +82,11 @@ class customerserviceclass {
         $response = include 'attachment/getallattachments.php';
         return $response;
     }
+      function getProfileAttachmentByEntityId($entityid,$entityType) {
+        $entitytype = $this->EntityType->getkey($entityType);
+        $response = include 'attachment/getprofileattachment.php';
+        return $response;
+    }
 
     function geAllMyCartItems($customerId) {
         $returnValue = include "cart/getallmycartitems.php";

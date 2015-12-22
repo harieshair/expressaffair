@@ -20,7 +20,7 @@ include "static/title.php" ;
 	<header id="header"><!--header-->
 		<div id="myprofile-content">
 			<?php 
-			include PUBLICFOLDER."/default/myprofile.php" ; ?>
+			include "default/myprofile.php" ; ?>
 		</div>
 		
 	</header><!--/header-->

@@ -26,13 +26,6 @@
                 <input type="text"  id="eventname" name="eventname" value="<?php echo !empty($eventdata['name'])?$eventdata['name']:'';?>" maxlength="25" placeholder="Login Name" class="form-control" >
               </div>
             </div>
-            <div class="col-lg-12">
-              <div class="form-group margin">
-                <label for="eventicon">Event Icon</label>
-                <input type="file" id="event_icons">
-                <p class="help-block">Upload event related Icon.</p>
-              </div>
-            </div>
             <div class="col-sm-12 ">
               <div class="form-group margin">
                <div class="col-sm-3">  

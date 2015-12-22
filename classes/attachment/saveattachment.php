@@ -16,6 +16,7 @@ try{
     isset($entity['file_name'])?$updateObject['file_name']=$entity['file_name']:'';
     !empty($savedPath)?$updateObject['file_path']=$savedPath:'';
     $updateObject['extension']=$this->getExtensionOfFile($entity['file_name']);
+    isset($entity['is_profile_file'])?$updateObject['is_profile_file']=$entity['is_profile_file']:'';
     $this->internalDB->update('attachments',$updateObject,"id=%i",$entity['attachmentid']);
     return array('Id'=>$entity['attachmentid'] );  
   }
@@ -25,6 +26,7 @@ try{
     isset($entity['file_type'])?$updateObject['file_type']=$entity['file_type']:'';
     isset($entity['entity_type'])?$updateObject['entity_type']=$entity['entity_type']:''; 
     isset($entity['file_name'])?$updateObject['file_name']=$entity['file_name']:'';
+    isset($entity['is_profile_file'])?$updateObject['is_profile_file']=$entity['is_profile_file']:'';
     !empty($savedPath)?$updateObject['file_path']=$savedPath:'';
     $updateObject['extension']=$this->getExtensionOfFile($entity['file_name']);
     $updateObject['created_on']=$today;

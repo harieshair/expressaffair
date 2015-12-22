@@ -29,7 +29,7 @@
         <div class="col-sm-6"><textarea  name="address" placeholder="Address for communication" id="address" name="address" disabled="true" ></textarea></div>
         <br/><div class="col-sm-12">
             <input type="checkbox" id="chkDeclaration" name="chkDeclaration" class="pull-left"> aggre to terms & condition
-            <a href="javascript:void()" class="btn btn-default pull-right" disabled="true"  id="submitsignup">Submit</a>
+            <a href="javascript:void(0)" class="btn btn-default pull-right" disabled="true"  id="submitsignup">Submit</a>
         </div>
     </form>
 </div><!--/sign up form-->

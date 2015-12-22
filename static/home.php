@@ -1,6 +1,5 @@
 <?php
 $allEvents = $customerService->GetAllEvents(1, 50, null);
-$allEvents=array($allEvents[0]);
 $entityCounts = $customerService->getEntityCounts();
 ?>
 <section id="slider">
@@ -24,24 +23,24 @@ $entityCounts = $customerService->getEntityCounts();
                                 <?php
                                 $itemcount = 0;
                                 foreach ($allEvents as $event) {
-                                    $attachments = $customerService->GetAllAttachnmentsByEntityId($event['id']);
+                                    $attachment = $customerService->GetProfileAttachnmentsByEntityId($event['id'],"Event");
                                     $itemcount++;
                                     ?>
                                     <div class="item <?php echo ($itemcount == 1) ? 'active' : ''; ?>" >
                                         <div class="col-sm-12">
-                                        <div class="col-sm-4">
-                                            <div class="home-slider-image-container">
-                                                <div class="slider-img-container">
-                                                    <img src="<?php echo $attachments[0]['file_path']; ?>"  alt="dw" class="img-responsive" height="190" />
+                                            <div class="col-sm-3">
+                                                <div class="home-slider-image-container">
+                                                    <div class="slider-img-container">
+                                                        <img src="<?php echo $attachment['file_path']; ?>"  alt="dw" height="190" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <h1><span><?php echo $event['name']; ?></span></h1>
-                                            <?php //echo $customerService->closehtmltags(substr($event['description'],0,700));  ?>										
-                                            <p><?php echo substr($event['description'], 0, 350); ?> ... </p>
-                                            <a href="events=<?php echo $event['id']; ?>" class="btn btn-default get">Plan this function</a>
-                                        </div>   
+                                            <div class="col-sm-9">
+                                                <h1><span><?php echo $event['name']; ?></span></h1>
+                                                <?php //echo $customerService->closehtmltags(substr($event['description'],0,700));  ?>										
+                                                <p><?php echo substr($event['description'], 0, 350); ?> ... </p>
+                                                <a href="events=<?php echo $event['id']; ?>" class="btn btn-default get">Plan this function</a>
+                                            </div>   
                                         </div>
                                     </div>
                                     <?php
@@ -64,15 +63,17 @@ $entityCounts = $customerService->getEntityCounts();
             </div>					
         </div>
         <div class="row">
-                                <?php include_once("lefthome.php"); ?>  
-                
-                <div class="col-sm-12 padding-right home-right-container" >
+            <?php include_once("lefthome.php"); ?>  
+
+            <div class="col-sm-12 padding-right home-right-container" >
+                <div id="entitylists">
                     <?php
                     $entity = "events";
                     include_once("lefthomecontainer.php");
                     ?>
                 </div>
             </div>
-        
+        </div>
+
     </div>
 </section>

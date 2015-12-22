@@ -51,7 +51,7 @@
         <div class="col-sm-2">
             <label></label>
             <div class="input-group">
-                <a href="javascript:void()" class="form-control btn btn-default get refine-search" onclick="refinesearchonclick();"><i class="fa fa-filter"></i>  Check Availability</a>
+                <a href="javascript:void(0)" class="form-control btn btn-default get refine-search" onclick="refinesearchonclick();"><i class="fa fa-filter"></i>  Check Availability</a>
             </div>
         </div>
     </div>

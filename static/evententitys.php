@@ -7,13 +7,13 @@
         <?php
         } else {
             foreach ($resultSet['items'] as $event) {
-                $attachments = $customerService->GetAllAttachnmentsByEntityId($event['id']);
+                $attachment = $customerService->GetProfileAttachnmentsByEntityId($event['id'],"Event");
                 ?>           
                 <div class="col-sm-3">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
-                                <img src="<?php echo $attachments[0]['file_path']; ?>" alt="" height="150" width="42" 
+                                <img src="<?php echo $attachment['file_path']; ?>" alt="" height="150" width="42" 
                                      onclick="previewentity('events',<?php echo $event['id']; ?>);"/>
                                 <span class="col-sm-12"><?php echo  substr($event['description'], 0, 50); ?></span>
                                 <span class="col-sm-12"><a class="btn btn-default get" href="events=<?php echo $event['id']; ?>"><?php echo $event['name']; ?></a></span>

@@ -40,7 +40,7 @@ if(empty($customerService)){
 		<div class="col-sm-9"> <span>  <?php echo $customerData["address"];?></span></div>
 	</div>
 	<div class="row signup-form pull-right" >
-		<a href="javascript:void()"   class="btn btn-default pull-left" onclick="fun_edit_save_cancel();"  id="btn_editprofile">Edit</a>
+		<a href="javascript:void(0)"   class="btn btn-default pull-left" onclick="fun_edit_save_cancel();"  id="btn_editprofile">Edit</a>
 		
 	</div>
 	</form>
