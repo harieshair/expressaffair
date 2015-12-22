@@ -16,12 +16,12 @@
 							<a href="home"><i class ="fa fa-home"></i></a>
 						</li>
 					<li id="1" >
-							<a href="javascript:void()" onclick="">
+							<a href="javascript:void(0)" onclick="">
 								Booking History	
 							</a>
 						</li>
 						<li id="2" >
-							<a href="javascript:void()"	onclick="" class="active" >
+							<a href="javascript:void(0)"	onclick="" class="active" >
 							My Profile
 						</a>
 					</li>						

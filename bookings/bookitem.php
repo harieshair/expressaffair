@@ -148,7 +148,7 @@
 				</div>
 				<div class="col-sm-12 pull-right">
 				<span class="col-sm-9"><span id="errorHandler" class="label label-danger pull-right"></span></span>
-				<span class="col-sm-3"><a class="btn btn-success pull-right form-control" href="javascript:void()" onclick="bookitemonmyaccount()">Confirm</a></span>
+				<span class="col-sm-3"><a class="btn btn-success pull-right form-control" href="javascript:void(0)" onclick="bookitemonmyaccount()">Confirm</a></span>
 					</div>	
 				<div class="row"> <!-- start of specification -->
 					<div class="col-sm-12">

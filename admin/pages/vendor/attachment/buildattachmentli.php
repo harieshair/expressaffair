@@ -47,7 +47,7 @@ if(empty($attachment))
       <label class="col-sm-6 "><span class="pull-right">File:</span></label>
       <label class="col-sm-6"><?php echo $attachment['file_name'];?>
         <span>
-         <a  href="javascript:void()" onclick="showfilecontent('<?php  echo HTTPAPPLICATIONROOT.'/'.$attachment['file_path']; ?>');" title="View" ><i class ="fa fa-eye"></i></a>|
+         <a  href="javascript:void(0)" onclick="showfilecontent('<?php  echo HTTPAPPLICATIONROOT.'/'.$attachment['file_path']; ?>');" title="View" ><i class ="fa fa-eye"></i></a>|
          <a href="attachments/downloadfiles.php?filelocation=<?php  echo '/'.$attachment['file_path']; ?>"><i class ="fa fa-download"></i></a>
        </span>
      </label>          

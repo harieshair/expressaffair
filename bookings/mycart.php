@@ -18,7 +18,7 @@
 					<div class="box box-primary" id="div_<?php echo $item['cartId']; ?>">
 						<div class="row"> 
 							<span class="col-sm-1 pull-right">
-								<a href="javascript:void()" class="btn btn-default pull-right" onclick="removecarteditem(<?php echo $item['cartId']; ?>,<?php echo $CustomerId; ?>)" ><i class="fa fa-times" ></i></a>
+								<a href="javascript:void(0)" class="btn btn-default pull-right" onclick="removecarteditem(<?php echo $item['cartId']; ?>,<?php echo $CustomerId; ?>)" ><i class="fa fa-times" ></i></a>
 							</span>
 							<span class=" col-sm-2 pull-right">
 								<?php 
@@ -87,7 +87,7 @@
 										</div>
 										<div class="row">
 											<div class="col-sm-6 ">	
-												<a class="btn btn-info form-control" href="javascript:void()" id="chkcartservice_<?php echo $item['cartId']; ?>" onclick="initializecarteddatepicker(<?php echo $item['cartId']; ?>,this.id)">Check Availability</a>
+												<a class="btn btn-info form-control" href="javascript:void(0)" id="chkcartservice_<?php echo $item['cartId']; ?>" onclick="initializecarteddatepicker(<?php echo $item['cartId']; ?>,this.id)">Check Availability</a>
 											</div>
 											<div class="col-sm-6 pull-right">
 												<?php 
@@ -100,20 +100,20 @@
 
 													if(!$customerService->customer->IsAlreadyBookedCartedItem($cartDetails))	
 														{?>
-													<a class="btn btn-success form-control" href="javascript:void()" id="bookcartitem_<?php echo $item['cartId']; ?>"												
+													<a class="btn btn-success form-control" href="javascript:void(0)" id="bookcartitem_<?php echo $item['cartId']; ?>"												
 														onclick="bookCartedItem('<?php echo $item['cartId']; ?>')">Book Now</a>
 														<?php 
 													}
 													else
 														{ ?>
-													<a class="btn btn-success form-control" href="javascript:void()" id="bookcartitem_<?php echo $item['cartId']; ?>"												
+													<a class="btn btn-success form-control" href="javascript:void(0)" id="bookcartitem_<?php echo $item['cartId']; ?>"												
 														style="display:none" onclick="bookCartedItem('<?php echo $item['cartId']; ?>')">Book Now</a>
 														<?php
 													}
 												}
 												else
 													{ ?>
-												<a class="btn btn-success form-control" href="javascript:void()" id="bookcartitem_<?php echo $item['cartId']; ?>"												
+												<a class="btn btn-success form-control" href="javascript:void(0)" id="bookcartitem_<?php echo $item['cartId']; ?>"												
 													style="display:none" onclick="bookCartedItem('<?php echo $item['cartId']; ?>')">Book Now</a>
 												<?php
 													}?>	

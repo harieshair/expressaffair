@@ -48,10 +48,10 @@
         <div class ="col-sm-12">
           <div class="signup-form pull-right">           
             <div class="col-sm-6">                   
-              <a href="javascript:void()" class="btn btn-default pull-left"   id="submitsignup" >Save</a>          
+              <a href="javascript:void(0)" class="btn btn-default pull-left"   id="submitsignup" >Save</a>          
             </div>        
             <div class="col-sm-6">                 
-              <a href="javascript:void()" onclick="fun_edit_save_cancel();" class="btn btn-default pull-right"   id="btn_cancel">Cancel</a>   
+              <a href="javascript:void(0)" onclick="fun_edit_save_cancel();" class="btn btn-default pull-right"   id="btn_cancel">Cancel</a>   
             </div>
           </div>
         </div>

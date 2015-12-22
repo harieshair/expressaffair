@@ -1,6 +1,6 @@
 function fillsearcheditems(){
 	var result=ajaxResponse;
-	if(result.Exception && result.Exception!=""){
+	if(result.Exception && (result.Exception!="")){
 		$('#features-items').html('Service is not available');
 		return;
 	}
@@ -25,7 +25,7 @@ function fillsearcheditems(){
 			pricerow=$("<div/>").addClass("row").appendTo(productinfo)
 			price=$("<span/>").addClass("col-sm-6").appendTo(pricerow);
 			$("<label/>").addClass("rate").html("<i class='fa fa-rupee'></i>"+result.Items[i].price).appendTo(price);
-			$("<span/>").addClass("col-sm-6").html("<a href='javascript:void()' class='rating'>"+getRatings(result.Items[i].review)+"</a>").appendTo(pricerow);
+			$("<span/>").addClass("col-sm-6").html("<a href='javascript:void(0)' class='rating'>"+getRatings(result.Items[i].review)+"</a>").appendTo(pricerow);
 			if(canshowbooking){
 			addtocart=$("<span/>").addClass("col-sm-6").appendTo(productinfo);
 			$("<a/>").attr({"href":"#","onclick":"addtomycart('"+result.Items[i].id+"')"}).addClass("btn btn-default get").html("<i class='fa fa-bookmark'></i> Shortlist").appendTo(addtocart);
@@ -46,7 +46,7 @@ function fillsearcheditems(){
 		};
 	}
 	else{
-		$('#features-items').html('<h2 class="item-unavail">New items comes soon</h2>');
+		$('#features-items').html('<h2 class="item-unavail">New services coming soon</h2>');
 		return;
 	}
 

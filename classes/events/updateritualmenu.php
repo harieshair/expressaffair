@@ -7,7 +7,7 @@ foreach ($rituals as $ritual) {
 }
 
 $menuList.='</ul>';
-$ritualmenufile = PUBLICFOLDER."/static/rituallist.php";
+$ritualmenufile = ROOTFOLDER."/static/rituallist.php";
 $handle = fopen($ritualmenufile, 'w') or die('Cannot open file:  '.$ritualmenufile);
 fwrite($handle, $menuList);
 fclose($handle);

@@ -1,6 +1,7 @@
 <?php
 if (session_status() != PHP_SESSION_ACTIVE)
     session_start();
+$activeMenu=empty($activeMenu)?"":$activeMenu;
 if (empty($customerService)) {
     include_once($_SERVER['DOCUMENT_ROOT'] . "/eventconfig.php");
     include_once(SERVERFOLDER . "/customer/services.php");
@@ -31,11 +32,11 @@ if (empty($customerService)) {
                 <div class="navbar-collapse collapse in affair-header-nav pull-right" aria-expanded="true">
                     <ul class="nav navbar-nav">
                         <li><a href="home"><i class="fa fa-home"></i></a></li>
-                        <li class="dropdown"><a href="javascript:void()" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                        <li class="dropdown"><a href="javascript:void(0)" data-toggle="dropdown" role="button" aria-haspopup="true" 
                            aria-expanded="true" class="<?php echo ($activeMenu == 'events') ? 'active' : '' ?>" >Events<span class="caret"></span></a>
                             <?php include ROOTFOLDER."/static/eventlist.php" ?>
                         </li>
-                        <li class="dropdown"><a href="javascript:void()" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                        <li class="dropdown"><a href="javascript:void(0)" data-toggle="dropdown" role="button" aria-haspopup="true" 
                                                 aria-expanded="true" class="<?php echo ($activeMenu == 'rituals') ? 'active' : '' ?>">Activity<span class="caret"></span></a>
                             <?php include ROOTFOLDER."/static/rituallist.php" ?>
                         </li>

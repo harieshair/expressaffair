@@ -104,6 +104,9 @@ class customerservice {
     function GetAllAttachnmentsByEntityId($entityId) {
         return $this->customer->getallattachments($entityId);
     }
+     function GetProfileAttachnmentsByEntityId($entityId,$entityType) {
+        return $this->customer->getProfileAttachmentByEntityId($entityId,$entityType);
+    }
 
     /* ------------------Service Item Data -------------------------- */
 

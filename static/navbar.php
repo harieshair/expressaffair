@@ -14,10 +14,10 @@
 					<ul class="nav navbar-nav collapse navbar-collapse affair-home-nav">
 						<li><a href="<?php echo HTTPAPPLICATIONROOT; ?>/public" class="<?php echo ($activeMenu=='home')?'active':''?>">Home</a></li>
 						
-						<li><a href="javascript:void()" class="<?php echo ($activeMenu=='events')?'active':''?>" >Events</a>
+						<li><a href="javascript:void(0)" class="<?php echo ($activeMenu=='events')?'active':''?>" >Events</a>
 							<?php include "eventlist.php" ?>
 						</li>
-						<li><a href="javascript:void()"class="<?php echo ($activeMenu=='rituals')?'active':''?>" >Rituals</a>
+						<li><a href="javascript:void(0)"class="<?php echo ($activeMenu=='rituals')?'active':''?>" >Rituals</a>
 							<?php include "rituallist.php" ?>
 						</li>
 						<li><a href="index.html" class="<?php echo ($activeMenu=='aboutus')?'active':''?>" >About Us</a></li>
