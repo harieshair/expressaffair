@@ -2,6 +2,7 @@
 $temp = commonclass::to_ist(commonclass::to_gmt(time()));
 $today=date("y-m-d H:i:s",$temp);
 $updateObject=array();
+$updateCoordinateObj = array();
 try{
 	$userId="";
 	if(!empty($entity['entity_id'])){
@@ -28,12 +29,23 @@ try{
 		isset($entity['name'])?$updateObject['name']=$entity['name']:'';
 		isset($entity['status'])?$updateObject['status']=$entity['status']:'';
 		isset($entity['employeeid'])?$updateObject['employeeid']=$entity['employeeid']:''; 
+                isset($entity['address'])?$updateObject['address']=$entity['address']:'';
 		isset($entity['roles'])?$updateObject['roles']=implode(',',$entity['roles']):''; 
 		$updateObject['updated_on']=$today;
 
 		$this->internalDB->update('users',$updateObject,"id=%i",$entity['entity_id']);
+                
+                 if($entity['usertype']=='4') {
+                    
+                    isset($entity['coord_explevel'])?$updateCoordinateObj['coord_explevel']=$entity['coord_explevel']:'';
+                    isset($entity['is_third_party'])?$updateCoordinateObj['is_third_party']=$entity['is_third_party']:'';
+                   // $updateCoordinateObj['user_id'] = $userId;
+                    $this->internalDB->update('coordinator',$updateCoordinateObj,"user_id=%i",$entity['entity_id']);
+                }
+                
 		$userId= $entity['entity_id'];	
-		$this->saveRoles($entity['roles'],$userId);
+		if(isset($entity['roles']))
+			$this->saveRoles($entity['roles'],$userId);
 
 	}
 	else{
@@ -52,18 +64,29 @@ try{
 		isset($entity['status'])?$updateObject['status']=$entity['status']:'';
 		isset($entity['employeeid'])?$updateObject['employeeid']=$entity['employeeid']:''; 
 		isset($entity['roles'])?$updateObject['roles']=implode(',',$entity['roles']):''; 
-		$updateObject['updated_on']=$today;		
+		$updateObject['updated_on']=$today;
+                isset($entity['address'])?$updateObject['address']=$entity['address']:'';
 		$this->internalDB->insert('users',$updateObject);
-		$entity['entity_id']=$userId= array('Id'=>$this->internalDB->insertId() );
-
+               $entity['entity_id']=$userId =$this->internalDB->insertId();
+		 
+                
+                 if($entity['usertype']=='4') {
+                    isset($entity['coord_explevel'])?$updateCoordinateObj['coord_explevel']=$entity['coord_explevel']:'';
+                    isset($entity['is_third_party'])?$updateCoordinateObj['is_third_party']=$entity['is_third_party']:'';
+                    $updateCoordinateObj['user_id'] = $userId;
+                    $this->internalDB->insert('coordinator',$updateCoordinateObj);
+                }
+                
 		if(!empty($entity['file_name'])){
 			$response=$this->saveattachments($entity);
 			$this->internalDB->update('users',array(
 				'photo_id'=>$response['Id']
 				),"id=%i",$userId);
 		}
-		$this->saveRoles($entity['roles'],$userId);
-
+                if(!empty($entity['roles']))
+		$this->saveRoles($entity['roles'],$userId);              
+               
+                
 	}
 	return array("Id"=>$userId);
 }

@@ -1,0 +1,1 @@
+<ul role="menu" class="dropdown-menu"><li><a href='rituals=1'>Thilak</a></li><li><a href='rituals=2'>Homa Pooja</a></li><li><a href='rituals=3'>Party Inaguration</a></li><li><a href='rituals=4'>Ring Ceremony</a></li><li><a href='rituals=5'>Naming</a></li></ul>

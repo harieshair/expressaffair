@@ -1,16 +1,18 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
-session_start();
 include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/common.php");
 include_once(CLASSFOLDER."/cart.php");
+
 $cart = new cartclass($dbconnection->dbconnector);
 
 switch($_POST['action']){
 	/*--------------------------------------------------------------*/
 	case "aditemtocart":
 	if(!empty($_POST['itemdata'])){
-		$entity=getRequestParameters();
+		include_once(CLASSFOLDER."/searchobject.php");
+		$searchObj=new searchobject();
+		$entity=getRequestParameters($searchObj);
 		$response=$cart->AddToCart($entity);
 		if(empty($response['Exception']) && !empty($response['Id'])){			
 			echo $response['Id'];	
@@ -23,9 +25,8 @@ switch($_POST['action']){
 	break;
 }
 
-function getRequestParameters(){
+function getRequestParameters($entity){
 	$request=json_decode($_POST['itemdata']);
-	$entity="";
 	$entity->customerId=!empty($request->c)?$request->c:null;
 	$entity->locationId=!empty($request->l)?$request->l:null;
 	$entity->eventId=!empty($request->e)?$request->e:null;

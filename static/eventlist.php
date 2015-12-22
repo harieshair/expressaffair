@@ -1,0 +1,1 @@
+<ul role="menu" class="dropdown-menu"><li><a href='events=1'>Marriage</a></li><li><a href='events=2'>House warming</a></li><li><a href='events=3'>Birthday Party</a></li><li><a href='events=4'>Business Meetings</a></li><li><a href='events=5'>Music Concerts</a></li><li><a href='events=6'>Engagement</a></li><li><a href='events=7'>Get Together</a></li></ul>

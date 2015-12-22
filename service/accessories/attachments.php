@@ -1,7 +1,7 @@
 <?php
+
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
 include_once(CLASSFOLDER."/enums/commonenums.php");
-session_start();
 set_time_limit(0);
 
 $response=array();

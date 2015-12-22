@@ -1,4 +1,6 @@
-<?php	
+<?php
+	$page = $page == "" ? 0 : $page-1;
+	$start=$page * $rows;	
 $sql = "SELECT count(id) as total FROM customers ";
 $wherecondition=" where email is not null ";
 if($searchobj!=null){
@@ -7,13 +9,14 @@ if($searchobj!=null){
 	$wherecondition .=(!empty($searchobj->email))?" AND email='".$searchobj->email."'":'';
 	$wherecondition .=(!empty($searchobj->location))?" AND location='".$searchobj->location."'":'';
 }
-$totalusers = $this->internalDB->queryFirstField($sql.$wherecondition);
-if($totalusers>0) {
-	$pages=ceil($totalusers/$rows);
-	$page = $page == "" ? 0 : $page-1;
-	$start=$page * $rows;
-	$sql="SELECT id,name,location FROM customers ".$wherecondition;
-	return $this->internalDB->query("$sql ORDER BY id DESC LIMIT $start, $rows");	
+if(isset($page) && isset($rows))
+	$limit=" LIMIT $start, $rows ";
+$totalrows = $this->internalDB->queryFirstField($sql.$wherecondition);
+$resultSet['totlaRows']=$totalrows;
+if($totalrows>0) {
+	$sql="SELECT id,email,name,city,contact_number,created_on FROM customers ".$wherecondition." ORDER BY id DESC" .$limit;
+	$resultSet['items']= $this->internalDB->query($sql);
+	return 	$resultSet;
 }
 else return null;
 ?>

@@ -1,6 +1,6 @@
 <?php
+if(session_status()!=PHP_SESSION_ACTIVE) session_start(); 
 include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
-session_start();
 include_once(CLASSFOLDER."/dbconnection.php");
 include_once(CLASSFOLDER."/common.php");
 include_once(CLASSFOLDER."/customer.php");
@@ -60,4 +60,22 @@ switch($_POST['action']){
 		}
 		break;
 
+		case "checkcartserviceavailability":
+		if(!empty($_POST['chkdetails'])){
+		$params = array();
+		parse_str($_POST['chkdetails'], $params);
+		$availability=$customer->checkcartserviceavailability($params);
+		echo $availability;
+		}
+		else
+		echo 0;
+		break;
+
+		case "removecarteditem":
+		if(!empty($_POST['cartId']) && !empty($_POST['customerId'] ))
+		{
+		$returnValue=$customer->removeCartedItem($_POST['cartId'],$_POST['customerId']);
+		echo 	$returnValue;	
+		}		
+		break;
 	}

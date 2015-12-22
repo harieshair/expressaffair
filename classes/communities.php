@@ -31,12 +31,8 @@
 
 	}
 	function getAllCommunityNames(){
-		$communitynames=array();
-		$resultset= $this->internalDB->query("SELECT id,name FROM communities" );
-		foreach ($resultset as $row) {
-			$communitynames[$row['id']]=$row['name'];
-		}
-		return $communitynames;
+		$response =include 'community/getallcommunitynames.php'	;	
+		return $response;
 	}
 	function getTotalCommunities($searchobj){
 		$searchobj=($searchobj!=null)?json_decode($searchobj):null;
