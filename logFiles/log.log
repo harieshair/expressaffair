@@ -1,0 +1,8 @@
+2015-12-15 9:12:10 - ERROR --> An exception was thrown in ThisFunction() 
+2015-12-15 9:12:10 - INFO  --> Internal Query Time:  milliseconds 
+2015-12-15 9:15:35 - ERROR --> An exception was thrown in ThisFunction() 
+2015-12-15 9:15:35 - INFO  --> Internal Query Time:  milliseconds 
+2015-12-15 9:29:14 - ERROR --> An exception was thrown in ThisFunction() 
+2015-12-15 9:29:14 - INFO  --> Internal Query Time:  milliseconds 
+2015-12-15 9:33:12 - ERROR --> An exception was thrown in ThisFunction() 
+2015-12-15 9:33:12 - INFO  --> Internal Query Time:  milliseconds 

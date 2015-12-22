@@ -1,5 +1,5 @@
   <?php 
-  $userid=isset($_POST['postvalue'])?$_POST['postvalue']:null;
+  $userid=isset($_POST['postvalue'])?$_POST['postvalue']:0;
   include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
   include_once(CLASSFOLDER."/dbconnection.php");
   include_once(CLASSFOLDER."/enums/userenums.php");
@@ -7,7 +7,9 @@
   $userstatus=new UserStatus;
   include_once(CLASSFOLDER."/user.php");
   $user=new userclass($dbconnection->dbconnector);
-  $userdata=!empty($userid)?$user->getuserbyid($userid):array();   
+  $userdata=$user->getuserbyid($userid);
+  //var_dump($userdata);
+  
   $attachment=!empty($userid)?$user->getUserAttachments($userid):array();   
   $rolesResult=$user->internalDB->query("select  name,id from roles ");
   ?>
@@ -112,17 +114,43 @@
             <div class="col-lg-6">
               <div class="form-group  margin">
                 <label>Type of User</label>
-                <select class="form-control" name="usertype" id="usertype" >
+                <select class="form-control" name="usertype" id="usertype">
                   <?php $typeofuser=$userdata['usertype'];?>
                   <option>Select type of user</option>
                   <option value="1" <?php echo ($typeofuser==1)?'selected':''?>>Super Admin</option>
                   <option value="2" <?php echo ($typeofuser==2)?'selected':''?>>Admin</option>
                   <option value="3" <?php echo ($typeofuser==3)?'selected':''?>>Vendor</option>
-                  <option value="4" <?php echo ($typeofuser==4)?'selected':''?>>Customer</option>
-                  <option value="5" <?php echo ($typeofuser==5)?'selected':''?>>Circle User</option>
+                  <option value="4" <?php echo ($typeofuser==4)?'selected':''?>>Co-ordinator</option>
                 </select>
               </div>
             </div>
+            <div class="col-lg-6" id="coordlevelshowhide">
+              <div class="form-group  margin">
+                <label >Co-ordinator Level</label>
+                <select class="form-control" name="coord_explevel" id="coordlevel"  >
+                  <?php $coordinatelevel=$userdata['coord_explevel'];?>
+                  <option>Select type of user</option>
+                  <option value="1" <?php echo ($coordinatelevel==1)?'selected':''?>>1</option>
+                  <option value="2" <?php echo ($coordinatelevel==2)?'selected':''?>>2</option>
+                  <option value="3" <?php echo ($coordinatelevel==3)?'selected':''?>>3</option>
+                  <option value="4" <?php echo ($coordinatelevel==4)?'selected':''?>>4</option>
+                </select>              
+              </div>
+            </div>
+           
+            <div class="col-lg-6" id="thirdpartyshowhide">
+              <div class="form-group  margin">
+                <label >Is Third Party</label>
+                <select class="form-control" name="is_third_party" id="isthirdparty" >
+                  <?php $thirdparty=$userdata['is_third_party'];?>
+                  <option>Is third party</option>
+                  <option value="1" <?php echo ($thirdparty==1)?'selected':''?>>Yes</option>
+                  <option value="0" <?php echo ($thirdparty==0)?'selected':''?>>No</option>
+                  </select>              
+              </div>
+            </div>
+            
+            
             <div class="col-lg-6">
              <div class="form-group margin">
                <label>User Status:</label>
@@ -173,6 +201,12 @@
         </div>
       </div>
       </div>
+            <div class="col-lg-6">
+              <div class="form-group  margin">
+                <label >Address</label>
+                <input type="text" name="address" id="address" value="<?php echo $userdata['address'];?>" maxlength="30" placeholder="Address"  class="form-control"  >
+              </div>
+            </div>
     </div>
 
 
@@ -198,6 +232,23 @@
 <script type="text/javascript">
   (function($,W,D)
   {
+      if($('#usertype').val() == '4') {
+            $('#thirdpartyshowhide').show(); 
+            $('#coordlevelshowhide').show(); 
+        }else {
+      $('#coordlevelshowhide').hide(); 
+      $('#thirdpartyshowhide').hide();
+  }
+      $('#usertype').change(function() {
+        if($('#usertype').val() == '4') {
+            $('#thirdpartyshowhide').show(); 
+            $('#coordlevelshowhide').show(); 
+        } else {
+            $('#coordlevelshowhide').hide(); 
+            $('#thirdpartyshowhide').hide(); 
+        } 
+      });
+      
     var JQUERY4U = {};
 
     JQUERY4U.UTIL =
@@ -251,6 +302,14 @@
     });
 
   })(jQuery, window, document);
+  
+  //chooseuserType = function(userType){
+    //  alert('1');
+   //alert(userType);
+  
+      
+   // }
+ // }
 </script>
 
 
