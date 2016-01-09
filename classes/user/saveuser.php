@@ -30,6 +30,8 @@ try{
 		isset($entity['status'])?$updateObject['status']=$entity['status']:'';
 		isset($entity['employeeid'])?$updateObject['employeeid']=$entity['employeeid']:''; 
                 isset($entity['address'])?$updateObject['address']=$entity['address']:'';
+                 isset($entity['city'])?$updateObject['city']=$entity['city']:'';
+                 isset($entity['state'])?$updateObject['state']=$entity['state']:'';
 		isset($entity['roles'])?$updateObject['roles']=implode(',',$entity['roles']):''; 
 		$updateObject['updated_on']=$today;
 
@@ -66,6 +68,8 @@ try{
 		isset($entity['roles'])?$updateObject['roles']=implode(',',$entity['roles']):''; 
 		$updateObject['updated_on']=$today;
                 isset($entity['address'])?$updateObject['address']=$entity['address']:'';
+                 isset($entity['city'])?$updateObject['city']=$entity['city']:'';
+                 isset($entity['state'])?$updateObject['state']=$entity['state']:'';
 		$this->internalDB->insert('users',$updateObject);
                $entity['entity_id']=$userId =$this->internalDB->insertId();
 		 

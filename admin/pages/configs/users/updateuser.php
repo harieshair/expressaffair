@@ -3,13 +3,19 @@
   include_once($_SERVER['DOCUMENT_ROOT']."/eventconfig.php");
   include_once(CLASSFOLDER."/dbconnection.php");
   include_once(CLASSFOLDER."/enums/userenums.php");
+  include_once(SERVERFOLDER."/customer/services.php");
   $typeofuser=new TypeOfUser;
   $userstatus=new UserStatus;
   include_once(CLASSFOLDER."/user.php");
   $user=new userclass($dbconnection->dbconnector);
   $userdata=$user->getuserbyid($userid);
   //var_dump($userdata);
-  
+  $customerService=new customerservice($dbconnection->dbconnector);
+  $Citys=$customerService->GetCatalogValuesByMasterName('City');
+  $States = $customerService->GetCatalogValuesByMasterName('State');
+
+  //var_dump($Citys);
+  //var_dump($States);
   $attachment=!empty($userid)?$user->getUserAttachments($userid):array();   
   $rolesResult=$user->internalDB->query("select  name,id from roles ");
   ?>
@@ -116,7 +122,7 @@
                 <label>Type of User</label>
                 <select class="form-control" name="usertype" id="usertype">
                   <?php $typeofuser=$userdata['usertype'];?>
-                  <option>Select type of user</option>
+                  <option>--Select type of user--</option>
                   <option value="1" <?php echo ($typeofuser==1)?'selected':''?>>Super Admin</option>
                   <option value="2" <?php echo ($typeofuser==2)?'selected':''?>>Admin</option>
                   <option value="3" <?php echo ($typeofuser==3)?'selected':''?>>Vendor</option>
@@ -129,7 +135,7 @@
                 <label >Co-ordinator Level</label>
                 <select class="form-control" name="coord_explevel" id="coordlevel"  >
                   <?php $coordinatelevel=$userdata['coord_explevel'];?>
-                  <option>Select type of user</option>
+                  <option>--Co-ordinator Level--</option>
                   <option value="1" <?php echo ($coordinatelevel==1)?'selected':''?>>1</option>
                   <option value="2" <?php echo ($coordinatelevel==2)?'selected':''?>>2</option>
                   <option value="3" <?php echo ($coordinatelevel==3)?'selected':''?>>3</option>
@@ -140,15 +146,41 @@
            
             <div class="col-lg-6" id="thirdpartyshowhide">
               <div class="form-group  margin">
-                <label >Is Third Party</label>
+                <label >Are you third Party ? </label>
                 <select class="form-control" name="is_third_party" id="isthirdparty" >
                   <?php $thirdparty=$userdata['is_third_party'];?>
-                  <option>Is third party</option>
+                  <option>Are you third party ?</option>
                   <option value="1" <?php echo ($thirdparty==1)?'selected':''?>>Yes</option>
                   <option value="0" <?php echo ($thirdparty==0)?'selected':''?>>No</option>
                   </select>              
               </div>
             </div>
+            
+        <div class="col-sm-6">
+            <div class="form-group  margin">
+          <label>City:</label>
+          <select class="form-control" name="city" id="city" >
+             <option>--Select City--</option>
+            <?php 
+            foreach($Citys as $city) { ?>
+            <option value="<?php  echo $city["id"]; ?>"> <?php echo $city["catalog_value"]; ?></option> 
+            <?php }?>  
+          </select> 
+            </div>
+        </div>
+            
+        <div class="col-sm-6" style="border-style: none; ">
+            <div class="form-group  margin">
+          <label>State   :  </label>
+          <select class="form-control" name="state" id="state" >
+           <option>--Select State--</option>
+            <?php 
+            foreach($States as $state) { ?>
+            <option value="<?php  echo $state["id"]; ?>"> <?php echo $state["catalog_value"]; ?></option> 
+            <?php }?>  
+          </select>
+            </div>
+        </div>
             
             
             <div class="col-lg-6">

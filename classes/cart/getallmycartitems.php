@@ -16,15 +16,16 @@ if($totalItem>0){
 	$orderby=" order by c.created_on desc ";		
 
 	$items= $this->internalDB->query($selectclause.$joinclause.$where.$orderby);	
-
+       
 
 			//Get all city catalogs
 	$catalogarray=array();
 	$catalogvalues=$this->internalDB->query("SELECT id,catalog_value FROM catalog_value c where catalogmaster_id in (select id from catalog_master where name in ('City', 'Service Category','Services'))"); 
 	foreach($catalogvalues as $catalog)
 		$catalogarray[$catalog['id']]=$catalog['catalog_value'];
+        
 	for ($i=0; $i < $totalItem; $i++) { 
-		$items[$i]['city']=$catalogarray[$items[$i]['locationId']];
+		$items[$i]['city']=!empty($items[$i]['locationId'])?$catalogarray[$items[$i]['locationId']]:"";
 		$items[$i]['service']=$catalogarray[$items[$i]['serviceId']];
 		$items[$i]['category']=!empty($items[$i]['serviceId'])?$catalogarray[$items[$i]['serviceId']]:null;				
 	}				
