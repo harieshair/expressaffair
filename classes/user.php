@@ -80,7 +80,7 @@ function ShowUserManagementPagination($totcount,$page,$rows)
 function getuserbyid($userid)
 {		
 	$resultSet= $this->internalDB->queryFirstRow("SELECT u.id,u.name,u.login_name,u.phone,u.email,u.usertype,u.status,
-		u.employeeid,u.password,u.photo_id,u.roles,u.address,c.coord_explevel,c.is_third_party FROM users u LEFT JOIN coordinator c ON u.id=c.user_id where u.id=$userid");
+		u.employeeid,u.password,u.photo_id,u.roles,u.address,u.city,u.state,c.coord_explevel,c.is_third_party FROM users u LEFT JOIN coordinator c ON u.id=c.user_id where u.id=$userid");
 	return $resultSet;
 }
 
