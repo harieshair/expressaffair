@@ -1,0 +1,30 @@
+.header_top{background: none repeat scroll 0 0 pink}
+.login-form form input[type="text"], .login-form form input[type="email"], .login-form form input[type="password"], .signup-form form input[type="text"], .signup-form form input[type="email"], .signup-form form input[type="password"], .signup-form form select, .signup-form form textarea {
+    background: #E8E8E4;
+    border: #F6F9CB 2px solid;
+    color: #696763;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: medium none;
+    padding-left: 10px;
+    width: 100%;
+}
+.box.box-primary {
+    border-top-color: #A94263;
+}
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin: 10px 0 0 10px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+.xpress-back{background-color: #A94263;    border-color: #A94263;}
+.brand-a{font-size: 28px;    font-weight: 500;}
+.xpress-btn-info,.xpress-btn-info:hover{   color: #fff;}

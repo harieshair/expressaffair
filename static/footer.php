@@ -92,4 +92,4 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<?php include "scripts/scripts.php" ?>
+<?php include "scripts/scripts.php";

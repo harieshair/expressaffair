@@ -3,14 +3,13 @@
     <form name="login-form" id="login-form" >
         <input type="email" name="email" id="email" placeholder="Email Address" />
         <input type="password" name="password" id="password" placeholder="Password"/>
-        <span>
-            <input type="checkbox" class="checkbox"> 
-            Keep me signed in
-        </span
-        <span>
-            <input type="checkbox" class="checkbox"> 
-           Forgot Password?
-        </span>
+        <div class="col-sm-6">
+           <input type="checkbox" id="remember_me" name="_remember_me" checked />
+    <label for="remember_me">Keep me logged in</label>
+        </div>
+        <div class="col-sm-6">
+            <input type="checkbox" class="checkbox">Forgot Password?
+        </div>
         <br/>
         <a href="javascript:void(0)" class="btn btn-default" id="submitlogin" >Login</a>
         <!--<span  class="or">OR</span>
