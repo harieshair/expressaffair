@@ -2,10 +2,12 @@
 $temp = commonclass::to_ist(commonclass::to_gmt(time()));
 $today=date("y-m-d H:i:s",$temp);
 $updateObject=array();
+$updateCoordinator = array();
 $updateEvent_statusObj = array();
 try{
 	$bookingbegin="";
 	$bookingend="";
+        $userId="";
 	if(!empty($entity->eventFrom) || !empty($entity->eventTo)){
 		if(!empty($entity->eventFrom))
 		{
@@ -65,9 +67,10 @@ try{
         // to get co-ordinator
         //if(!empty($entityId) ) {
         $booking_location_id = $this->internalDB->queryFirstField("SELECT location_id FROM bookings WHERE id=$entity->eventId");
-        echo "booking_location_id::".$booking_location_id;
-        $co_ordinator_id = $this->internalDB->query("SELECT user_id FROM coordinator co  INNER JOIN users u ON u.id=co.user_id WHERE u.city=$booking_location_id AND u.usertype=4 ORDER BY noof_events ASC LIMIT 1");
-        echo 'co-ordinateID::'.$co_ordinator_id;
+        //echo "booking_location_id::".$booking_location_id;
+        $co_ordinator_id = $this->internalDB->queryFirstField("SELECT user_id FROM coordinator co  INNER JOIN users u ON u.id=co.user_id WHERE u.city=$booking_location_id AND u.usertype=4 ORDER BY noof_events ASC LIMIT 1");
+        //echo 'co-ordinateID::'.$co_ordinator_id;
+               
         // save event_status - tbl
         $event_des = $this->internalDB->queryFirstField("SELECT name FROM events WHERE id=$entity->eventId");
         isset($entity->eventId)?$updateEvent_statusObj['event_id']=$entity->eventId:"";
@@ -80,6 +83,10 @@ try{
       //  var_dump($updateEvent_statusObj);
         $this->internalDB->insert('event_status',$updateEvent_statusObj);
         
+        // update coordinator - bookings tbl
+        $updateCoordinator['coordinator_id'] = $co_ordinator_id;
+        var_dump($updateCoordinator);
+        $this->internalDB->update('bookings',$updateCoordinator,"id=%i",$entityId);
         
 	//Save bookingdates
 	$this->SaveBookingDates($updateObject['booking_from'],$updateObject['booking_to'],$entityId,$entity->vserviceId);
