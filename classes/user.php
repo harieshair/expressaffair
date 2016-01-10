@@ -14,7 +14,11 @@ function GetLoginDetails($uname,$pwd)
 	$resultSet= $this->internalDB->queryFirstRow("SELECT * FROM users WHERE login_name='$uname' AND password='$pwd' AND status=0");
 	return $resultSet;
 }
-
+function GetCoordinatorLoginDetails($uname,$pwd)
+{
+	$resultSet= $this->internalDB->queryFirstRow("SELECT * FROM users WHERE login_name='$uname' AND password='$pwd' AND status=0 and usertype=4");
+	return $resultSet;
+}
 function CheckAccesstoPage($useractionarray,$pageid)
 {
 	if(in_array('26',$useractionarray))
@@ -75,12 +79,17 @@ function ShowUserManagementPagination($totcount,$page,$rows)
 	return $response;	
 }
 
-
+function getadminuserbyid($userid)
+{		
+	$resultSet= $this->internalDB->queryFirstRow("SELECT u.id,u.name,u.login_name,u.phone,u.email,u.usertype,u.status,
+		u.employeeid,u.password,u.photo_id,u.roles,u.address FROM users u where u.id=$userid");
+	return $resultSet;
+}
 
 function getuserbyid($userid)
 {		
 	$resultSet= $this->internalDB->queryFirstRow("SELECT u.id,u.name,u.login_name,u.phone,u.email,u.usertype,u.status,
-		u.employeeid,u.password,u.photo_id,u.roles,u.address,u.city,u.state,c.coord_explevel,c.is_third_party FROM users u LEFT JOIN coordinator c ON u.id=c.user_id where u.id=$userid");
+		u.employeeid,u.password,u.photo_id,u.roles,u.address,u.city,u.state,c.coord_explevel,c.is_third_party FROM users u INNER JOIN coordinator c ON u.id=c.user_id where u.id=$userid");
 	return $resultSet;
 }
 

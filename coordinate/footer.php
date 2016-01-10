@@ -25,4 +25,3 @@
         </div>
     </div>
 </footer>
-<?php include "scripts.php";

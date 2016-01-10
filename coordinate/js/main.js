@@ -58,6 +58,6 @@ function getcontents(urllocator, responsearea, postdata)
     if (postdata)
         POSTDATA += "postvalue=" + encodeURIComponent(postdata);
     callservicebyajax(POSTDATA, urllocator, function () {
-        getcontentresponse(responsearea)
+        getcontentresponse(responsearea);
     });
 }

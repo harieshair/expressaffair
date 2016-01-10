@@ -12,7 +12,7 @@ include_once(CLASSFOLDER . "/dbconnection.php");
 include_once(CLASSFOLDER . "/user.php");
 include_once(CLASSFOLDER . "/common.php");
 $user = new userclass($dbconnection->dbconnector);
-$userdata = $user->getuserbyid($userid);
+$userdata = $user->getadminuserbyid($userid);
 $userdata['profile_path'] = $user->getUserProfilePath($userid);
 ?>
 <!DOCTYPE html>
