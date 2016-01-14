@@ -41,7 +41,7 @@ class sendmailclass {
         );
         $this->mailObj->AddAlternativeMultipart($alternative_parts);
 
-        $error = $this->mailObj->Send();
+        $error = $this->mailObj->Send();echo "testmail";
         if (strcmp($error, ""))
             return $error;
         else
