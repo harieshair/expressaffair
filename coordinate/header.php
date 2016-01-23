@@ -30,7 +30,8 @@
                  <div class="navbar-collapse collapse in affair-header-nav pull-right" aria-expanded="true">
                     <ul class="nav navbar-nav">
                         <li><a href="home"><i class="fa fa-home"></i></a></li>
-                      <li><span><i class="fa fa-user"></i>Hi, <?php echo $Coordinator['name'] ; ?></span></li>
+                      <li><a href="javascript:void(0)"><i class="fa fa-user"></i>Hi, <?php echo $Coordinator['name'] ; ?></a></li>
+                       <li><a href="logout"><i class="fa fa-unlock"></i>Log Out</a></li>
                     </ul>
                  </div>
                 <?php } ?>

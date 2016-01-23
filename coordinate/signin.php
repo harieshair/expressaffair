@@ -3,12 +3,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 pull-right">
-                <h3>Login to your account</h3>
-                <div class="box box-primary">
+                 <div class="box">
+                    <div class="box-header box-login">
+                  <h3 class="box-title">Login to your account</h3>
+                    </div>
                     <div class="login-form"><!--login form-->
                         <form name="login-form" id="login-form" >
-                            <input type="text" name="loginid" id="email" placeholder="Login Id" />
-                            <input type="password" name="password" id="password" placeholder="Password"/>
+                            <input type="text" name="loginid" id="loginid" placeholder="UseName" maxlength="20" />
+                            <input type="password" name="password" id="password" placeholder="Password" maxlength="15"/>
                             <div class="col-sm-6">
                                 <input type="checkbox" id="remember_me" name="_remember_me" checked />
                                 <label for="remember_me">Keep me logged in</label>

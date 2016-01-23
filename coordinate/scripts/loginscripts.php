@@ -18,11 +18,11 @@
                             rules: {
                                 loginid: {
                                     required: true,
-                                    email: true
+                                     minlength: 3,
                                 },
                                 password: {
                                     required: true,
-                                    minlength: 8,
+                                    minlength: 4,
                                     maxlength: 15,
                                 }
                             },
@@ -39,7 +39,7 @@
             JQUERY4U.UTIL.setupFormValidation();
             $('#submitlogin').on('click', function () {
                 if ($('#login-form').valid()) {
-                    getintoaccount("service/customerserver.php", "login-form");
+                    getintoaccount("service/signupservice.php", "login-form");
                 }
             });
         });

@@ -8,10 +8,10 @@ class coordinatorservice {
     public $coordinator = null;
     function coordinatorservice($db) {
         $this->internalDB = $db;        
-        $this->$coordinator = new coordinatorclass($this->internalDB);
+        $this->coordinator = new coordinatorclass($this->internalDB);
     }
     function getCoordinatorById($coordinatorId){
-       $resultSet= $this->$coordinator->getCoordinatorById($coordinatorId);
+       $resultSet= $this->coordinator->getCoordinatorById($coordinatorId);
        return $resultSet;
     }
 }

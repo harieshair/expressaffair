@@ -1,4 +1,4 @@
 RewriteEngine On
-RewriteRule ^home$ index.php [L,QSA]
+RewriteRule ^home$ home.php [L,QSA]
 RewriteRule ^logout$ logout.php    [L,QSA]
-RewriteRule ^$ index.php [L,QSA]
+RewriteRule ^login$ index.php [L,QSA]

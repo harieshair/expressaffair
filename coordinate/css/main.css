@@ -1,4 +1,4 @@
-.header_top{background: none repeat scroll 0 0 #F5E3E6}
+.header_top{background: none repeat scroll 0 0 #DED8D9}
 .login-form form input[type="text"], .login-form form input[type="email"], .login-form form input[type="password"], .signup-form form input[type="text"], .signup-form form input[type="email"], .signup-form form input[type="password"], .signup-form form select, .signup-form form textarea {
     background: #E8E8E4;
     border: #F6F9CB 2px solid;
@@ -13,18 +13,65 @@
     padding-left: 10px;
     width: 100%;
 }
-.box.box-primary {
-    border-top-color: #A94263;
-}
+
 .box {
     position: relative;
     border-radius: 3px;
     background: #ffffff;
-    border-top: 3px solid #d2d6de;
-    margin: 10px 0 0 10px;
+
+    margin: 30px 0 0 10px;
     width: 100%;
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+.box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
+    min-height: 150px;
+}
+.box-header {
+    display: block;
+    padding: 10px;
+    position: relative;
+    border-radius: 5px 5px 0 0;
+}
+.box-title {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+}
+.box-login {
+    color: #fff;
+    background: #A94263;
+}
+.box-active {
+    color: #fff;
+    background: #f39c12;
+}
+.box-info {
+    color: #fff;
+    background: #3c8dbc;
+}
+.box-default {
+    color: #000;
+    background: #D6D6D0;
+}
+.box-danger {
+    color: #fff;
+    background: #dd4b39;
+}
+.box-success {
+    color: #fff;
+    background: #00a65a;
+}
+.box-inactive {
+    background: #A94263;
 }
 .xpress-back{background-color: #A94263;    border-color: #A94263;}
 .brand-a{font-size: 28px;    font-weight: 500;}
 .xpress-btn-info,.xpress-btn-info:hover{   color: #fff;}
+#footer {    background: #F0F0E9;    margin-top: 50px;}
+.footer-bottom {    background: #D6D6D0;    padding-top: 10px;}

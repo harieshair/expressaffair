@@ -39,7 +39,7 @@ $entityCounts = $customerService->getEntityCounts();
                                                 <h1><span><?php echo $event['name']; ?></span></h1>
                                                 <?php //echo $customerService->closehtmltags(substr($event['description'],0,700));  ?>										
                                                 <p><?php echo substr($event['description'], 0, 350); ?> ... </p>
-                                                <a href="events=<?php echo $event['id']; ?>" class="btn btn-default get">Plan this function</a>
+                                                <a href="events=<?php echo $event['id']; ?>" class="btn btn-default get">Plan this event</a>
                                             </div>   
                                         </div>
                                     </div>
